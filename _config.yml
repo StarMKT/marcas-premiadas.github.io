@@ -1,0 +1,19 @@
+# GitHub Pages Configuration
+title: Marcas Premiadas - Rede Litoral
+description: Site de Marcas Premiadas da Rede Litoral
+theme: null
+markdown: kramdown
+plugins: []
+
+# Exclude files from GitHub Pages
+exclude:
+  - .gitignore
+  - README.md
+  - .git
+
+# Permalink structure
+permalink: /:title/
+
+# Future posts
+future: false
+
