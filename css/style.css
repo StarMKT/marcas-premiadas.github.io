@@ -103,6 +103,14 @@ body {
     transition: var(--transition);
 }
 
+
+.logo-img {
+    height: 55px;
+    width: auto;
+    display: block;
+}
+
+
 /* ============================================
    HERO SECTION
    ============================================ */
