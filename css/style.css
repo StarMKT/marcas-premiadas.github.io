@@ -1127,3 +1127,150 @@ html, body{ border:none !important; }
   .menu-toggle{ display:none !important; }
 }
 
+/* === HERO LABELS (data e certificado) === */
+.hero-data,
+.hero-certificado {
+  position: absolute;
+  top: clamp(30px, 6vw, 80px);
+  width: clamp(190px, 17vw, 280px);
+  height: auto;
+  z-index: 1250; /* acima do background e abaixo da arte principal */
+  pointer-events: none;
+  user-select: none;
+}
+
+/* posicionamento específico */
+.hero-data {
+  left: clamp(40px, 7vw, 120px);
+}
+
+.hero-certificado {
+   position: absolute;
+  right: clamp(40px, 7vw, 120px);
+  top: auto !important; /* <- libera o posicionamento por bottom */
+  bottom: calc(var(--hero-bar-h) + clamp(6px, 0.8vw, 14px)); /* fica pouco acima da faixa azul */
+  width: clamp(190px, 17vw, 280px);
+  height: auto;
+  z-index: 1250;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Responsividade - ajuste no tablet */
+@media (max-width: 1024px) {
+  .hero-data,
+  .hero-certificado {
+     top: auto !important;
+    bottom: calc(var(--hero-bar-h) + clamp(4px, 1vw, 10px));
+    width: clamp(160px, 24vw, 220px);
+  }
+  .hero-data { left: clamp(20px, 6vw, 60px); }
+  .hero-certificado { right: clamp(20px, 6vw, 60px); }
+}
+
+/* Mobile - empilhar as 3 imagens mantendo equilíbrio visual */
+@media (max-width: 768px) {
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero-data,
+  .hero-certificado {
+    position: relative;
+    width: 70%;
+    max-width: 280px;
+    top: auto;
+    left: auto;
+    right: auto;
+    margin: 6px 0;
+  }
+
+    .hero-certificado{
+    position: relative;
+    top: auto !important;
+    bottom: auto;
+    width: 70%;
+    max-width: 280px;
+    margin-top: 10px;
+  }
+
+  .hero-art {
+    position: relative;
+    bottom: 0;
+    transform: none;
+    width: 90%;
+    max-width: 480px;
+    z-index: 1260;
+  }
+}
+/* === HERO: posição final do CERTIFICADO (mais perto da faixa azul) === */
+.hero-certificado {
+  position: absolute;
+  right: clamp(40px, 7vw, 120px);
+  bottom: clamp(4px, 0.8vw, 10px); /* 👈 desce bem mais — quase colado na faixa azul */
+  width: clamp(190px, 17vw, 280px);
+  height: auto;
+  z-index: 1250;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* tablet (mantém proporção idêntica) */
+@media (max-width: 1024px) {
+  .hero-certificado {
+    bottom: clamp(2px, 1vw, 8px);
+    width: clamp(160px, 24vw, 220px);
+  }
+}
+
+/* mobile (Mabel) — centralizado e empilhado */
+@media (max-width: 768px) {
+  .hero-certificado {
+    position: relative;
+    bottom: auto;
+    width: 70%;
+    max-width: 280px;
+    margin-top: 10px;
+  }
+}
+
+
+
+
+/* === HERO: posição refinada do certificado (ligeiramente acima da faixa azul) === */
+.hero-certificado {
+  position: absolute;
+  right: clamp(40px, 7vw, 120px);
+  top: auto !important;
+  bottom: calc(var(--hero-bar-h) + clamp(20px, 1.6vw, 28px)); /* 👈 sobe um pouco — ideal visual */
+  width: clamp(190px, 17vw, 280px);
+  height: auto;
+  z-index: 1250;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .hero-certificado {
+    bottom: calc(var(--hero-bar-h) + clamp(12px, 1vw, 18px));
+    width: clamp(160px, 24vw, 220px);
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .hero-certificado {
+    position: relative;
+    top: auto !important;
+    bottom: auto;
+    width: 70%;
+    max-width: 280px;
+    margin-top: 10px;
+  }
+}
