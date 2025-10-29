@@ -1009,3 +1009,121 @@ body{
 
 /* anti-flicker adicional */
 html, body{ border:none !important; }
+
+
+/* === PATCH FINAL: alinhamento do ícone hamburguer === */
+
+/* Container com respiro consistente */
+.header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-h, 72px);
+  padding: 0 18px !important;   /* iguala a distância da logo e do botão */
+  box-sizing: border-box;
+}
+
+/* Logo e menu harmonizados */
+.logo {
+  display: flex;
+  align-items: center;
+}
+.logo-img {
+  display: block;
+  height: 48px;
+  width: auto;
+}
+
+/* Ícone hamburguer: sempre visível no topo direito e com espaçamento correto */
+.menu-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 34px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  margin-right: 4px;         /* aproxima um pouco do centro */
+  cursor: pointer;
+  z-index: 3600;
+}
+
+/* Barrinhas do ícone */
+.menu-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #1737ff;
+  border-radius: 2px;
+  transition: transform .25s ease, opacity .2s ease;
+}
+
+/* Animação X */
+.menu-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.menu-toggle.open span:nth-child(2) { opacity: 0; }
+.menu-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* Garante posição correta no mobile */
+@media (max-width: 920px) {
+  .header .container { padding: 0 16px !important; }
+  .menu-toggle { margin-right: 2px; }
+}
+
+
+
+/* === VISIBILIDADE DO HAMBÚRGUER POR BREAKPOINT === */
+.menu-toggle {
+  display: none;            /* Desktop padrão: escondido */
+}
+
+/* Mobile/Tablet */
+@media (max-width: 1024px) {
+  .menu-toggle {
+    display: flex;          /* Mostra o botão em telas menores */
+  }
+
+  /* (opcional) esconder o menu horizontal quando o hambúrguer estiver ativo */
+  .nav {
+    display: none;
+  }
+  .nav.open {
+    display: block;         /* seu JS já controla .open */
+  }
+}
+
+
+/* === MOBILE / TABLET — visibilidade correta do menu === */
+@media (max-width: 1024px){
+  /* o botão deve aparecer */
+  .menu-toggle{ display:flex; }
+
+  /* NUNCA esconda o container .nav; deixe-o vivo */
+  .nav{ display:block !important; }
+
+  /* lista fechada por padrão … */
+  .nav-list{
+    display:none;                 /* escondida */
+    position: fixed;
+    top: calc(var(--header-h) + env(safe-area-inset-top,0px));
+    left: 0; right: 0;
+    background: rgba(255,255,255,.98);
+    -webkit-backdrop-filter: blur(8px) saturate(160%);
+    backdrop-filter: blur(8px) saturate(160%);
+    flex-direction: column;
+    gap: 0;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    box-shadow: 0 8px 18px rgba(0,0,0,.14);
+    z-index: 3500;
+  }
+
+  /* …e abre quando o JS adicionar .active */
+  .nav-list.active{ display:flex; }
+}
+
+/* === DESKTOP — esconder o hambúrguer sempre === */
+@media (min-width: 1025px){
+  .menu-toggle{ display:none !important; }
+}
+
