@@ -35,20 +35,25 @@ body {
     margin: 0 auto;
     padding: 0 var(--spacing-unit);
 }
+
+
+
 /* ============================================
    HEADER / NAVIGATION (efeito vidro opaco)
    ============================================ */
+
 .header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    backdrop-filter: blur(12px) saturate(180%);
-    -webkit-backdrop-filter: blur(12px) saturate(180%);
-    background-color: rgba(255, 255, 255, 0.6); /* transparência controlada */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  background-color: rgba(255,255,255,0.6);
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  transition: background-color .4s ease, backdrop-filter .4s ease;
+  z-index: 3000;                 /* ↑ acima de qualquer elemento da hero */
 }
+
 
 .header .container {
     display: flex;
@@ -132,107 +137,101 @@ body {
     }
 }
 
-
-
 /* ============================================
-   HERO SECTION (com imagem responsiva)
+   HERO SECTION (imagem + faixa azul – ajuste fino)
    ============================================ */
-.hero {
-    position: relative;
-    min-height: 420px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+.hero{
+  position: relative;
+  min-height: clamp(440px, 50vw, 600px);
+  overflow: hidden;
 
-    /* Substitui o gradiente pelo background.png */
-    background-image: url("../images/background.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  background-image: url("../images/background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* ALTURA MAIOR DA FAIXA + arte mais próxima do bottom */
+  --hero-bar-h: clamp(68px, 10.5vw, 120px);
+  --hero-art-overlap: clamp(18px, 2vw, 32px);
+  padding-bottom: var(--hero-bar-h);
 }
 
-.hero-background {
-    /* efeito luminoso sutil sobre a imagem */
-    position: absolute;
-    inset: 0;
-    background-image: 
-        radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: 1;
+/* faixa azul colada no rodapé da hero */
+.hero::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:0;
+  height:var(--hero-bar-h);
+  background:#2001f9;
+  z-index:1;
 }
 
-.hero-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    color: var(--color-white);
-    padding: 0 1rem;
+/* brilho leve sobre o background */
+.hero-background{
+  position:absolute; inset:0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255,255,255,.10) 0%, transparent 50%);
+  pointer-events:none;
+  z-index:1;
 }
 
-.hero-title {
-    font-size: 4rem;
-    font-weight: 900;
-    text-shadow: 3px 3px 0 var(--color-primary-blue), 
-                 6px 6px 0 var(--color-primary-orange);
-    margin-bottom: 1rem;
-    line-height: 1.1;
+/* arte principal (hero.png) — centralizada e ancorada na faixa */
+.hero-art{
+  position:absolute;
+  left:50%;
+  bottom: calc(var(--hero-bar-h) - var(--hero-art-overlap)); /* encosta/avança um pouco na faixa */
+  transform: translateX(-50%);
+  transform-origin: center bottom;
+
+  /* um pouco menor que antes */
+  width: clamp(480px, 46vw, 820px);
+  max-width: 90%;
+  height:auto;
+  object-fit:contain;
+  aspect-ratio: 1.42 / 1;
+
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,.12));
+  z-index: 1200; /* abaixo do header (que fica ~3000) */
+  transition: transform .45s cubic-bezier(.2,.8,.2,1),
+              filter .45s cubic-bezier(.2,.8,.2,1);
 }
 
-.title-line-1,
-.title-line-2 {
-    display: block;
+/* Hover sutil no desktop (zoom leve, sem subir) */
+@media (hover:hover) and (pointer:fine){
+  .hero-art:hover{
+    transform: translateX(-50%) scale(1.025);
+    filter: drop-shadow(0 14px 36px rgba(0,0,0,.16));
+  }
 }
 
-.title-line-2 {
-    color: var(--color-yellow);
+/* Quebras para manter o enquadramento do protótipo */
+@media (min-width: 1200px){
+  /* desce um pouquinho mais em telas grandes */
+  .hero-art{ bottom: calc(var(--hero-bar-h) - var(--hero-art-overlap) - 55px); }
 }
 
-.hero-subtitle {
-    font-size: 1rem;
-    color: var(--color-white);
-    margin-bottom: 1rem;
-    font-weight: 500;
+@media (max-width: 1024px){
+  .hero { min-height: clamp(400px, 52vw, 560px); }
+  .hero-art { width: clamp(460px, 50vw, 780px); }
 }
 
-.highlight-red {
-    color: var(--color-primary-orange);
-    font-weight: 700;
+@media (max-width: 768px){
+  .hero { min-height: clamp(360px, 64vw, 500px); }
+  .hero-art{
+    width: clamp(380px, 72vw, 640px);
+    bottom: calc(var(--hero-bar-h) - var(--hero-art-overlap) - 6px);
+  }
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    .hero {
-        min-height: 320px;
-        background-attachment: scroll; /* evita glitch no mobile */
-        background-position: center;
-    }
-
-    .hero-title {
-        font-size: 2.5rem;
-    }
-
-    .hero-subtitle {
-        font-size: 0.9rem;
-    }
+@media (max-width: 480px){
+  .hero { min-height: clamp(320px, 74vw, 440px); }
+  .hero-art{
+    width: clamp(320px, 86vw, 560px);
+    bottom: calc(var(--hero-bar-h) - var(--hero-art-overlap) - 10px);
+  }
 }
 
-@media (max-width: 480px) {
-    .hero {
-        min-height: 280px;
-    }
-
-    .hero-title {
-        font-size: 2rem;
-        text-shadow: 2px 2px 0 var(--color-primary-blue), 
-                     4px 4px 0 var(--color-primary-orange);
-    }
-
-    .hero-subtitle {
-        font-size: 0.8rem;
-    }
-}
 
 /* ============================================
    BRANDS SECTION
@@ -584,5 +583,40 @@ body {
 
 .visible {
     display: block;
+}
+
+
+
+
+/* --- PATCH: HERO BUGFIX --- */
+
+/* 1) If some line appears in :before, remove it completely */
+.hero::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* 2) Avoid cursor/outline/caret and text selection inside the hero */
+.hero, .hero * {
+  user-select: none;
+  -webkit-user-select: none;
+  caret-color: transparent;              /* hide the blinking cursor */
+}
+
+.hero-art { 
+  outline: none;
+  -webkit-tap-highlight-color: transparent; /* remove highlight no mobile */
+  border: 0;                                 /* garante sem borda fantasma */
+
+  /* 3) Anti-flicker em transform/hover */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateX(-50%) translateZ(0); /* mantém o seu translateX */
+  will-change: transform;
+}
+
+/* Se houver alguma borda/linha aplicada por engano ao container, zera */
+.hero {
+  border: 0;
 }
 
