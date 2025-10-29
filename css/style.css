@@ -1,3 +1,121 @@
+/* ==== RESET ESSENCIAL ==== */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Evita qualquer "sobrinha" acima do header (iOS safe-area) */
+body {
+  background: #ffffff;                 /* ou a cor base do seu layout */
+  padding-top: env(safe-area-inset-top, 0);
+}
+
+/* ==== HEADER (vidro opaco) ==== */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 3000;
+  /* vidro opaco */
+  background: rgba(255,255,255,0.82);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 0;
+  margin: 0;
+  /* animação de esconder/mostrar ao rolar */
+  transition: transform .25s ease;
+  /* cola no topo em telas com notch */
+  padding-top: env(safe-area-inset-top, 0);
+}
+
+/* Quando rola p/ baixo, escondemos o header fora da tela */
+.header--hidden {
+  transform: translateY(calc(-100% - env(safe-area-inset-top, 0)));
+}
+
+/* Container do header com respiro coerente p/ mobile */
+.header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .625rem 1rem;  /* ~10px 16px */
+}
+
+/* ==== ÍCONE HAMBÚRGUER (botão) ==== */
+.menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin-left: auto;
+  /* “mais pra dentro” da borda direita */
+  margin-right: 8px;
+  border-radius: 8px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+/* desenhinho do hambúrguer (se usar spans) */
+.menu-toggle .bar,
+.menu-toggle .bar::before,
+.menu-toggle .bar::after {
+  content: "";
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #1737ff;   /* azul do layout */
+  border-radius: 2px;
+  transition: transform .25s ease, opacity .2s ease;
+}
+.menu-toggle .bar::before { transform: translateY(-6px); }
+.menu-toggle .bar::after  { transform: translateY( 6px); }
+.menu-toggle.open .bar    { opacity: 0; }
+.menu-toggle.open .bar::before { transform: translateY(0) rotate(45deg); }
+.menu-toggle.open .bar::after  { transform: translateY(0) rotate(-45deg); }
+
+/* ==== NAV MOBILE (abre abaixo do header) ==== */
+.nav-list {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: auto;
+  width: min(88vw, 360px);
+  background: rgba(255,255,255,0.95);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-radius: 12px 0 0 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.12);
+  padding: .75rem 1rem;
+  transform: translateY(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+  z-index: 2999;
+}
+.nav-list.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+@media (min-width: 769px) {
+  .menu-toggle { display: none; }
+  .nav-list {
+    position: static;
+    width: auto;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+
+
 /* ============================================
    RESET E VARIÁVEIS GLOBAIS
    ============================================ */
@@ -51,6 +169,7 @@ body {
   border-bottom: 1px solid rgba(255,255,255,0.3);
   box-shadow: 0 2px 8px rgba(0,0,0,.15);
   transition: background-color .4s ease, backdrop-filter .4s ease;
+  --header-h: 76px;
   z-index: 3000;                 /* ↑ acima de qualquer elemento da hero */
 }
 
@@ -60,6 +179,75 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 1.5rem;
+}
+
+/* === Mobile Nav (Hambúrguer) === */
+.menu-toggle{
+  display: none;                  /* só aparece no mobile */
+  width: 36px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-direction: column;
+  z-index: 3000;                  /* acima de tudo */
+}
+
+/* “barrinhas” do hambúrguer */
+.menu-toggle span{
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: #1d2ae0;            /* azul visível sobre header claro */
+  border-radius: 2px;
+  transition: transform .3s ease, opacity .3s ease;
+}
+
+/* animação para X */
+.menu-toggle.open span:nth-child(1){ transform: translateY(9px) rotate(45deg); }
+.menu-toggle.open span:nth-child(2){ opacity: 0; }
+.menu-toggle.open span:nth-child(3){ transform: translateY(-9px) rotate(-45deg); }
+
+/* Layout mobile do menu */
+@media (max-width: 920px){
+  .header .container{ gap: .5rem; }
+  .nav .nav-list{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: var(--header-h, 72px);    /* altura do header; ajuste se precisar */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px 20px 22px;
+    background: rgba(255,255,255,.96); /* vidro opaco */
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 24px rgba(0,0,0,.14);
+    transform: translateY(-120%);
+    transition: transform .35s ease;
+    z-index: 2500;
+  }
+  .nav .nav-list.active{ transform: translateY(0); }
+
+  /* links grandes e fáceis de tocar */
+  .nav .nav-list li a{
+    display: block;
+    padding: .8rem 0;
+    font-weight: 700;
+  }
+
+  /* mostra o botão e esconde a lista por padrão */
+  .menu-toggle{ display: flex; }
+}
+
+/* garante que no desktop o menu fica inline e o botão some */
+@media (min-width: 921px){
+  .nav .nav-list{ transform: none !important; position: static; box-shadow: none; background: transparent; display: flex; }
+  .menu-toggle{ display: none; }
 }
 
 /* Mantém logo e nav intactos */
@@ -123,6 +311,12 @@ body {
     border-radius: 2px;
     transition: var(--transition);
 }
+
+/* Animação do ícone (X) */
+.menu-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.menu-toggle.open span:nth-child(2) { opacity: 0; }
+.menu-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+.menu-toggle span { transition: transform .25s ease, opacity .2s ease; }
 
 /* Responsividade: remove blur pesado no mobile */
 @media (max-width: 768px) {
@@ -407,6 +601,35 @@ body {
    RESPONSIVE DESIGN
    ============================================ */
 
+
+@media (max-width: 1024px) {
+  .header .container { gap: .75rem; }
+
+  /* esconde a lista no mobile para o botão não “sumir” */
+  .nav-list {
+    display: none;                 /* some por padrão */
+    position: fixed;               /* dropdown fixo sob o header */
+    top: calc(var(--header-h, 72px));
+    left: 0;
+    right: 0;
+    background: rgba(255,255,255,.98);
+    -webkit-backdrop-filter: blur(8px) saturate(160%);
+    backdrop-filter: blur(8px) saturate(160%);
+    flex-direction: column;
+    gap: 0;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    box-shadow: 0 8px 18px rgba(0,0,0,.14);
+    z-index: 3500;                 /* abaixo do header, acima do conteúdo */
+  }
+  .nav-list.active { display: flex; }
+
+  .nav-list li { width: 100%; border-bottom: 1px solid #f0f0f0; }
+  .nav-list a { display:block; padding: 1rem 1.25rem; text-align:center; }
+
+  /* mostra o botão */
+  .menu-toggle { display: flex; z-index: 3600; }
+}   
+
 /* Tablets (768px and below) */
 @media (max-width: 768px) {
     .nav-list {
@@ -587,6 +810,51 @@ body {
 
 
 
+/* zera qualquer folga no topo */
+html, body { margin: 0; padding: 0; }
+
+/* altura padrão da barra (ajuste se usar outra) */
+:root { --header-h: 72px; }
+
+/* Header fixo e colado no topo, com transição para esconder/mostrar */
+.header{
+  position: fixed;                /* em vez de sticky */
+  top: 0; left: 0; right: 0;
+  z-index: 3000;
+  background: rgba(255,255,255,.92);   /* “vidro opaco” */
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 8px rgba(0,0,0,.12);
+  transform: translateY(0);            /* visível por padrão */
+  transition: transform .28s ease;
+}
+
+/* Esconde a barra quando adicionarmos a classe via JS */
+.header--hidden{ transform: translateY(-100%); }
+
+/* container interno — controla o “respiro” para o ícone não grudar na borda */
+.header .container{
+  height: var(--header-h);
+  padding: 0 14px;                      /* puxa o conteúdo pra dentro */
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+/* Botão hambúrguer – garante que não encoste na borda */
+.menu-toggle{ margin-right: 6px; }      /* mais pra dentro no mobile */
+
+/* Compensa o header fixo para o conteúdo não “subir” por baixo */
+body{ padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px)); }
+
+/* Drop do menu mobile (mantém o que já fizemos, só reforçando o topo correto) */
+@media (max-width: 920px){
+  .nav .nav-list{
+    top: var(--header-h);
+    left: 0; right: 0;
+  }
+}
+
+
+
+
 
 /* --- PATCH: HERO BUGFIX --- */
 
@@ -620,3 +888,124 @@ body {
   border: 0;
 }
 
+
+
+
+/* === CORREÇÃO HEADER (Remove White Gap no Topo) === */
+
+/* Remove a versão antiga (sticky) */
+.header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  background: rgba(255,255,255,0.92) !important;
+  backdrop-filter: blur(10px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(160%) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12) !important;
+  z-index: 3000 !important;
+}
+
+/* Força o body a compensar exatamente a altura do header */
+body {
+  margin: 0 !important;
+  padding-top: var(--header-h, 72px) !important;
+  background-color: var(--color-white) !important;
+}
+
+/* Remove qualquer fundo inesperado no html */
+html {
+  background: var(--color-white) !important;
+}
+
+/* Ajusta o container interno do header (reposiciona o ícone) */
+.header .container {
+  height: var(--header-h, 72px);
+  padding: 0 18px !important; /* mais para dentro */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Remove duplicações antigas de box-shadow/border */
+.header::before,
+.header::after {
+  content: none !important;
+  border: none !important;
+  display: none !important;
+}
+
+/* Evita linhas finas de borda entre o header e o topo */
+body, .header {
+  border: none !important;
+}
+
+
+
+/* ==== HEADER: sem gap no topo + ícone mais pra dentro ==== */
+
+/* garante colagem absoluta no topo sem sub-pixel gap */
+.header{
+  position: fixed !important;
+  top: 0 !important; left: 0 !important; right: 0 !important;
+  transform: translateZ(0);                  /* evita 1px gap em alguns devices */
+  background: rgba(255,255,255,.92) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(160%) !important;
+  backdrop-filter: blur(10px) saturate(160%) !important;
+  z-index: 3000 !important;
+}
+
+/* cobre qualquer “linha fantasma” acima do header (Chrome mobile/devtools) */
+.header::before{
+  content:"";
+  position:absolute;
+  top:-1px; left:0; right:0;
+  height:1px;
+  background:#fff;                           /* mesma cor do header */
+}
+
+/* safe area (notch) – o header incorpora a área segura */
+.header{ padding-top: env(safe-area-inset-top, 0px); }
+
+/* compensa a altura total do header (altura + safe-area) no conteúdo */
+:root{ --header-h: 72px; }                   /* sua altura de barra */
+body{ 
+  margin:0 !important;
+  padding-top: calc(var(--header-h) + env(safe-area-inset-top,0px)) !important;
+  background:#fff !important;
+}
+
+/* container interno com respiro correto p/ o hambúrguer */
+.header .container{
+  height: var(--header-h);
+  padding: 0 14px !important;                /* puxa o conteúdo pra dentro */
+}
+
+/* hambúrguer mais “pra dentro” no mobile */
+.menu-toggle{
+  margin-right: 8px;                         /* afasta da borda direita */
+}
+.menu-toggle span{
+  width: 22px;                               /* um pouco menor para caber melhor */
+  height: 3px;
+}
+
+/* menu drop no mobile ancorado exatamente sob o header fixo */
+@media (max-width: 920px){
+  .nav .nav-list{
+    position: fixed;
+    top: calc(var(--header-h) + env(safe-area-inset-top,0px));
+    left:0; right:0;
+    background: rgba(255,255,255,.98);
+    -webkit-backdrop-filter: blur(8px) saturate(160%);
+    backdrop-filter: blur(8px) saturate(160%);
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    box-shadow: 0 8px 18px rgba(0,0,0,.14);
+  }
+}
+
+/* anti-flicker adicional */
+html, body{ border:none !important; }
