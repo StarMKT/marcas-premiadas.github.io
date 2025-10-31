@@ -6494,3 +6494,329 @@ body{ padding-top: var(--header-h) !important; }
   }
   body.menu-open { overflow: auto !important; }
 }
+
+/* Ajuste fino: subir apenas o item "Panelas Polishop Ichef" */
+.brand-ichef { 
+  /* mobile/tablet: sem ajuste */
+  margin-top: 0;
+}
+
+/* Desktop (>= 992px): sobe o bloco */
+@media (min-width: 992px){
+  .brand-ichef{
+    margin-top: -64px;          /* ajuste principal: suba/abaixe aqui */
+  }
+}
+
+/* (Opcional) telas muito grandes: sobe um pouco mais */
+@media (min-width: 1400px){
+  .brand-ichef{
+    margin-top: -80px;
+  }
+}
+
+/* Ajuste fino: posicionar Potes Tupperware */
+.brand-tupperware {
+  position: relative;
+  margin-top: -40px;     /* sobe um pouco */
+  left: -30px;           /* move levemente pra esquerda */
+}
+
+/* Se quiser só aplicar isso no desktop */
+@media (min-width: 992px){
+  .brand-tupperware {
+    margin-top: -50px;
+    left: -40px;
+  }
+}
+
+
+/* Ajuste fino: alinhar Canecas Rede Litoral */
+.brand-caneca {
+  position: relative;
+  left: -40px;   /* move pra esquerda */
+  margin-top: -20px; /* sobe um pouquinho pra encaixar melhor */
+}
+
+/* Desktop only */
+@media (min-width: 992px){
+  .brand-caneca {
+    left: -42px;
+    margin-top: -25px;
+  }
+}
+
+/* Ajuste fino: descer Panelas Tramontina */
+.brand-tramontina {
+  position: relative;
+  margin-top: 20px; /* desce o item */
+}
+
+/* Desktop refinement */
+@media (min-width: 992px){
+  .brand-tramontina {
+    margin-top: 30px; /* ligeiramente mais pra baixo em telas maiores */
+  }
+}
+
+/* ===== FLUTUAÇÃO (versão desktop) ===== */
+@media (min-width: 992px) {
+  .brands .brand-item {
+    position: relative;
+    animation: floaty 6s ease-in-out infinite;
+    transition: transform 0.15s ease-out;
+  }
+
+  /* animação de flutuação leve */
+  @keyframes floaty {
+    0%   { transform: translate(0px, 0px) rotate(0deg); }
+    25%  { transform: translate(6px, -8px) rotate(0.5deg); }
+    50%  { transform: translate(-5px, -3px) rotate(-0.5deg); }
+    75%  { transform: translate(8px, 6px) rotate(0.3deg); }
+    100% { transform: translate(0px, 0px) rotate(0deg); }
+  }
+
+  /* variações aleatórias de delay para não flutuarem juntas */
+  .brands .brand-item:nth-child(1) { animation-delay: 0s; }
+  .brands .brand-item:nth-child(2) { animation-delay: 1s; }
+  .brands .brand-item:nth-child(3) { animation-delay: 2s; }
+  .brands .brand-item:nth-child(4) { animation-delay: 1.5s; }
+  .brands .brand-item:nth-child(5) { animation-delay: 0.8s; }
+  .brands .brand-item:nth-child(6) { animation-delay: 2.5s; }
+  .brands .brand-item:nth-child(7) { animation-delay: 1.8s; }
+  .brands .brand-item:nth-child(8) { animation-delay: 0.4s; }
+}
+
+
+/* ===== Flutuação + composição de transform (desktop) ===== */
+@media (min-width: 992px){
+  .brands .brand-item { position: relative; }
+
+  /* anima no PNG para evitar conflito com offsets do container */
+  .brands .brand-item .brand-png{
+    display:block; width:100%; height:auto;
+    /* composição: mouse (mx/my) + flutuação (fx/fy/rot) */
+    transform:
+      translate(var(--mx, 0px), var(--my, 0px))
+      translate(var(--fx, 0px), var(--fy, 0px))
+      rotate(var(--fr, 0deg));
+    transition: transform 120ms ease-out;
+    will-change: transform;
+    animation: floatyVars 6s ease-in-out infinite;
+  }
+
+  @keyframes floatyVars{
+    0%   { --fx: 0px;  --fy: 0px;  --fr: 0deg;   }
+    25%  { --fx: 6px;  --fy:-8px;  --fr: 0.5deg; }
+    50%  { --fx:-5px;  --fy:-3px;  --fr:-0.5deg; }
+    75%  { --fx: 8px;  --fy: 6px;  --fr: 0.3deg; }
+    100% { --fx: 0px;  --fy: 0px;  --fr: 0deg;   }
+  }
+
+  /* delays diferentes para cada item */
+  .brands .brand-item:nth-child(1)  .brand-png { animation-delay: 0s;   }
+  .brands .brand-item:nth-child(2)  .brand-png { animation-delay: 1s;   }
+  .brands .brand-item:nth-child(3)  .brand-png { animation-delay: 2s;   }
+  .brands .brand-item:nth-child(4)  .brand-png { animation-delay: 1.5s; }
+  .brands .brand-item:nth-child(5)  .brand-png { animation-delay: 0.8s; }
+  .brands .brand-item:nth-child(6)  .brand-png { animation-delay: 2.5s; }
+  .brands .brand-item:nth-child(7)  .brand-png { animation-delay: 1.8s; }
+  .brands .brand-item:nth-child(8)  .brand-png { animation-delay: 0.4s; }
+}
+
+/* --- FIX: anima só o PNG; containers livres para receber transform !important --- */
+@media (min-width: 992px){
+  .brands .brand-item{
+    animation: none !important;     /* desliga floaty no container */
+    transform: none;                /* não anima/compõe no container */
+  }
+
+  /* mantém a flutuação no próprio PNG (já usada no JS de gravidade) */
+  .brands .brand-item .brand-png{
+    display:block; width:100%; height:auto;
+    transform:
+      translate(var(--mx, 0px), var(--my, 0px))
+      translate(var(--fx, 0px), var(--fy, 0px))
+      rotate(var(--fr, 0deg));
+    transition: transform 120ms ease-out;
+    will-change: transform;
+    animation: floatyVars 6s ease-in-out infinite;
+  }
+}
+
+/* ===== PRÊMIOS: animação controlada por JS (desktop only) ===== */
+@media (min-width: 992px){
+  .brands { position: relative; }
+  .brands .brand-item { position: relative; } /* mantém seus ajustes de layout */
+  .brands .brand-item .brand-png{
+    display:block; width:100%; height:auto;
+    will-change: transform;
+    transition: transform 0.08s linear; /* suaviza micro jitter */
+  }
+}
+
+
+/* Evitar recorte dos prêmios quando se movem (desktop) */
+@media (min-width: 992px){
+  .brands,
+  .brands .container,
+  .brands .brands-grid,
+  .brands .brand-item{
+    overflow: visible;           /* libera as bordas pra animação */
+  }
+
+  /* dá um "respiro" lateral pra não encostar no limite ao mover */
+  .brands .container{
+    padding-inline: max(24px, 4vw);
+  }
+
+  /* segurança: o PNG é quem anima, então o container não clipa */
+  .brands .brand-item .brand-png{
+    transform-origin: center center;
+  }
+}
+
+/* PRÊMIOS: mais área útil lateral (desktop) */
+@media (min-width: 992px){
+  .brands,
+  .brands .container,
+  .brands .brands-grid,
+  .brands .brand-item{
+    overflow: visible;
+  }
+
+  /* Gutters bem largos para a animação não encostar nas bordas */
+  .brands .container{
+    padding-left: clamp(64px, 10vw, 180px);
+    padding-right: clamp(64px, 10vw, 180px);
+  }
+}
+
+/* === Brands: espaço seguro para animação (desktop) === */
+.brands,
+.brands .container,
+.brands .brands-grid,
+.brands .brand-item {
+  overflow: visible !important; /* impede clipping do translate */
+}
+
+.brands {
+  /* gutters largos para a bolha não encostar nas bordas do viewport */
+  --bubble-room: max(7vw, 140px);
+  padding-left: var(--bubble-room);
+  padding-right: var(--bubble-room);
+}
+
+/* se a sua .container tiver padding horizontal, zera aqui só nesta seção */
+.brands .container {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* imagens preparadas para animar */
+.brands .brand-png {
+  display: block;               /* remove possíveis espaços inline */
+  transform-origin: center;     /* rotação/translate a partir do centro */
+  will-change: transform;       /* suaviza durante a animação */
+}
+
+/* reduzir um pouco o gutter em telas grandes “médias” */
+@media (max-width: 1400px) {
+  .brands { --bubble-room: max(5vw, 110px); }
+}
+
+/* sem efeito no mobile (você vai definir outro layout depois) */
+@media (max-width: 991.98px) {
+  .brands {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* ===============================
+   SECÇÃO DE PRÊMIOS — FIX CORTE LATERAL
+   =============================== */
+
+/* Remove qualquer limite de recorte da seção e ancestrais */
+html, body {
+  overflow-x: visible !important;
+}
+
+section.brands,
+section.brands * {
+  overflow: visible !important;
+}
+
+/* Remove qualquer transform/perspective herdado na hierarquia */
+section.brands {
+  isolation: isolate;         /* cria um novo contexto isolado */
+  transform: none !important;
+  perspective: none !important;
+  clip-path: none !important;
+  contain: none !important;
+  position: relative;
+  z-index: 5;
+}
+
+/* Garante margem lateral suficiente pra imagens flutuarem */
+section.brands .container {
+  max-width: 100%;
+  padding-left: 12vw;
+  padding-right: 12vw;
+}
+
+/* Dentro da seção, libera absolutamente todas as bordas */
+section.brands .brands-grid,
+section.brands .brand-item {
+  overflow: visible !important;
+  transform: none !important; /* cancela possíveis contextos */
+}
+
+/* O PNG é o único que anima */
+section.brands .brand-png {
+  display: block;
+  transform-origin: center center;
+  will-change: transform;
+  pointer-events: none; /* evita hover quebrar layout */
+}
+
+/* Mobile */
+@media (max-width: 991.98px){
+  section.brands .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* =========================================
+   BRANDS – liberar animação sem cortes
+   ========================================= */
+
+/* 1) Todos os wrappers dos itens de prêmio NÃO podem conter paint/clipping */
+.brands .brand-item,
+.brands .brand-as-image,
+.brands .brand-item.brand-as-image,
+.brands .brand-ichef,
+.brands .brand-tramontina,
+.brands .brand-10mil,
+.brands .brand-tupperware,
+.brands .brand-caneca,
+.brands .brand-premios {
+  contain: none !important;          /* <— remove o “caixote” de pintura */
+  overflow: visible !important;      /* <— permite o translate sair do box */
+  clip-path: none !important;        /* segurança extra */
+}
+
+/* 2) A grade também não pode clipar */
+.brands .brands-grid{
+  overflow: visible !important;
+  contain: none !important;
+}
+
+/* 3) A imagem é quem anima; centro correto e sem interferência */
+.brands .brand-png{
+  display: block;
+  transform-origin: center center;
+  will-change: transform;
+  /* não coloque transform aqui com !important pra não brigar com o JS */
+}
