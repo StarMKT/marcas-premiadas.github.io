@@ -7414,3 +7414,189 @@ section.brands .brand-png {
   text-shadow: 0 3px 6px rgba(0,0,0,0.25);
   transform: translateY(-4px); /* ajuste fino vertical */
 }
+
+
+/* ========== CARD BRANCO — MARCAS PARTICIPANTES (dentro da .how-to) ========== */
+.brands-card{
+  position: relative;
+  z-index: 1; /* acima do azul de fundo, igual ao card laranja */
+  background: #fff;
+  border-radius: 28px;
+  padding: clamp(24px,3.5vw,48px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.12);
+  margin-top: clamp(20px, 3vw, 32px); /* respiro entre os cards */
+  font-family: 'Myriad Pro', sans-serif;
+}
+/* Reusa o mesmo look do título do card laranja */
+.brands-card .section-title{
+  /* herda tamanho/peso de .section-title global já usado no card laranja */
+  /* centralizado por padrão */
+  margin: 0 0 clamp(20px,3vw,28px);
+}
+
+/* Grid de logos — 22 itens 250x250, responsivo sem cortar */
+.brands-logos-grid{
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 24px);
+  align-items: center;
+  justify-items: center;
+}
+
+.brand-logo{
+  width: 250px;
+  height: 250px;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  border-radius: 16px;
+  /* opcional: uma bordinha leve pra destacar no branco */
+  border: 1px solid rgba(0,0,0,.06);
+}
+
+.brand-logo img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;  /* não corta a arte da logo */
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Breakpoints para manter fill perfeito nas telas menores */
+@media (max-width: 1280px){
+  .brands-logos-grid{ grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+@media (max-width: 1024px){
+  .brands-logos-grid{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 768px){
+  .brands-logos-grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .brand-logo{ width: 220px; height: 220px; }
+}
+@media (max-width: 560px){
+  .brands-logos-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .brand-logo{ width: 200px; height: 200px; }
+}
+@media (max-width: 380px){
+  .brands-logos-grid{ grid-template-columns: 1fr; }
+  .brand-logo{ width: 180px; height: 180px; }
+}
+
+/* ================================
+   PATCH — Logos 50% menores (sem borda)
+==================================*/
+
+.brands-logos-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: clamp(12px, 1.8vw, 20px);
+  align-items: center;
+  justify-items: center;
+}
+
+.brand-logo {
+  width: 125px;   /* antes 250px */
+  height: 125px;  /* antes 250px */
+  display: grid;
+  place-items: center;
+  background: transparent; /* sem fundo branco sólido */
+  border: none;            /* remove a borda sutil anterior */
+}
+
+.brand-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Responsividade */
+@media (max-width: 1280px){
+  .brands-logos-grid { grid-template-columns: repeat(6, 1fr); }
+}
+@media (max-width: 1024px){
+  .brands-logos-grid { grid-template-columns: repeat(5, 1fr); }
+}
+@media (max-width: 768px){
+  .brands-logos-grid { grid-template-columns: repeat(4, 1fr); }
+  .brand-logo { width: 110px; height: 110px; }
+}
+@media (max-width: 560px){
+  .brands-logos-grid { grid-template-columns: repeat(3, 1fr); }
+  .brand-logo { width: 100px; height: 100px; }
+}
+@media (max-width: 380px){
+  .brands-logos-grid { grid-template-columns: repeat(2, 1fr); }
+  .brand-logo { width: 90px; height: 90px; }
+}
+
+/* Centralizar a última fileira das logos */
+.brands-logos-grid{
+  display: grid;
+  /* cada coluna tem 125px fixos; cria quantas couberem e centraliza o conjunto */
+  grid-template-columns: repeat(auto-fit, minmax(125px, 125px));
+  justify-content: center;        /* centra o grid dentro do card */
+  gap: clamp(12px, 1.8vw, 20px);
+  align-items: center;
+  justify-items: center;           /* centra cada logo na sua célula */
+}
+
+.brand-logo{
+  width: 125px;
+  height: 125px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: none;
+}
+
+.brand-logo img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* (Opcional) em telas bem pequenas, reduza suavemente */
+@media (max-width: 380px){
+  .brands-logos-grid{
+    grid-template-columns: repeat(auto-fit, minmax(100px, 100px));
+  }
+  .brand-logo{ width: 100px; height: 100px; }
+}
+
+/* --- CENTRALIZAR SEMPRE A ÚLTIMA FILEIRA --- */
+.brands-logos-grid{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;     /* <-- centraliza cada linha */
+  align-items: center;
+  gap: clamp(12px, 1.8vw, 20px);
+}
+
+/* Itens continuam com tamanho fixo (50% do original) */
+.brand-logo{
+  width: 125px;
+  height: 125px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: none;
+}
+
+.brand-logo img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Responsividade suave */
+@media (max-width: 768px){
+  .brand-logo{ width: 110px; height: 110px; }
+}
+@media (max-width: 560px){
+  .brand-logo{ width: 100px; height: 100px; }
+}
+@media (max-width: 380px){
+  .brand-logo{ width: 90px; height: 90px; }
+}
