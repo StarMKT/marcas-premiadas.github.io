@@ -6927,3 +6927,272 @@ section.brands .brand-png {
 @media (max-width: 991.98px){
   .brand-cta{ display:none; }
 }
+
+
+/* --- PATCH 2025-10-31: travar scroll lateral no mobile --- */
+@media (max-width: 768px) {
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden !important;   /* bloqueia rolagem horizontal */
+    overscroll-behavior-x: none;     /* evita elastic scroll lateral no mobile */
+  }
+
+  /* Evita que algo dentro do body projete largura além do viewport */
+  body > * {
+    max-width: 100vw;
+  }
+
+  /* Contém qualquer “estouro” apenas na seção de prêmios sem afetar desktop */
+  section.brands,
+  .brands .brands-grid {
+    overflow-x: hidden !important;   /* clip horizontal na área dos prêmios */
+  }
+
+  /* Garante que as imagens dos prêmios não causem overflow */
+  .brands .brand-item,
+  .brands .brand-as-image,
+  .brands .brand-png {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Guard-rails: se algum inline style empurrou para fora (left/right), neutraliza no mobile */
+  .brands [style*="left:"],
+  .brands [style*="right:"] {
+    left: auto !important;
+    right: auto !important;
+  }
+}
+
+
+/* --- PATCH 2025-10-31: layout mobile para seção #premios --- */
+@media (max-width: 768px) {
+  /* Garante empilhamento vertical e centralização */
+  #premios .brands-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 20px; /* espaçamento entre as imagens */
+  }
+
+  /* Imagens centralizadas, responsivas e com espaçamento proporcional */
+  #premios .brand-item,
+  #premios .brand-as-image {
+    width: 80% !important;       /* largura máxima no mobile */
+    max-width: 320px !important; /* limite para evitar estouro */
+    margin: 0 auto !important;   /* centraliza horizontalmente */
+    transform: none !important;  /* desativa efeitos flutuantes */
+  }
+
+  #premios .brand-png {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Ajuste do botão Ver Regulamento no final */
+  #premios .ver-regulamento-btn {
+    margin-top: 20px;
+    align-self: center;
+    display: inline-block;
+    transform: none !important;
+  }
+
+  /* Remove qualquer posicionamento absoluto residual */
+  #premios [style*="position: absolute"],
+  #premios [style*="left:"],
+  #premios [style*="right:"] {
+    position: static !important;
+    left: auto !important;
+    right: auto !important;
+  }
+}
+
+
+/* --- PATCH 2025-10-31: ordem exata dos itens em #premios no mobile --- */
+@media (max-width: 768px) {
+
+  /* Container em coluna */
+  #premios .brands-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 20px;
+  }
+
+  /* Flex items (default) */
+  #premios :is(.brand-item, .brand-as-image, .ver-regulamento-btn) {
+    order: 100;                 /* fallback alto */
+    width: 80%;
+    max-width: 320px;
+    margin: 0 auto;
+    transform: none !important; /* sem flutuação */
+    position: static !important;
+  }
+  #premios .brand-png { width: 100%; height: auto; display: block; }
+
+  /* ORDEM EXATA */
+  #premios :is(.brand-item, .brand-as-image):has(img[src$="raspou_achou_ganhou.png"]) { order: 1; }
+  #premios :is(.brand-item, .brand-as-image):has(img[src$="airfryer.png"])            { order: 2; }
+  #premios :is(.brand-item, .brand-as-image):has(img[src$="10_mil.png"])              { order: 3; }
+  #premios :is(.brand-item, .brand-as-image):has(img[src$="tramontina.png"])          { order: 4; }
+  #premios :is(.brand-item, .brand-as-image):has(img[src$="premios.png"])             { order: 5; }
+  #premios :is(.brand-item, .brand-as-image):has(img[src$="panelas.png"])             { order: 6; }
+  #premios :is(.brand-item, .brand-as-image):has(img[src$="tupperware.png"])          { order: 7; }
+  #premios :is(.brand-item, .brand-as-image):has(img[src$="caneca.png"])              { order: 8; }
+  #premios .ver-regulamento-btn { order: 9; align-self: center; }
+}
+
+/* --- PATCH 2025-10-31: ajusta posição do raspou_achou_ganhou.png --- */
+@media (max-width: 768px) {
+  #premios :is(.brand-item, .brand-as-image):has(img[src$="raspou_achou_ganhou.png"]) {
+    margin-top: -10px !important; /* sobe um pouco */
+  }
+}
+
+/* --- PATCH 2025-10-31: destaque visual raspou_achou_ganhou.png no mobile --- */
+@media (max-width: 768px) {
+  #premios :is(.brand-item, .brand-as-image):has(img[src$="raspou_achou_ganhou.png"]) {
+    margin-top: -35px !important;   /* sobe mais */
+    margin-right: 15px !important;  /* leve deslocamento à direita */
+    transform: none !important;     /* garante que o efeito flutuante não interfira */
+    position: relative !important;
+    z-index: 2;                     /* garante sobreposição suave se houver camadas */
+  }
+}
+
+/* --- PATCH 2025-10-31: flutuação nas imagens no mobile e NÃO no botão --- */
+
+/* 1) Nunca flutuar o botão (desktop e mobile) */
+#premios .ver-regulamento-btn {
+  animation: none !important;
+  transform: none !important; /* neutraliza qualquer JS de “gravidade” */
+}
+
+/* 2) Ativar flutuação suave nas IMAGENS no mobile */
+@media (max-width: 768px) {
+  /* Keyframes leves p/ mobile */
+  @keyframes float-mobile {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+  }
+
+  /* Aplica a flutuação só nos PNGs dos prêmios */
+  #premios .brand-png {
+    animation: float-mobile 5.5s ease-in-out infinite;
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translateZ(0); /* suaviza no mobile */
+  }
+
+  /* Pequenas variações de tempo p/ não ficarem sincronizadas */
+  #premios .brands-grid > :nth-child(1) .brand-png { animation-duration: 5.2s; }
+  #premios .brands-grid > :nth-child(2) .brand-png { animation-duration: 5.8s; }
+  #premios .brands-grid > :nth-child(3) .brand-png { animation-duration: 5.4s; }
+  #premios .brands-grid > :nth-child(4) .brand-png { animation-duration: 6.0s; }
+  #premios .brands-grid > :nth-child(5) .brand-png { animation-duration: 5.6s; }
+  #premios .brands-grid > :nth-child(6) .brand-png { animation-duration: 5.9s; }
+  #premios .brands-grid > :nth-child(7) .brand-png { animation-duration: 5.3s; }
+  #premios .brands-grid > :nth-child(8) .brand-png { animation-duration: 6.1s; }
+
+  /* Garante que o botão continue sem flutuar no mobile */
+  #premios .ver-regulamento-btn .brand-png,
+  #premios .ver-regulamento-btn {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* --- PATCH FINAL 2025-10-31: botão Ver Regulamento fixo e sem animação --- */
+@media (max-width: 768px) {
+  #premios .ver-regulamento-btn {
+    margin-top: 40px !important;   /* empurra o botão mais pra baixo */
+    animation: none !important;    /* desativa qualquer keyframe CSS */
+    transform: none !important;    /* neutraliza qualquer movimento residual */
+    transition: none !important;   /* cancela efeitos de transição */
+    position: relative !important;
+    z-index: 3;                    /* garante que fique acima das imagens, se preciso */
+  }
+
+  /* remove também se o botão tiver algum wrapper interno com imagem */
+  #premios .ver-regulamento-btn *,
+  #premios .ver-regulamento-btn img {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* --- PATCH 2025-10-31: botão Ver Regulamento mais abaixo e estático --- */
+@media (max-width: 768px) {
+  #premios .ver-regulamento-btn {
+    margin-top: 80px !important;   /* empurra mais pra baixo */
+    animation: none !important;    /* remove qualquer animação */
+    transform: none !important;
+    transition: none !important;
+    position: relative !important;
+    z-index: 3;
+  }
+
+  /* Neutraliza qualquer animação interna do botão */
+  #premios .ver-regulamento-btn *,
+  #premios .ver-regulamento-btn img {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* --- PATCH 2025-10-31: ajustar botão Ver Regulamento e ordem no mobile --- */
+@media (max-width: 768px) {
+  /* Empilhamento em coluna no mobile */
+  #premios .brands-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 20px;
+  }
+
+  /* Tira QUALQUER animação/movimento do botão (wrapper + filhos) */
+  #premios .brand-cta,
+  #premios .brand-cta *,
+  #premios .brand-cta .cta-button {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  /* Desce o botão (aplique no wrapper flex item) */
+  #premios .brand-cta {
+    order: 9;                 /* garante que o botão fique por último */
+    margin-top: 100px !important;  /* empurra mais pra baixo */
+    width: 80%;
+    max-width: 320px;
+    align-self: center;
+  }
+
+  /* Mantém imagens responsivas e sem “gravidade” agressiva no mobile */
+  #premios .brand-item.brand-as-image {
+    width: 80%;
+    max-width: 320px;
+    margin: 0 auto;
+    position: static !important;
+    transform: none !important;
+  }
+  #premios .brand-item.brand-as-image .brand-png {
+    display: block; width: 100%; height: auto;
+  }
+
+  /* ORDEM EXATA (1..8) pelos arquivos */
+  #premios :is(.brand-item, .brand-as-image):has(img[src$="raspou_achou_ganhou.png"]) { order: 1; }
+  #premios :is(.brand-item, .brand-as-image):has(img[src$="airfryer.png"])            { order: 2; }
+  #premios :is(.brand-item, .brand-as-image):has(img[src$="10_mil.png"])              { order: 3; }
+  #premios :is(.brand-item, .brand-as-image):has(img[src$="tramontina.png"])          { order: 4; }
+  #premios :is(.brand-item, .brand-as-image):has(img[src$="premios.png"])             { order: 5; }
+  #premios :is(.brand-item, .brand-as-image):has(img[src$="panelas.png"])             { order: 6; }
+  #premios :is(.brand-item, .brand-as-image):has(img[src$="tupperware.png"])          { order: 7; }
+  #premios :is(.brand-item, .brand-as-image):has(img[src$="caneca.png"])              { order: 8; }
+}
