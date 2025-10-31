@@ -2,207 +2,232 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-    <title>Marcas Premiadas - Rede Litoral</title>
-    <link rel="stylesheet" href="css/style.css">
+  <title>Marcas Premiadas - Rede Litoral</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <!-- Header/Navigation -->
-    <header class="header">
-        <div class="container">
-            <div class="logo">
-                <a href="/">
-                    <img src="images/logo.png" alt="Rede Litoral" class="logo-img">
-                </a>
-            </div>
-            <nav class="nav">
-                <ul class="nav-list">
-                    <li><a href="#como-participar">COMO PARTICIPAR</a></li>
-                    <li><a href="#premios">PRÊMIOS</a></li>
-                    <li><a href="#marcas">MARCAS</a></li>
-                    <li><a href="#perguntas">PERGUNTAS</a></li>
-                    <li><a href="https://api.whatsapp.com/send/?phone=5513974037686&text&type=phone_number&app_absent=0"
-                            target="_blank">CONTATO</a></li>
-
-                </ul>
-            </nav>
-            <!-- dentro do header, no mesmo lugar do botão antigo -->
-            <button id="k-menu-toggle" aria-label="Abrir menu" class="only-mobile">
-                <!-- ícone hamburguer -->
-                <svg class="k-burger" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
-                    <path d="M4 6h16M4 12h16M4 18h16" fill="none" stroke="#2F3DBD" stroke-width="2.6"
-                        stroke-linecap="round" />
-                </svg>
-                <!-- ícone X -->
-                <svg class="k-close" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
-                    <path d="M5 5l14 14M19 5l-14 14" fill="none" stroke="#2F3DBD" stroke-width="2.6"
-                        stroke-linecap="round" />
-                </svg>
-            </button>
-
-
-
-        </div>
-    </header>
-
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <!-- Imagens laterais fixas na hero -->
-        <img src="images/data_campanha.png" alt="Campanha válida" class="hero-data">
-        <img src="images/certificado.png" alt="Certificado" class="hero-certificado">
-
-        <img class="hero-art" src="images/hero.png" alt="Marcas Premiadas">
-        <div class="hero-background"></div>
-    </section>
-
-
-
-    <!-- Brands Section -->
-    <section class="brands" id="premios">
-        <div class="container">
-            <div class="brands-grid">
-                <!-- Brand 1 -->
-                <div class="brand-item brand-as-image">
-                    <img class="brand-png" src="images/airfryer.png" alt="Airfryer Polishop">
-                </div>
-
-
-                <!-- Brand 2 - agora como imagem -->
-                <div class="brand-item brand-as-image">
-                    <img class="brand-png" src="images/raspou_achou_ganhou.png" alt="Raspou, achou, ganhou!" width="500"
-                        height="500" loading="lazy">
-                </div>
-
-                <!-- Brand 3 — Panelas Polishop Ichef -->
-                <div class="brand-item brand-as-image brand-ichef">
-                    <img class="brand-png" src="images/panelas.png" alt="São dezenas de panelas Polishop Ichef"
-                        width="533" height="637" loading="lazy">
-                </div>
-
-
-                <!-- Brand 4 — Panelas Tramontina -->
-                <div class="brand-item brand-as-image brand-tramontina">
-                    <img class="brand-png" src="images/tramontina.png" alt="São dezenas de panelas Tramontina"
-                        width="646" height="507" loading="lazy">
-                </div>
-
-                <!-- CTA — Ver Regulamento -->
-                <div class="brand-item brand-cta">
-                    <a class="cta-button" href="#regulamento" aria-label="Ver Regulamento">
-                        <img src="images/selo_borrado.png" alt="" class="cta-sticker" aria-hidden="true">
-                        <span class="cta-label">Ver Regulamento</span>
-                    </a>
-                </div>
-
-
-                <!-- Brand 5 — +DE 10MIL PRÊMIOS INSTANTÂNEOS -->
-                <div class="brand-item brand-as-image brand-10mil">
-                    <img class="brand-png" src="images/10_mil.png" alt="+DE 10MIL PRÊMIOS INSTANTÂNEOS!" width="394"
-                        height="393" loading="lazy">
-                </div>
-
-                <!-- Brand 6 — Potes Tupperware -->
-                <div class="brand-item brand-as-image brand-tupperware">
-                    <img class="brand-png" src="images/tupperware.png" alt="São centenas de potes Tupperware"
-                        width="465" height="449" loading="lazy">
-                </div>
-
-                <!-- Brand 7 — Canecas Rede Litoral -->
-                <div class="brand-item brand-as-image brand-caneca">
-                    <img class="brand-png" src="images/caneca.png" alt="São milhares de canecas Rede Litoral"
-                        width="476" height="403" loading="lazy">
-                </div>
-
-                <!-- Brand 8 — Centenas de Prêmios Todos os Dias -->
-                <div class="brand-item brand-as-image brand-premios">
-                    <img class="brand-png" src="images/premios.png" alt="Centenas de prêmios todos os dias!" width="400"
-                        height="400" loading="lazy">
-                </div>
-
-
-
-            </div>
-        </div>
-    </section>
-
-
-<!-- How to Participate Section -->
-<section class="how-to" id="como-participar">
-  <div class="container">
-    <!-- Cartão laranja arredondado -->
-    <div class="howto-card">
-      <!-- Selos decorativos ancorados no card -->
-      <img class="ticket-badge ticket-blurry-tl" src="images/blurry_ticket.png" alt="Selo superior esquerdo borrado" loading="lazy">
-      <img class="ticket-badge ticket-clear-ml" src="images/clear_ticket.png" alt="Selo lateral esquerdo claro" loading="lazy">
-      <img class="ticket-badge ticket-bottom-ll" src="images/bottom_ticket.png" alt="Selo inferior esquerdo" loading="lazy">
-      <img class="ticket-badge ticket-top-tr" src="images/top_right_ticket.png" alt="Selo superior direito" loading="lazy">
-      <img class="ticket-badge ticket-bottom-rr" src="images/bottom_right_ticket.png" alt="Selo inferior direito" loading="lazy">
-
-      <!-- Conteúdo principal -->
-      <h2 class="section-title">COMO PARTICIPAR:</h2>
-
-      <div class="participation-content">
-        <div class="participation-item">
-          <p class="amount">A cada <strong>R$ 20</strong></p>
-          <p class="description">
-            EM COMPRAS EM PRODUTOS<br>DAS MARCAS PATROCINADAS!
-          </p>
-        </div>
-
-        <div class="equals">=</div>
-
-        <div class="participation-item">
-          <p class="raspadinha">1 RASPADINHA</p>
-          <p class="description">
-            PARA CONCORRER A PRÊMIOS<br>NA HORA!
-          </p>
-        </div>
+  <!-- Header/Navigation -->
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <a href="/">
+          <img src="images/logo.png" alt="Rede Litoral" class="logo-img">
+        </a>
       </div>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="#como-participar">COMO PARTICIPAR</a></li>
+          <li><a href="#premios">PRÊMIOS</a></li>
+          <li><a href="#marcas">MARCAS</a></li>
+          <li><a href="#perguntas">PERGUNTAS</a></li>
+          <li><a href="https://api.whatsapp.com/send/?phone=5513974037686&text&type=phone_number&app_absent=0"
+              target="_blank">CONTATO</a></li>
 
-      <div class="cta-section">
-        <h3>VEM APROVEITAR!</h3>
+        </ul>
+      </nav>
+      <!-- dentro do header, no mesmo lugar do botão antigo -->
+      <button id="k-menu-toggle" aria-label="Abrir menu" class="only-mobile">
+        <!-- ícone hamburguer -->
+        <svg class="k-burger" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16" fill="none" stroke="#2F3DBD" stroke-width="2.6" stroke-linecap="round" />
+        </svg>
+        <!-- ícone X -->
+        <svg class="k-close" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+          <path d="M5 5l14 14M19 5l-14 14" fill="none" stroke="#2F3DBD" stroke-width="2.6" stroke-linecap="round" />
+        </svg>
+      </button>
+
+
+
+    </div>
+  </header>
+
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <!-- Imagens laterais fixas na hero -->
+    <img src="images/data_campanha.png" alt="Campanha válida" class="hero-data">
+    <img src="images/certificado.png" alt="Certificado" class="hero-certificado">
+
+    <img class="hero-art" src="images/hero.png" alt="Marcas Premiadas">
+    <div class="hero-background"></div>
+  </section>
+
+
+
+  <!-- Brands Section -->
+  <section class="brands" id="premios">
+    <div class="container">
+      <div class="brands-grid">
+        <!-- Brand 1 -->
+        <div class="brand-item brand-as-image">
+          <img class="brand-png" src="images/airfryer.png" alt="Airfryer Polishop">
+        </div>
+
+
+        <!-- Brand 2 - agora como imagem -->
+        <div class="brand-item brand-as-image">
+          <img class="brand-png" src="images/raspou_achou_ganhou.png" alt="Raspou, achou, ganhou!" width="500"
+            height="500" loading="lazy">
+        </div>
+
+        <!-- Brand 3 — Panelas Polishop Ichef -->
+        <div class="brand-item brand-as-image brand-ichef">
+          <img class="brand-png" src="images/panelas.png" alt="São dezenas de panelas Polishop Ichef" width="533"
+            height="637" loading="lazy">
+        </div>
+
+
+        <!-- Brand 4 — Panelas Tramontina -->
+        <div class="brand-item brand-as-image brand-tramontina">
+          <img class="brand-png" src="images/tramontina.png" alt="São dezenas de panelas Tramontina" width="646"
+            height="507" loading="lazy">
+        </div>
+
+        <!-- CTA — Ver Regulamento -->
+        <div class="brand-item brand-cta">
+          <a class="cta-button" href="#regulamento" aria-label="Ver Regulamento">
+            <img src="images/selo_borrado.png" alt="" class="cta-sticker" aria-hidden="true">
+            <span class="cta-label">Ver Regulamento</span>
+          </a>
+        </div>
+
+
+        <!-- Brand 5 — +DE 10MIL PRÊMIOS INSTANTÂNEOS -->
+        <div class="brand-item brand-as-image brand-10mil">
+          <img class="brand-png" src="images/10_mil.png" alt="+DE 10MIL PRÊMIOS INSTANTÂNEOS!" width="394" height="393"
+            loading="lazy">
+        </div>
+
+        <!-- Brand 6 — Potes Tupperware -->
+        <div class="brand-item brand-as-image brand-tupperware">
+          <img class="brand-png" src="images/tupperware.png" alt="São centenas de potes Tupperware" width="465"
+            height="449" loading="lazy">
+        </div>
+
+        <!-- Brand 7 — Canecas Rede Litoral -->
+        <div class="brand-item brand-as-image brand-caneca">
+          <img class="brand-png" src="images/caneca.png" alt="São milhares de canecas Rede Litoral" width="476"
+            height="403" loading="lazy">
+        </div>
+
+        <!-- Brand 8 — Centenas de Prêmios Todos os Dias -->
+        <div class="brand-item brand-as-image brand-premios">
+          <img class="brand-png" src="images/premios.png" alt="Centenas de prêmios todos os dias!" width="400"
+            height="400" loading="lazy">
+        </div>
+
+
+
       </div>
     </div>
+  </section>
 
 
-          <!-- NOVO: Card branco — Marcas Participantes -->
+  <!-- How to Participate Section -->
+  <section class="how-to" id="como-participar">
+    <div class="container">
+      <!-- Cartão laranja arredondado -->
+      <div class="howto-card">
+        <!-- Selos decorativos ancorados no card -->
+        <img class="ticket-badge ticket-blurry-tl" src="images/blurry_ticket.png" alt="Selo superior esquerdo borrado"
+          loading="lazy">
+        <img class="ticket-badge ticket-clear-ml" src="images/clear_ticket.png" alt="Selo lateral esquerdo claro"
+          loading="lazy">
+        <img class="ticket-badge ticket-bottom-ll" src="images/bottom_ticket.png" alt="Selo inferior esquerdo"
+          loading="lazy">
+        <img class="ticket-badge ticket-top-tr" src="images/top_right_ticket.png" alt="Selo superior direito"
+          loading="lazy">
+        <img class="ticket-badge ticket-bottom-rr" src="images/bottom_right_ticket.png" alt="Selo inferior direito"
+          loading="lazy">
+
+        <!-- Conteúdo principal -->
+        <h2 class="section-title">COMO PARTICIPAR:</h2>
+
+        <div class="participation-content">
+          <div class="participation-item">
+            <p class="amount">A cada <strong>R$ 20</strong></p>
+            <p class="description">
+              EM COMPRAS EM PRODUTOS<br>DAS MARCAS PATROCINADAS!
+            </p>
+          </div>
+
+          <div class="equals">=</div>
+
+          <div class="participation-item">
+            <p class="raspadinha">1 RASPADINHA</p>
+            <p class="description">
+              PARA CONCORRER A PRÊMIOS<br>NA HORA!
+            </p>
+          </div>
+        </div>
+
+        <div class="cta-section">
+          <h3>VEM APROVEITAR!</h3>
+        </div>
+      </div>
+
+
+      <!-- NOVO: Card branco — Marcas Participantes -->
       <div class="brands-card">
         <h2 class="section-title" id="marcas">MARCAS PARTICIPANTES:</h2>
 
         <div class="brands-logos-grid" aria-label="Logos das marcas participantes">
           <!-- 22 slots 250x250. Trocar src pelos arquivos reais. -->
-          <div class="brand-logo"><img src="images/marcas/MARCA_1.png" draggable="false" alt="Marca 01" width="250" height="250" loading="lazy"></div>
-          <div class="brand-logo"><img src="images/marcas/MARCA_2.png" draggable="false" alt="Marca 02" width="250" height="250" loading="lazy"></div>
-          <div class="brand-logo"><img src="images/marcas/MARCA_3.png" draggable="false" alt="Marca 03" width="250" height="250" loading="lazy"></div>
-          <div class="brand-logo"><img src="images/marcas/MARCA_4.png" draggable="false" alt="Marca 04" width="250" height="250" loading="lazy"></div>
-          <div class="brand-logo"><img src="images/marcas/MARCA_5.png" draggable="false" alt="Marca 05" width="250" height="250" loading="lazy"></div>
-          <div class="brand-logo"><img src="images/marcas/MARCA_6.png" draggable="false" alt="Marca 06" width="250" height="250" loading="lazy"></div>
-          <div class="brand-logo"><img src="images/marcas/MARCA_7.png" draggable="false" alt="Marca 07" width="250" height="250" loading="lazy"></div>
-          <div class="brand-logo"><img src="images/marcas/MARCA_8.png" draggable="false" alt="Marca 08" width="250" height="250" loading="lazy"></div>
-          <div class="brand-logo"><img src="images/marcas/MARCA_9.png" draggable="false" alt="Marca 09" width="250" height="250" loading="lazy"></div>
-          <div class="brand-logo"><img src="images/marcas/MARCA_10.png" draggable="false" alt="Marca 10" width="250" height="250" loading="lazy"></div>
-          <div class="brand-logo"><img src="images/marcas/MARCA_11.png" draggable="false" alt="Marca 11" width="250" height="250" loading="lazy"></div>
-          <div class="brand-logo"><img src="images/marcas/MARCA_12.png" draggable="false" alt="Marca 12" width="250" height="250" loading="lazy"></div>
-          <div class="brand-logo"><img src="images/marcas/MARCA_13.png" draggable="false" alt="Marca 13" width="250" height="250" loading="lazy"></div>
-          <div class="brand-logo"><img src="images/marcas/MARCA_14.png" draggable="false" alt="Marca 14" width="250" height="250" loading="lazy"></div>
-          <div class="brand-logo"><img src="images/marcas/MARCA_15.png" draggable="false" alt="Marca 15" width="250" height="250" loading="lazy"></div>
-          <div class="brand-logo"><img src="images/marcas/MARCA_16.png" draggable="false" alt="Marca 16" width="250" height="250" loading="lazy"></div>
-          <div class="brand-logo"><img src="images/marcas/MARCA_17.png" draggable="false" alt="Marca 17" width="250" height="250" loading="lazy"></div>
-          <div class="brand-logo"><img src="images/marcas/MARCA_18.png" draggable="false" alt="Marca 18" width="250" height="250" loading="lazy"></div>
-          <div class="brand-logo"><img src="images/marcas/MARCA_19.png" draggable="false" alt="Marca 19" width="250" height="250" loading="lazy"></div>
-          <div class="brand-logo"><img src="images/marcas/MARCA_20.png" draggable="false" alt="Marca 20" width="250" height="250" loading="lazy"></div>
-          <div class="brand-logo"><img src="images/marcas/MARCA_21.png" draggable="false" alt="Marca 21" width="250" height="250" loading="lazy"></div>
-          <div class="brand-logo"><img src="images/marcas/MARCA_22.png" draggable="false" alt="Marca 22" width="250" height="250" loading="lazy"></div>
+          <div class="brand-logo"><img src="images/marcas/MARCA_1.png" draggable="false" alt="Marca 01" width="250"
+              height="250" loading="lazy"></div>
+          <div class="brand-logo"><img src="images/marcas/MARCA_2.png" draggable="false" alt="Marca 02" width="250"
+              height="250" loading="lazy"></div>
+          <div class="brand-logo"><img src="images/marcas/MARCA_3.png" draggable="false" alt="Marca 03" width="250"
+              height="250" loading="lazy"></div>
+          <div class="brand-logo"><img src="images/marcas/MARCA_4.png" draggable="false" alt="Marca 04" width="250"
+              height="250" loading="lazy"></div>
+          <div class="brand-logo"><img src="images/marcas/MARCA_5.png" draggable="false" alt="Marca 05" width="250"
+              height="250" loading="lazy"></div>
+          <div class="brand-logo"><img src="images/marcas/MARCA_6.png" draggable="false" alt="Marca 06" width="250"
+              height="250" loading="lazy"></div>
+          <div class="brand-logo"><img src="images/marcas/MARCA_7.png" draggable="false" alt="Marca 07" width="250"
+              height="250" loading="lazy"></div>
+          <div class="brand-logo"><img src="images/marcas/MARCA_8.png" draggable="false" alt="Marca 08" width="250"
+              height="250" loading="lazy"></div>
+          <div class="brand-logo"><img src="images/marcas/MARCA_9.png" draggable="false" alt="Marca 09" width="250"
+              height="250" loading="lazy"></div>
+          <div class="brand-logo"><img src="images/marcas/MARCA_10.png" draggable="false" alt="Marca 10" width="250"
+              height="250" loading="lazy"></div>
+          <div class="brand-logo"><img src="images/marcas/MARCA_11.png" draggable="false" alt="Marca 11" width="250"
+              height="250" loading="lazy"></div>
+          <div class="brand-logo"><img src="images/marcas/MARCA_12.png" draggable="false" alt="Marca 12" width="250"
+              height="250" loading="lazy"></div>
+          <div class="brand-logo"><img src="images/marcas/MARCA_13.png" draggable="false" alt="Marca 13" width="250"
+              height="250" loading="lazy"></div>
+          <div class="brand-logo"><img src="images/marcas/MARCA_14.png" draggable="false" alt="Marca 14" width="250"
+              height="250" loading="lazy"></div>
+          <div class="brand-logo"><img src="images/marcas/MARCA_15.png" draggable="false" alt="Marca 15" width="250"
+              height="250" loading="lazy"></div>
+          <div class="brand-logo"><img src="images/marcas/MARCA_16.png" draggable="false" alt="Marca 16" width="250"
+              height="250" loading="lazy"></div>
+          <div class="brand-logo"><img src="images/marcas/MARCA_17.png" draggable="false" alt="Marca 17" width="250"
+              height="250" loading="lazy"></div>
+          <div class="brand-logo"><img src="images/marcas/MARCA_18.png" draggable="false" alt="Marca 18" width="250"
+              height="250" loading="lazy"></div>
+          <div class="brand-logo"><img src="images/marcas/MARCA_19.png" draggable="false" alt="Marca 19" width="250"
+              height="250" loading="lazy"></div>
+          <div class="brand-logo"><img src="images/marcas/MARCA_20.png" draggable="false" alt="Marca 20" width="250"
+              height="250" loading="lazy"></div>
+          <div class="brand-logo"><img src="images/marcas/MARCA_21.png" draggable="false" alt="Marca 21" width="250"
+              height="250" loading="lazy"></div>
+          <div class="brand-logo"><img src="images/marcas/MARCA_22.png" draggable="false" alt="Marca 22" width="250"
+              height="250" loading="lazy"></div>
         </div>
       </div>
 
 
 
-            <!-- NOVO: Card branco — FAQ -->
+      <!-- NOVO: Card branco — FAQ -->
       <div class="faq-card" id="faq">
         <h2 class="section-title" id="perguntas">FAQ:</h2>
 
@@ -300,23 +325,32 @@
 
 
 
-  </div>
-</section>
+    </div>
+  </section>
 
 
 
 
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Rede Litoral. Todos os direitos reservados.</p>
-        </div>
-    </footer>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        &copy; 2025 Rede Litoral. Todos os direitos reservados. |
+        Desenvolvido por
+        <a href="https://www.starmkt.com.br/" target="_blank" rel="noopener noreferrer">
+          <strong>StarMKT</strong>
+        </a>.
+      </p>
+    </div>
+  </footer>
 
-    <script src="js/menu-hamburguer.js"></script>
-    <script src="js/prize-section-desktop-effects.js"></script>
-    <script src="js/mouse-click.js"></script>
+
+  <script src="js/menu-hamburguer.js"></script>
+  <script src="js/prize-section-desktop-effects.js"></script>
+  <script src="js/mouse-click.js"></script>
+  <script src="js/hero-stickers-burst.js"></script>
+
 </body>
 
 </html>

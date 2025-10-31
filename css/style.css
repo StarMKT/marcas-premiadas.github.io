@@ -8227,3 +8227,158 @@ section.brands .brand-png {
     background: transparent !important;
   }
 }
+
+/* Camadas na hero */
+.hero { position: relative; overflow: hidden; }
+
+/* IMPORTANTE: z-index para respeitar a hierarquia pedida
+   Header (já está no topo) > hero-art > layer dos selos > hero-background */
+.header { position: sticky; top: 0; z-index: 1000; } /* se já existir, mantenha o maior z-index */
+.hero .hero-art { position: relative; z-index: 900; }
+.hero .hero-burst-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 800;          /* atrás da hero-art e do header */
+  pointer-events: none;  /* não bloquear interações da hero */
+}
+
+/* Partículas (selos) */
+.sticker-particle {
+  position: absolute;
+  left: 0; top: 0;
+  width: auto; height: auto;
+  max-width: 200px;           /* limite de tamanho confortável */
+  will-change: transform, opacity;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,.18));
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Fundo da hero deve ficar por baixo de tudo na hero */
+.hero .hero-background { position: absolute; inset: 0; z-index: 700; }
+
+/* A hero só precisa ser contexto de posicionamento */
+.hero { position: relative; overflow: hidden; }
+
+/* A layer de selos fica por baixo da hero-art sem mexer nela */
+.hero .hero-burst-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;            /* abaixo da hero-art por ordem de pintura */
+  pointer-events: none;
+}
+
+.hero .hero-background { 
+  position: absolute; 
+  inset: 0; 
+  z-index: 0;            /* fundo da hero */
+}
+
+/* Partículas */
+.sticker-particle {
+  position: absolute;
+  left: 0; top: 0;
+  max-width: 200px;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,.18));
+  user-select: none;
+  pointer-events: none;
+}
+
+/* (opcional) header acima de tudo do site */
+.header { position: sticky; top: 0; z-index: 1000; }
+
+/* === PATCH: força a hero.png a descer no desktop === */
+@media (min-width: 1025px){
+  .hero-art {
+    position: relative !important;
+    bottom: auto !important;
+    margin-top: 80px !important; /* <-- controla o quanto ela desce */
+    transform: translateX(-50%) !important;
+  }
+}
+
+/* Ajuste fino pra telas grandes (opcional) */
+@media (min-width: 1400px){
+  .hero-art {
+    margin-top: 100px !important; /* desce um pouco mais */
+  }
+}
+
+/* === RESET do patch anterior que empurrava layout === */
+@media (min-width: 1025px){
+  .hero-art{
+    margin-top: 0 !important;     /* não empurra layout */
+    top: auto !important;
+  }
+}
+
+/* === POSICIONAMENTO: overlap sem alterar altura do header === */
+.hero{ position: relative; }       /* garante contexto para posicionamento */
+
+@media (min-width: 1025px){
+  .hero-art{
+    position: absolute !important;
+    left: 50% !important;
+    /* mantém o cálculo original de ancoragem no rodapé da hero */
+    bottom: calc(var(--hero-bar-h) - var(--hero-art-overlap)) !important;
+
+    /* desce visualmente sem mudar o fluxo (overlap na barra azul) */
+    transform: translate(-50%, 70px) !important;  /* ajuste fino aqui */
+
+    z-index: 3 !important; /* fica por cima da faixa azul */
+    /* nenhuma margin que altere layout */
+  }
+}
+
+/* telas muito largas: pequeno ajuste se quiser um pouco mais de invasão */
+@media (min-width: 1400px){
+  .hero-art{
+    transform: translate(-50%, 80px) !important;
+  }
+}
+
+/* (opcional) se existir a faixa azul como elemento separado, mantenha abaixo */
+.hero .hero-bottom,
+.hero .blue-bar,
+.hero .faixa-azul {
+  z-index: 2; /* abaixo da hero-art */
+}
+
+/* === AJUSTE FINO: hero.png levemente mais alta, mantendo overlap === */
+@media (min-width: 1025px){
+  .hero-art {
+    transform: translate(-50%, 45px) !important; /* subiu um tiquinho */
+  }
+}
+
+@media (min-width: 1400px){
+  .hero-art {
+    transform: translate(-50%, 55px) !important; /* idem pra telas grandes */
+  }
+}
+
+/* Itens pesados (prêmios) – um pouco maiores e com sombra mais rica */
+.sticker-heavy{
+  max-width: 220px;               /* limite superior para desktop */
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,.22));
+}
+@media (max-width: 768px){
+  .sticker-heavy{ max-width: 160px; }
+}
+
+/* Remove o contorno azul ao clicar em itens do FAQ */
+details summary {
+  outline: none !important;
+}
+
+details summary:focus,
+details summary:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+details[open] summary {
+  outline: none !important;
+  box-shadow: none !important;
+}
