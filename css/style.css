@@ -6820,3 +6820,110 @@ section.brands .brand-png {
   will-change: transform;
   /* não coloque transform aqui com !important pra não brigar com o JS */
 }
+
+
+/* ===== CTA: Ver Regulamento (desktop) ===== */
+:root{
+  --rl-blue: #1d2de3;     /* azul campanha */
+  --rl-blue-dark:#121a9c;
+  --rl-orange:#ff6a00;    /* laranja campanha */
+  --rl-yellow:#ffd66c;
+}
+
+/* ===== CTA: Ver Regulamento (desktop) ===== */
+.brand-cta { 
+  position: relative;
+  margin-top: 120px;   /* ↓ empurra o botão pra baixo */
+  left: -6px;          /* leve ajuste horizontal */
+  display: flex;
+  justify-content: center;
+}
+
+/* botão */
+.cta-button{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px 28px;
+  min-width: 280px;
+  border-radius: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: .5px;
+  color: #fff;
+
+  background: linear-gradient(180deg,var(--rl-blue) 0%, var(--rl-blue-dark) 100%);
+  border: 4px solid var(--rl-orange);
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.18),
+    0 0 0 6px rgba(255,106,0,.08),
+    inset 0 -6px 0 rgba(0,0,0,.15);
+
+  /* flutuação suave */
+  animation: ctaFloat 4.8s ease-in-out infinite;
+  transform: translateZ(0);
+}
+
+/* selo borrado na quina */
+.cta-sticker{
+  position: absolute;
+  top: -18px;
+  left: -18px;
+  width: 64px;
+  height: auto;
+  transform: rotate(-12deg);
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,.25));
+  pointer-events: none;
+}
+
+/* texto */
+.cta-label{
+  font-size: clamp(16px, 1.2vw, 18px);
+  line-height: 1;
+  text-shadow: 0 1px 0 rgba(0,0,0,.25);
+}
+
+/* brilho em “sheen” no hover */
+.cta-button::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,.25) 40%, transparent 60%);
+  mix-blend-mode: screen;
+  transform: translateX(-120%);
+  transition: transform .6s ease;
+  border-radius: inherit;
+}
+.cta-button:hover::after{
+  transform: translateX(120%);
+}
+
+/* hover/click feedback */
+.cta-button:hover{
+  box-shadow:
+    0 14px 28px rgba(0,0,0,.22),
+    0 0 0 8px rgba(255,106,0,.12),
+    inset 0 -6px 0 rgba(0,0,0,.18);
+  transform: translateY(-2px);
+}
+.cta-button:active{
+  transform: translateY(0);
+  box-shadow:
+    0 8px 18px rgba(0,0,0,.18),
+    0 0 0 6px rgba(255,106,0,.10),
+    inset 0 -2px 0 rgba(0,0,0,.25);
+}
+
+/* flutuação */
+@keyframes ctaFloat{
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-6px); }
+  100% { transform: translateY(0px); }
+}
+
+/* desktop only – some no mobile até ajustarmos a seção responsiva */
+@media (max-width: 991.98px){
+  .brand-cta{ display:none; }
+}
