@@ -1,3 +1,28 @@
+/* ===== Tipografia Myriad Pro ===== */
+@font-face {
+  font-family: 'Myriad Pro';
+  src: url('../fonts/MyriadPro-Regular.woff2') format('woff2'),
+       url('../fonts/MyriadPro-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Myriad Pro';
+  src: url('../fonts/MyriadPro-Semibold.woff2') format('woff2'),
+       url('../fonts/MyriadPro-Semibold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Myriad Pro';
+  src: url('../fonts/MyriadPro-Black.woff2') format('woff2'),
+       url('../fonts/MyriadPro-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+}
+
+
+
 /* ==== RESET ESSENCIAL ==== */
 html, body {
   margin: 0;
@@ -7195,4 +7220,197 @@ section.brands .brand-png {
   #premios :is(.brand-item, .brand-as-image):has(img[src$="panelas.png"])             { order: 6; }
   #premios :is(.brand-item, .brand-as-image):has(img[src$="tupperware.png"])          { order: 7; }
   #premios :is(.brand-item, .brand-as-image):has(img[src$="caneca.png"])              { order: 8; }
+}
+
+/* Paleta base (se já existir, mantenha suas cores e ignore estas linhas) */
+:root{
+  --rl-blue:#2001f9;
+  --rl-orange:#FF6A00;              /* fundo do cartão laranja */
+  --rl-orange-soft:#FF7F32;         /* caixas internas mais claras, se usar */
+}
+
+/* Seção COMO PARTICIPAR agora tem FUNDO AZUL */
+.how-to{
+  background: var(--rl-blue);
+  /* padding vertical suficiente para o azul “encostar” no rodapé visualmente */
+  padding: clamp(32px,4vw,56px) 0 clamp(64px,6vw,96px);
+}
+
+/* Cartão laranja arredondado que “flutua” sobre o azul */
+.howto-card{
+  background: var(--rl-orange);
+  border-radius: 28px;
+  padding: clamp(24px,3.5vw,48px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.15);
+}
+
+/* Título dentro do cartão mantém o estilo já usado no site */
+.howto-card .section-title{
+  margin: 0 0 clamp(16px,2.5vw,28px);
+}
+
+/* Garante respiro lateral mesmo em telas grandes */
+.how-to .container{
+  max-width: 1200px; /* ajuste se seu container global for outro */
+  padding-left: clamp(16px,3vw,32px);
+  padding-right: clamp(16px,3vw,32px);
+}
+
+/* (Opcional) se as caixas internas usarem um laranja mais claro, mantenha */
+.participation-content .participation-item{
+  background: rgba(255,255,255,.08); /* mantém contraste leve sobre o laranja */
+  border-radius: 18px;
+}
+
+/* Responsividade: evita que o cartão “cole” nas bordas em mobile estreito */
+@media (max-width: 640px){
+  .howto-card{ border-radius: 22px; }
+}
+
+
+
+/* === COMO PARTICIPAR — efeito de sobreposição do card sobre o fundo azul === */
+:root{
+  /* ajuste fino do ponto onde o AZUL começa (abaixo do topo da seção) */
+  --howto-blue-offset: clamp(52px, 7vw, 92px);
+  --rl-blue: #2001f9; /* sua nova cor */
+}
+
+/* a seção em si fica sem background; o azul vem do ::before */
+.how-to{
+  position: relative;
+  background: transparent;
+  padding: clamp(24px, 3vw, 40px) 0 clamp(64px, 6vw, 96px);
+}
+
+/* o fundo AZUL começa abaixo do topo (offset), preenchendo até o rodapé da seção */
+.how-to::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--howto-blue-offset); /* alinhe com sua “linha vermelha” */
+  bottom: 0;
+  background: var(--rl-blue);
+  z-index: 0;
+}
+
+/* garante que o cartão fique acima do azul */
+.howto-card{
+  position: relative;
+  z-index: 1;
+  background: var(--rl-orange);
+  border-radius: 28px;
+  padding: clamp(24px,3.5vw,48px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.15);
+}
+
+/* responsivo: aproxima um pouco o início do azul em telas pequenas (opcional) */
+@media (max-width: 768px){
+  :root{ --howto-blue-offset: clamp(36px, 8vw, 56px); }
+}
+
+
+/* Garante que o card seja a âncora dos tickets */
+.howto-card {
+  position: relative;
+  isolation: isolate; /* mantém a pilha de camadas organizada */
+}
+
+/* Base para todos os selos */
+.ticket-badge {
+  position: absolute;
+  z-index: 2;                 /* acima do laranja, abaixo do conteúdo flutuante se houver */
+  pointer-events: none;       /* puramente decorativo */
+  user-select: none;
+  will-change: transform;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Tamanhos responsivos (escala suave em desktops) */
+.ticket-blurry-tl  { width: clamp(44px, 4.5vw, 72px); }
+.ticket-clear-ml   { width: clamp(92px, 9.2vw, 150px); }
+.ticket-bottom-ll  { width: clamp(70px, 7vw, 116px); }
+.ticket-top-tr     { width: clamp(76px, 7.6vw, 128px); }
+.ticket-bottom-rr  { width: clamp(92px, 9.2vw, 150px); }
+
+/* Posições (sempre ancoradas às bordas do card) */
+.ticket-blurry-tl {
+  top: clamp(-10px, -1.2vw, -18px);
+  left: clamp(-6px, -0.6vw, -10px);
+}
+
+.ticket-clear-ml {
+  top: 50%;
+  left: clamp(-16px, -1.2vw, -20px);
+  transform: translateY(-50%);
+}
+
+.ticket-bottom-ll {
+  bottom: clamp(-10px, -1.2vw, -18px);
+  left: clamp(-8px, -0.8vw, -12px);
+}
+
+.ticket-top-tr {
+  top: clamp(-12px, -1.4vw, -20px);
+  right: clamp(-10px, -1vw, -16px);
+}
+
+.ticket-bottom-rr {
+  bottom: clamp(-14px, -1.6vw, -24px);
+  right: clamp(-12px, -1.2vw, -18px);
+}
+
+/* Se o seu card tiver sombra/raio grandes, pode subir um pouco os tickets em telas bem largas */
+@media (min-width: 1600px) {
+  .ticket-clear-ml  { left: -18px; }
+  .ticket-top-tr    { right: -14px; top: -16px; }
+  .ticket-bottom-rr { right: -16px; bottom: -18px; }
+}
+
+/* aumenta levemente o selo do meio esquerdo */
+.ticket-clear-ml {
+  width: clamp(120px, 11vw, 190px); /* era ~92px–150px, agora maior */
+  top: 50%;
+  left: clamp(-18px, -1.2vw, -22px);
+  transform: translateY(-50%);
+}
+
+/* === Tipografia dentro do card laranja === */
+.howto-card {
+  font-family: 'Myriad Pro', sans-serif;
+  color: #fff; /* mantém legibilidade no fundo laranja */
+}
+
+.howto-card .amount {
+  font-weight: 600; /* Myriad Pro Semibold */
+}
+
+.howto-card .amount strong {
+  font-weight: 900; /* Myriad Pro Black para R$ 20 */
+}
+
+.howto-card .description {
+  font-weight: 400; /* Myriad Pro Regular */
+}
+
+.howto-card .raspadinha {
+  font-weight: 900; /* Myriad Pro Black */
+}
+
+.howto-card .participation-item:last-child .description {
+  font-weight: 400; /* Myriad Pro Regular */
+  text-transform: uppercase;
+}
+
+
+/* ===== Destaque para o sinal "=" na seção COMO PARTICIPAR ===== */
+.howto-card .equals {
+  font-size: clamp(64px, 6vw, 96px); /* aumenta proporcionalmente */
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  text-shadow: 0 3px 6px rgba(0,0,0,0.25);
+  transform: translateY(-4px); /* ajuste fino vertical */
 }
