@@ -7600,3 +7600,87 @@ section.brands .brand-png {
 @media (max-width: 380px){
   .brand-logo{ width: 90px; height: 90px; }
 }
+
+/* ========== CARD BRANCO — FAQ (dentro da .how-to) ========== */
+.faq-card{
+  position: relative;
+  z-index: 1;                 /* acima do fundo azul da seção */
+  background: #fff;
+  border-radius: 28px;
+  padding: clamp(24px,3.5vw,48px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.12);
+  margin-top: clamp(20px, 3vw, 32px);
+  font-family: 'Myriad Pro', sans-serif;
+}
+
+/* Título reaproveita a mesma classe do card de marcas */
+.faq-card .section-title{
+  margin: 0 0 clamp(16px,2.5vw,24px);
+  text-align: center;
+}
+
+/* Lista/itens */
+.faq-list{
+  display: grid;
+  gap: 12px;                          /* espacinho entre os retângulos */
+}
+
+/* Cada pergunta como um retângulo clicável (summary) */
+.faq-item{
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  overflow: hidden;
+}
+
+.faq-item[open]{
+  border-color: rgba(0,0,0,.12);
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+}
+
+.faq-question{
+  list-style: none;                    /* remove triângulo padrão */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;      /* texto à esquerda, seta à direita */
+  gap: 12px;
+  padding: 14px 16px;                  /* margemzinha nos lados do card */
+  font-weight: 700;
+  font-size: clamp(14px, 1.7vw, 16px);
+}
+
+/* Seta custom (↓) que gira ao abrir */
+.faq-question::after{
+  content: "▾";                        /* seta para baixo */
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform .2s ease;
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+.faq-item[open] .faq-question::after{
+  transform: rotate(180deg);           /* seta para cima */
+}
+
+/* Resposta */
+.faq-answer{
+  padding: 0 16px 14px 16px;           /* alinhado às laterais do summary */
+  font-weight: 400;
+  font-size: clamp(13px, 1.6vw, 15px);
+  line-height: 1.45;
+  color: #1b1b1b;
+}
+
+/* Toque sutil ao focar via teclado */
+.faq-question:focus{
+  outline: 2px solid #2a50ff20;
+  outline-offset: 2px;
+}
+
+/* Dark text melhor legibilidade no branco */
+.faq-card, .faq-card *{
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
