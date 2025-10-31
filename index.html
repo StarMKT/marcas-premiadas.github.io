@@ -29,11 +29,22 @@
 
                 </ul>
             </nav>
-            <button class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
+            <!-- dentro do header, no mesmo lugar do botão antigo -->
+            <button id="k-menu-toggle" aria-label="Abrir menu" class="only-mobile">
+                <!-- ícone hamburguer -->
+                <svg class="k-burger" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+                    <path d="M4 6h16M4 12h16M4 18h16" fill="none" stroke="#2F3DBD" stroke-width="2.6"
+                        stroke-linecap="round" />
+                </svg>
+                <!-- ícone X -->
+                <svg class="k-close" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+                    <path d="M5 5l14 14M19 5l-14 14" fill="none" stroke="#2F3DBD" stroke-width="2.6"
+                        stroke-linecap="round" />
+                </svg>
             </button>
+
+
+
         </div>
     </header>
 
@@ -55,95 +66,56 @@
         <div class="container">
             <div class="brands-grid">
                 <!-- Brand 1 -->
-                <div class="brand-item">
-                    <div class="brand-image">
-                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="200" height="200" fill="#e8e8e8" />
-                            <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" font-family="Arial"
-                                font-size="14" fill="#666">Airfryer</text>
-                        </svg>
-                    </div>
-                    <div class="brand-label">
-                        <p>SÃO DIVERSAS<br>AIRFRYERS<br>POLISHOP</p>
-                    </div>
+                <div class="brand-item brand-as-image">
+                    <img class="brand-png" src="images/airfryer.png" alt="Airfryer Polishop">
                 </div>
 
-                <!-- Brand 2 - Center Circle -->
-                <div class="brand-item brand-circle">
-                    <div class="circle-content">
-                        <p>RASPOU,<br>ACHOU,<br>GANHOU!</p>
-                    </div>
+
+                <!-- Brand 2 - agora como imagem -->
+                <div class="brand-item brand-as-image">
+                    <img class="brand-png" src="images/raspou_achou_ganhou.png" alt="Raspou, achou, ganhou!" width="500"
+                        height="500" loading="lazy">
                 </div>
 
-                <!-- Brand 3 -->
-                <div class="brand-item">
-                    <div class="brand-image">
-                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="200" height="200" fill="#e8e8e8" />
-                            <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" font-family="Arial"
-                                font-size="14" fill="#666">Panela Ichef</text>
-                        </svg>
-                    </div>
-                    <div class="brand-label">
-                        <p>SÃO DEZENAS<br>DE PANELAS<br>POLISHOP<br>ICHEF</p>
-                    </div>
+                <!-- Brand 3 — Panelas Polishop Ichef -->
+                <div class="brand-item brand-as-image brand-ichef">
+                    <img class="brand-png" src="images/panelas.png" alt="São dezenas de panelas Polishop Ichef"
+                        width="533" height="637" loading="lazy">
                 </div>
 
-                <!-- Brand 4 -->
-                <div class="brand-item">
-                    <div class="brand-image">
-                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="200" height="200" fill="#e8e8e8" />
-                            <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" font-family="Arial"
-                                font-size="14" fill="#666">Panela Tramontina</text>
-                        </svg>
-                    </div>
-                    <div class="brand-label">
-                        <p>SÃO DEZENAS<br>DE PANELAS<br>TRAMONTINA</p>
-                    </div>
+
+                <!-- Brand 4 — Panelas Tramontina -->
+                <div class="brand-item brand-as-image brand-tramontina">
+                    <img class="brand-png" src="images/tramontina.png" alt="São dezenas de panelas Tramontina"
+                        width="646" height="507" loading="lazy">
                 </div>
 
-                <!-- Brand 5 - Center Circle -->
-                <div class="brand-item brand-circle">
-                    <div class="circle-content">
-                        <p>+DE 10MIL<br>PRÊMIOS<br>INSTANTÂNEOS!</p>
-                    </div>
+                <!-- Brand 5 — +DE 10MIL PRÊMIOS INSTANTÂNEOS -->
+                <div class="brand-item brand-as-image brand-10mil">
+                    <img class="brand-png" src="images/10_mil.png" alt="+DE 10MIL PRÊMIOS INSTANTÂNEOS!" width="394"
+                        height="393" loading="lazy">
                 </div>
 
-                <!-- Brand 6 -->
-                <div class="brand-item">
-                    <div class="brand-image">
-                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="200" height="200" fill="#e8e8e8" />
-                            <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" font-family="Arial"
-                                font-size="14" fill="#666">Potes Tupperware</text>
-                        </svg>
-                    </div>
-                    <div class="brand-label">
-                        <p>SÃO CENTENAS<br>DE POTES<br>TUPPERWARE</p>
-                    </div>
+                <!-- Brand 6 — Potes Tupperware -->
+                <div class="brand-item brand-as-image brand-tupperware">
+                    <img class="brand-png" src="images/tupperware.png" alt="São centenas de potes Tupperware"
+                        width="465" height="449" loading="lazy">
                 </div>
 
-                <!-- Brand 7 -->
-                <div class="brand-item">
-                    <div class="brand-image">
-                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="200" height="200" fill="#e8e8e8" />
-                            <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" font-family="Arial"
-                                font-size="14" fill="#666">Canecas Rede Litoral</text>
-                        </svg>
-                    </div>
-                    <div class="brand-label">
-                        <p>SÃO MILHARES<br>DE CANECAS<br>REDE LITORAL</p>
-                    </div>
+                <!-- Brand 7 — Canecas Rede Litoral -->
+                <div class="brand-item brand-as-image brand-caneca">
+                    <img class="brand-png" src="images/caneca.png" alt="São milhares de canecas Rede Litoral"
+                        width="476" height="403" loading="lazy">
                 </div>
 
-                <!-- Brand 8 - Center Circle -->
-                <div class="brand-item brand-circle">
-                    <div class="circle-content">
-                        <p>CENTENAS<br>DE PRÊMIOS<br>TODOS<br>OS DIAS!</p>
-                    </div>
+                <!-- Brand 8 — Centenas de Prêmios Todos os Dias -->
+                <div class="brand-item brand-as-image brand-premios">
+                    <img class="brand-png" src="images/premios.png" alt="Centenas de prêmios todos os dias!" width="400"
+                        height="400" loading="lazy">
                 </div>
+
+
+
             </div>
         </div>
     </section>

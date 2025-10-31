@@ -1274,3 +1274,5223 @@ html, body{ border:none !important; }
     margin-top: 10px;
   }
 }
+
+
+
+/* === HERO MOBILE: empilhar data → certificado → hero === */
+@media (max-width: 768px) {
+  .hero {
+    display: flex;
+    flex-direction: column;      /* empilha verticalmente */
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    padding-top: 16px;           /* espaço extra no topo */
+    padding-bottom: var(--hero-bar-h);
+    min-height: unset;           /* permite altura automática */
+    background-position: center top;
+  }
+
+  /* remove posições absolutas */
+  .hero-data,
+  .hero-certificado,
+  .hero-art {
+    position: relative !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    max-width: 320px;
+    width: 80%;
+    height: auto;
+    z-index: 1250;
+    margin: 0 auto;
+  }
+
+  /* ordem correta: data → certificado → hero */
+  .hero-data   { order: 1; margin-top: 10px; }
+  .hero-certificado { order: 2; margin-top: 8px; }
+  .hero-art    { order: 3; margin-top: 12px; }
+
+  /* aumenta o fundo da hero para caber tudo confortavelmente */
+  .hero::after {
+    height: clamp(80px, 12vw, 120px); /* faixa azul ligeiramente maior */
+  }
+}
+
+
+/* === PATCH FINAL: altura do fundo da hero no mobile === */
+@media (max-width: 768px) {
+  .hero {
+    /* aumenta a área amarela para acomodar o hero e alinhar a barra azul */
+    min-height: clamp(520px, 120vw, 680px);
+    background-position: center 24%; /* recorte ligeiramente mais alto */
+    padding-top: 12px;
+    padding-bottom: var(--hero-bar-h);
+  }
+
+  /* garante que a faixa azul tenha altura e sobreposição corretas */
+  .hero::after {
+    height: clamp(80px, 14vw, 120px);
+  }
+
+  /* hero-art um pouco mais próximo da barra azul */
+  .hero > .hero-art {
+    margin-bottom: calc(-1 * clamp(10px, 3vw, 18px));
+  }
+}
+
+/* ajuste fino para telas muito estreitas (ex: Mabel) */
+@media (max-width: 430px) {
+  .hero {
+    min-height: clamp(500px, 130vw, 700px);
+    background-position: center 26%;
+  }
+
+  .hero::after {
+    height: clamp(90px, 15vw, 130px);
+  }
+
+  .hero > .hero-art {
+    margin-bottom: calc(-1 * clamp(12px, 3vw, 20px));
+  }
+}
+
+
+
+/* === PATCH MOBILE: altura da hero e leve sobreposição na faixa azul === */
+@media (max-width: 768px) {
+  .hero {
+    min-height: clamp(460px, 102vw, 590px);
+    background-position: center 24%;
+    padding-bottom: var(--hero-bar-h);
+  }
+
+  /* altura da faixa azul no mobile (continua robusta e proporcional) */
+  .hero::after {
+    height: clamp(84px, 14.5vw, 120px);
+  }
+
+  /* hero.png levemente sobreposto na barra azul (invade um pouco) */
+  .hero > .hero-art {
+    /* remove qualquer ajuste anterior negativo via margin */
+    margin-bottom: 0 !important;
+    /* empurra a arte alguns px para baixo, invadindo a barra azul */
+    transform: translateX(-50%) translateY(clamp(8px, 2.2vw, 16px));
+    /* se preferir, você também pode aumentar a "invasão" trocando o valor acima */
+  }
+}
+
+/* telas bem estreitas (tipo Mabel) — mantém a mesma intenção visual */
+@media (max-width: 430px) {
+  .hero {
+    min-height: clamp(450px, 108vw, 580px);
+    background-position: center 25%;
+  }
+  .hero::after {
+    height: clamp(90px, 16vw, 130px);
+  }
+  .hero > .hero-art {
+    transform: translateX(-50%) translateY(clamp(10px, 2.8vw, 18px));
+  }
+}
+
+/* === PATCH RESTAURADO MOBILE (proporção + hero maior e mais baixo) === */
+@media (max-width: 768px) {
+
+  /* Empilhamento vertical */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    background-position: center top;
+    min-height: clamp(480px, 115vw, 660px);
+    padding-top: 12px;
+    padding-bottom: var(--hero-bar-h);
+  }
+
+  /* Imagens da data e certificado menores */
+  .hero-data,
+  .hero-certificado {
+    position: relative;
+    width: 64%;
+    max-width: 240px;
+    height: auto;
+    margin: 6px auto;
+  }
+
+  /* hero.png maior e levemente mais para baixo */
+  .hero > .hero-art {
+    position: relative;
+    width: 92%;
+    max-width: 520px;
+    transform: translateY(clamp(22px, 5vw, 34px));
+    z-index: 1260;
+  }
+
+  /* Faixa azul ajustada proporcionalmente */
+  .hero::after {
+    height: clamp(84px, 14vw, 120px);
+  }
+}
+
+/* Versão ultracompacta (Mabel) */
+@media (max-width: 430px) {
+  .hero {
+    min-height: clamp(470px, 125vw, 700px);
+  }
+
+  .hero-data,
+  .hero-certificado {
+    width: 70%;
+    max-width: 220px;
+  }
+
+  .hero > .hero-art {
+    max-width: 500px;
+    transform: translateY(clamp(26px, 6vw, 38px));
+  }
+
+  .hero::after {
+    height: clamp(90px, 16vw, 130px);
+  }
+}
+
+
+/* === Ajuste fino MOBILE: fundo menor + hero mais sobreposta === */
+@media (max-width: 768px) {
+  /* Fundo amarelo da hero mais curto */
+  .hero{
+    min-height: clamp(420px, 100vw, 560px);
+  }
+
+  /* Aperta levemente o respiro entre as imagens de data e certificado */
+  .hero-data,
+  .hero-certificado{
+    margin: 4px auto 2px; /* antes estava maior */
+  }
+
+  /* Desce um pouco a arte para sobrepor mais a faixa azul */
+  .hero > .hero-art{
+    transform: translateY(clamp(34px, 7.5vw, 54px)); /* mais para baixo */
+  }
+
+  /* Mantém a faixa azul proporcional (pode ajustar 1–2px se quiser) */
+  .hero::after{
+    height: clamp(90px, 15vw, 125px);
+  }
+}
+
+@media (max-width: 430px) {
+  .hero{
+    min-height: clamp(410px, 108vw, 580px);
+  }
+  .hero > .hero-art{
+    transform: translateY(clamp(38px, 8.5vw, 60px));
+  }
+}
+
+/* item da grade que vira “imagem cheia” (sem círculo, sem label) */
+.brand-as-image {
+  /* já herda o alinhamento central do .brand-item */
+}
+
+.brand-as-image .brand-png{
+  display: block;
+  width: min(340px, 100%);  /* desktop */
+  height: auto;
+  image-rendering: auto;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,.18));
+}
+
+/* mobile/tablet – encaixa bem na coluna */
+@media (max-width: 768px){
+  .brand-as-image .brand-png{
+    width: min(90vw, 420px);
+  }
+}
+
+
+/* --- Correção da linha preta na borda das imagens de prêmios --- */
+.brand-item img,
+.brand-as-image img,
+.brand-png {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+
+  /* CORREÇÃO VISUAL */
+  transform: translateZ(0);              /* força renderização na GPU */
+  backface-visibility: hidden;           /* elimina anti-alias “bleed” */
+  border: none;
+  outline: none;
+  image-rendering: -webkit-optimize-contrast;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Garante que o container não ultrapasse pixels inteiros */
+.brands-grid,
+.brand-item {
+  overflow: hidden;                      /* corta qualquer sub-pixel */
+  box-sizing: border-box;
+}
+
+/* === Anti-seam/anti-flicker para os prêmios (remove “barinha preta”) === */
+
+/* Container da imagem como “cartão” (aplica sombra aqui, não na imagem) */
+.brand-as-image{
+  position: relative;
+  contain: paint;                 /* isola pintura => evita bleed */
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  outline: none;
+  border: 0;
+  /* sombra suave substituindo o drop-shadow da imagem */
+
+
+  background: transparent;
+}
+
+/* Imagem em si: nada de filter; estabiliza a layer */
+.brand-as-image .brand-png{
+  display: block;
+  width: min(340px, 100%);
+  height: auto;
+  object-fit: contain;
+  border: 0;
+  outline: none;
+
+  /* força renderização estável */
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Remove qualquer foco/outline que o clique possa aplicar */
+.brand-as-image:focus,
+.brand-as-image *:focus {
+  outline: none !important;
+}
+
+/* Evita “sangria” de 1px na coluna da grid quando clica */
+.brands-grid, .brand-item, .brand-as-image {
+  overflow: hidden;         /* corta qualquer subpixel bleed */
+  box-sizing: border-box;
+  caret-color: transparent; /* nada de cursor piscando */
+}
+
+/* =========================================================
+   PATCH [Rede Litoral | Brands] — Brand 2 como imagem PNG
+
+   ========================================================= */
+
+/* Diâmetro de referência dos círculos (ajuste se mudar o restante do grid) */
+:root {
+  --brand-circle-size: 200px; /* alinha com .circle-content (200px) */
+}
+
+/* Wrapper do item que virou imagem (mantém alinhamento da grid) */
+.brand-item.brand-as-image{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* sombra no CONTAINER (evita drop-shadow na imagem e a “barrinha preta”) */
+  box-shadow: 0 6px 14px rgba(0,0,0,.14);
+  background: transparent;
+  border: 0;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  contain: paint; /* isola pintura → elimina bleed subpixel */
+}
+
+/* A própria PNG: tamanho espelhando os círculos + anti-flicker */
+.brand-item.brand-as-image .brand-png{
+  display: block;
+  width: min(var(--brand-circle-size, 200px), 32vw);
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  border: 0;
+  outline: none;
+
+  /* Estabilização de render (corrige linha preta ao clicar/arrastar) */
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+  filter: none; /* garante que nenhum drop-shadow herde daqui */
+}
+
+/* Responsividade — mantém proporção e ocupa bem a coluna no mobile */
+@media (max-width: 768px){
+  .brand-item.brand-as-image .brand-png{
+    width: min(90vw, 420px);
+  }
+}
+
+/* Hardening extra: sem cursor/outline dentro do item */
+.brand-item.brand-as-image:focus,
+.brand-item.brand-as-image *:focus {
+  outline: none !important;
+  caret-color: transparent;
+}
+
+/* Segurança contra “sangria” em subpixel na coluna da grid */
+.brands-grid,
+.brand-item,
+.brand-item.brand-as-image{
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   PATCH [Rede Litoral | Brands] — Ajuste de proporção e bordas
+   ========================================================= */
+
+/* Remove qualquer borda dos containers e imagens */
+.brand-item,
+.brand-image,
+.brand-as-image {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* Remove bordas internas dos círculos que são imagem */
+.brand-item.brand-as-image img,
+.brand-item img,
+.brand-png {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* Mantém renderização estável sem linhas pretas */
+.brand-item img,
+.brand-png {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Garante proporção maior para a Airfryer e menor para o selo azul */
+.brand-item:first-child .brand-png {
+  width: min(300px, 48vw) !important;   /* Aumenta o tamanho da Airfryer */
+  max-width: 360px;
+  height: auto;
+}
+
+.brand-item.brand-as-image .brand-png {
+  width: min(220px, 34vw) !important;   /* Mantém o selo azul proporcional */
+  max-width: 260px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+
+/* Mobile — mantém proporção harmoniosa */
+@media (max-width: 768px) {
+  .brand-item:first-child .brand-png {
+    width: min(80vw, 380px) !important;
+  }
+
+  .brand-item.brand-as-image .brand-png {
+    width: min(68vw, 300px) !important;
+  }
+}
+
+/* Garante centralização absoluta e elimina bleed subpixel */
+.brand-item.brand-as-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  contain: paint;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   PATCH — Proporção Brand 1 > Brand 2 (forçado e responsivo)
+   ========================================================= */
+
+/* Tamanhos-base responsivos (desktop/tablet) */
+:root{
+  --brand1-size: clamp(260px, 28vw, 380px); /* Airfryer (maior) */
+  --brand2-size: clamp(200px, 22vw, 300px); /* Raspou... (menor) */
+}
+
+/* Zera qualquer largura herdada que possa interferir */
+.brand-as-image .brand-png{ width: auto; max-width: none; }
+
+/* Força os tamanhos por posição no grid */
+.brands-grid > .brand-item:nth-of-type(1) .brand-png{
+  width: var(--brand1-size) !important;
+  height: auto !important;
+}
+
+.brands-grid > .brand-item:nth-of-type(2) .brand-png{
+  width: var(--brand2-size) !important;
+  height: auto !important;
+  aspect-ratio: 1 / 1; /* mantém círculo do selo */
+  object-fit: contain;
+}
+
+/* Mobile mantém a hierarquia (1 maior que 2) e ajusta limites */
+@media (max-width: 768px){
+  :root{
+    --brand1-size: clamp(300px, 82vw, 420px);
+    --brand2-size: clamp(220px, 68vw, 320px);
+  }
+}
+
+/* Sem bordas/sombras indesejadas (blindagem) */
+.brands-grid > .brand-item:nth-of-type(1) .brand-png,
+.brands-grid > .brand-item:nth-of-type(2) .brand-png{
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* =========================================================
+   PATCH — Aumentar apenas o Brand 1 (Airfryer)
+   ========================================================= */
+
+/* 0) Neutraliza larguras genéricas anteriores de .brand-as-image */
+.brand-as-image .brand-png{
+  width: auto !important;
+  max-width: none !important;
+  height: auto !important;
+}
+
+/* 1) Brand 1 (primeiro item do grid) — MAIOR */
+.brands-grid > .brand-item:nth-of-type(1) .brand-png{
+  width: clamp(300px, 32vw, 420px) !important;
+  max-width: clamp(300px, 32vw, 420px) !important;
+  height: auto !important;
+  aspect-ratio: auto !important;      /* garante imagem livre, não-circular */
+  object-fit: contain;
+}
+
+/* 2) Brand 2 (segundo item, selo azul) — mantém MENOR (não altera visual atual) */
+.brands-grid > .brand-item.brand-as-image:nth-of-type(2) .brand-png{
+  width: clamp(200px, 22vw, 280px) !important;  /* menor que o Brand 1 */
+  max-width: clamp(200px, 22vw, 280px) !important;
+  height: auto !important;
+  aspect-ratio: 1 / 1 !important;               /* preserva círculo do selo */
+  object-fit: contain;
+}
+
+/* 3) Mobile — mantém hierarquia (1 > 2) */
+@media (max-width: 768px){
+  .brands-grid > .brand-item:nth-of-type(1) .brand-png{
+    width: min(84vw, 460px) !important;
+    max-width: min(84vw, 460px) !important;
+  }
+  .brands-grid > .brand-item.brand-as-image:nth-of-type(2) .brand-png{
+    width: min(64vw, 320px) !important;
+    max-width: min(64vw, 320px) !important;
+  }
+}
+
+
+/* =========================================================
+   PATCH — Balanceado: Brand 1 > Brand 2 (proporção refinada)
+   ========================================================= */
+
+/* Neutraliza estilos antigos que travavam largura */
+.brand-as-image .brand-png{
+  width: auto !important;
+  max-width: none !important;
+  height: auto !important;
+}
+
+/* Brand 1 — Airfryer Polishop (um pouco maior, sem cortar) */
+.brands-grid > .brand-item:nth-of-type(1) .brand-png{
+  width: clamp(260px, 26vw, 360px) !important; /* tamanho equilibrado */
+  max-width: clamp(260px, 26vw, 360px) !important;
+  height: auto !important;
+  aspect-ratio: auto !important;
+  object-fit: contain;
+}
+
+/* Brand 2 — “Raspou, Achou, Ganhou!” (mantém menor) */
+.brands-grid > .brand-item.brand-as-image:nth-of-type(2) .brand-png{
+  width: clamp(200px, 22vw, 280px) !important;
+  max-width: clamp(200px, 22vw, 280px) !important;
+  height: auto !important;
+  aspect-ratio: 1 / 1 !important;
+  object-fit: contain;
+}
+
+/* Mobile — mantém diferença harmoniosa (sem cortar) */
+@media (max-width: 768px){
+  .brands-grid > .brand-item:nth-of-type(1) .brand-png{
+    width: min(78vw, 400px) !important;
+  }
+  .brands-grid > .brand-item.brand-as-image:nth-of-type(2) .brand-png{
+    width: min(64vw, 300px) !important;
+  }
+}
+
+/* Remove qualquer borda ou sombra que interfira */
+.brands-grid > .brand-item:nth-of-type(1) .brand-png,
+.brands-grid > .brand-item:nth-of-type(2) .brand-png{
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+
+/* =========================================================
+   PATCH — Refinamento final: Brand 1 levemente maior que Brand 2
+   ========================================================= */
+
+/* Neutraliza larguras herdadas */
+.brand-as-image .brand-png {
+  width: auto !important;
+  max-width: none !important;
+  height: auto !important;
+}
+
+/* Brand 1 — Airfryer (reduzido, mas ainda dominante) */
+.brands-grid > .brand-item:nth-of-type(1) .brand-png {
+  width: clamp(240px, 24vw, 320px) !important; /* ↓ tamanho refinado */
+  max-width: clamp(240px, 24vw, 320px) !important;
+  height: auto !important;
+  object-fit: contain;
+}
+
+/* Brand 2 — selo “Raspou, Achou, Ganhou!” (mantém proporção atual) */
+.brands-grid > .brand-item.brand-as-image:nth-of-type(2) .brand-png {
+  width: clamp(200px, 21vw, 270px) !important;
+  max-width: clamp(200px, 21vw, 270px) !important;
+  height: auto !important;
+  aspect-ratio: 1 / 1 !important;
+  object-fit: contain;
+}
+
+/* Mobile — mantém hierarquia (1 um pouco maior que 2) */
+@media (max-width: 768px) {
+  .brands-grid > .brand-item:nth-of-type(1) .brand-png {
+    width: min(72vw, 360px) !important;
+  }
+  .brands-grid > .brand-item.brand-as-image:nth-of-type(2) .brand-png {
+    width: min(64vw, 300px) !important;
+  }
+}
+
+/* Remove bordas/sombras indesejadas */
+.brands-grid > .brand-item:nth-of-type(1) .brand-png,
+.brands-grid > .brand-item:nth-of-type(2) .brand-png {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+
+/* =========================================================
+   PATCH — Brand 3 (Panelas Ichef) como PNG
+   ========================================================= */
+
+/* Wrapper sem borda/sombra */
+.brand-ichef{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  overflow:hidden;           /* evita qualquer bleed subpixel */
+  contain: paint;
+}
+
+/* Tamanho e estabilidade da imagem */
+.brand-ichef .brand-png{
+  width: clamp(220px, 23vw, 320px) !important;  /* equilibrado com fila do topo */
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+
+  /* anti “barrinha preta” */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Mobile — ocupa bem a coluna, mantendo proporção */
+@media (max-width: 768px){
+  .brand-ichef .brand-png{
+    width: min(66vw, 320px) !important;
+  }
+}
+
+
+
+/* =========================================================
+   PATCH — Brand 3 (Panelas Ichef) ampliado
+   ========================================================= */
+
+.brand-ichef .brand-png {
+  width: clamp(260px, 27vw, 380px) !important;  /* ↑ aumento suave */
+  max-width: clamp(260px, 27vw, 380px) !important;
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+
+  /* estabilidade de renderização */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Mobile — proporcionalmente maior, mas ainda ajustado ao grid */
+@media (max-width: 768px) {
+  .brand-ichef .brand-png {
+    width: min(80vw, 400px) !important;
+    max-width: min(80vw, 400px) !important;
+  }
+}
+
+
+
+/* =========================================================
+   PATCH — Brand 3 (Panelas Ichef) DOBRADO (versão final)
+   ========================================================= */
+
+.brand-ichef .brand-png {
+  width: clamp(420px, 42vw, 640px) !important;  /* dobrado em relação ao anterior */
+  max-width: clamp(420px, 42vw, 640px) !important;
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Mobile — mantém proporcionalidade sem cortar nas bordas */
+@media (max-width: 768px) {
+  .brand-ichef .brand-png {
+    width: min(90vw, 520px) !important;
+    max-width: min(90vw, 520px) !important;
+  }
+}
+
+
+/* =========================================================
+   HOTFIX — Garantir aumento do Brand 3 (Panelas Ichef)
+   ========================================================= */
+
+/* 1) Neutraliza QUALQUER largura/limite herdado só no Brand 3 */
+.brands-grid > .brand-item.brand-as-image.brand-ichef .brand-png {
+  width: auto !important;
+  max-width: none !important;
+  height: auto !important;
+}
+
+/* 2) Aplica o tamanho desejado com especificidade alta (vence duplicações) */
+.brands-grid > .brand-item.brand-as-image.brand-ichef > .brand-png {
+  /* ajuste o intervalo conforme quiser; este já fica visivelmente maior */
+  width: clamp(380px, 36vw, 560px) !important;
+  max-width: clamp(380px, 36vw, 560px) !important;
+  object-fit: contain;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* 3) Garante que o card do Brand 3 não imponha limites extras */
+.brands-grid > .brand-item.brand-as-image.brand-ichef {
+  justify-self: center;     /* centraliza na coluna */
+  align-self: center;
+  overflow: visible;        /* deixa a imagem respirar se precisar */
+}
+
+/* Mobile — mantém grande, sem estourar */
+@media (max-width: 768px) {
+  .brands-grid > .brand-item.brand-as-image.brand-ichef > .brand-png {
+    width: min(88vw, 520px) !important;
+    max-width: min(88vw, 520px) !important;
+  }
+}
+
+
+/* =========================================================
+   PATCH — Brand 3 (Panelas Ichef) ajuste fino de tamanho
+   ========================================================= */
+
+.brands-grid > .brand-item.brand-as-image.brand-ichef .brand-png {
+  width: clamp(300px, 30vw, 440px) !important;   /* ↓ reduziu ~25% */
+  max-width: clamp(300px, 30vw, 440px) !important;
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Mobile — ainda responsivo e proporcional */
+@media (max-width: 768px) {
+  .brands-grid > .brand-item.brand-as-image.brand-ichef .brand-png {
+    width: min(80vw, 420px) !important;
+    max-width: min(80vw, 420px) !important;
+  }
+}
+
+/* =========================================================
+   PATCH — Brand 3 (Panelas Ichef) redução final equilibrada
+   ========================================================= */
+
+.brands-grid > .brand-item.brand-as-image.brand-ichef .brand-png {
+  width: clamp(260px, 26vw, 380px) !important;  /* ↓ redução suave (~20%) */
+  max-width: clamp(260px, 26vw, 380px) !important;
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Mobile — mantém responsivo e proporcional */
+@media (max-width: 768px) {
+  .brands-grid > .brand-item.brand-as-image.brand-ichef .brand-png {
+    width: min(74vw, 360px) !important;
+    max-width: min(74vw, 360px) !important;
+  }
+}
+
+
+/* =========================================================
+   PATCH — Brand 4 (Panelas Tramontina)
+   ========================================================= */
+
+/* Wrapper da imagem — centralizado na segunda fileira */
+.brand-tramontina {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-column: 1; /* aparece abaixo da Airfryer */
+  grid-row: 2;    /* força nova linha no grid */
+  overflow: visible;
+  contain: paint;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Imagem Tramontina — proporcional à Airfryer, sem ultrapassar */
+.brand-tramontina .brand-png {
+  width: clamp(260px, 28vw, 400px) !important;
+  max-width: clamp(260px, 28vw, 400px) !important;
+  height: auto !important;
+  object-fit: contain;
+
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+
+  /* suaviza renderização */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Mobile — mantém a proporção e o espaçamento */
+@media (max-width: 768px) {
+  .brand-tramontina {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+  .brand-tramontina .brand-png {
+    width: min(80vw, 380px) !important;
+    max-width: min(80vw, 380px) !important;
+  }
+}
+
+
+
+/* =========================================================
+   PATCH — Brand 4 (Panelas Tramontina) — aumento de destaque
+   ========================================================= */
+
+.brand-tramontina .brand-png {
+  width: clamp(320px, 32vw, 480px) !important;   /* ↑ aumento ~25% */
+  max-width: clamp(320px, 32vw, 480px) !important;
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+
+  /* estabilidade e suavização */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Mobile — mantém destaque mas sem estourar */
+@media (max-width: 768px) {
+  .brand-tramontina .brand-png {
+    width: min(84vw, 420px) !important;
+    max-width: min(84vw, 420px) !important;
+  }
+}
+
+
+/* =========================================================
+   FIX — Brand 4 (Tramontina) ignorado por regras anteriores
+   ========================================================= */
+
+/* Neutraliza larguras genéricas */
+.brands-grid > .brand-item.brand-as-image.brand-tramontina .brand-png {
+  width: auto !important;
+  max-width: none !important;
+  height: auto !important;
+}
+
+/* Aumenta com força máxima e especificidade extra */
+.brands-grid > .brand-item.brand-as-image.brand-tramontina > .brand-png {
+  width: clamp(340px, 34vw, 520px) !important;   /* ↑ aumento visível e seguro */
+  max-width: clamp(340px, 34vw, 520px) !important;
+  height: auto !important;
+  object-fit: contain !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Mantém responsividade correta */
+@media (max-width: 768px) {
+  .brands-grid > .brand-item.brand-as-image.brand-tramontina > .brand-png {
+    width: min(84vw, 440px) !important;
+    max-width: min(84vw, 440px) !important;
+  }
+}
+
+
+/* =========================================================
+   PATCH — Brand 4 (Panelas Tramontina) — ajuste de proporção
+   ========================================================= */
+
+.brands-grid > .brand-item.brand-as-image.brand-tramontina > .brand-png {
+  width: clamp(280px, 28vw, 420px) !important;   /* ↓ redução suave (~20%) */
+  max-width: clamp(280px, 28vw, 420px) !important;
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Mobile — mantém proporção e centralização */
+@media (max-width: 768px) {
+  .brands-grid > .brand-item.brand-as-image.brand-tramontina > .brand-png {
+    width: min(78vw, 380px) !important;
+    max-width: min(78vw, 380px) !important;
+  }
+}
+
+/* =========================================================
+   PATCH — Brand 4 (Panelas Tramontina) — tamanho final refinado
+   ========================================================= */
+
+.brands-grid > .brand-item.brand-as-image.brand-tramontina > .brand-png {
+  width: clamp(240px, 24vw, 360px) !important;   /* ↓ redução adicional (~15%) */
+  max-width: clamp(240px, 24vw, 360px) !important;
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Mobile — mantém proporção agradável e centralizada */
+@media (max-width: 768px) {
+  .brands-grid > .brand-item.brand-as-image.brand-tramontina > .brand-png {
+    width: min(72vw, 340px) !important;
+    max-width: min(72vw, 340px) !important;
+  }
+}
+
+
+/* =========================================================
+   FIX — Brand 4 (Panelas Tramontina) — evitar corte do cabo
+   ========================================================= */
+
+/* Permite que a imagem transborde com segurança */
+.brands-grid > .brand-item.brand-as-image.brand-tramontina {
+  overflow: visible !important;        /* ← essencial para liberar o cabo */
+  position: relative !important;
+  z-index: 2;
+}
+
+/* Mantém o tamanho ajustado, sem cortes */
+.brands-grid > .brand-item.brand-as-image.brand-tramontina > .brand-png {
+  width: clamp(240px, 24vw, 360px) !important;  /* mesmo tamanho atual */
+  max-width: clamp(240px, 24vw, 360px) !important;
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Garante que o layout inferior tenha espaço suficiente */
+.brands-grid {
+  overflow: visible !important;
+  padding-bottom: 40px; /* espaço extra pra cabos ou sombras */
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .brands-grid > .brand-item.brand-as-image.brand-tramontina > .brand-png {
+    width: min(72vw, 340px) !important;
+    max-width: min(72vw, 340px) !important;
+  }
+}
+
+/* =========================================================
+   PATCH — Brand 5 (+DE 10MIL PRÊMIOS INSTANTÂNEOS!)
+   ========================================================= */
+
+/* Estrutura base e alinhamento lateral com Brand 4 */
+.brands-grid > .brand-item.brand-as-image.brand-10mil {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-column: 2;       /* posiciona ao lado do Brand 4 */
+  grid-row: 2;          /* mesma linha da Tramontina */
+  overflow: visible !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* Tamanho ligeiramente menor que Brand 2 */
+.brands-grid > .brand-item.brand-as-image.brand-10mil > .brand-png {
+  width: clamp(220px, 22vw, 330px) !important;   /* ↓ cerca de 10–15% menor que Brand 2 */
+  max-width: clamp(220px, 22vw, 330px) !important;
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Garante alinhamento vertical com Brand 2 */
+.brands-grid {
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
+  justify-items: center;
+  align-items: start;
+}
+
+/* Mobile — mantém layout empilhado e proporcional */
+@media (max-width: 768px) {
+  .brands-grid > .brand-item.brand-as-image.brand-10mil {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+  .brands-grid > .brand-item.brand-as-image.brand-10mil > .brand-png {
+    width: min(68vw, 320px) !important;
+    max-width: min(68vw, 320px) !important;
+  }
+}
+
+
+/* =========================================================
+   PATCH — Brand 5 (+DE 10MIL PRÊMIOS INSTANTÂNEOS) — tamanho reduzido
+   ========================================================= */
+
+.brands-grid > .brand-item.brand-as-image.brand-10mil > .brand-png {
+  width: clamp(180px, 18vw, 270px) !important;   /* ↓ agora menor que Brand 2 */
+  max-width: clamp(180px, 18vw, 270px) !important;
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: translateY(-8px); /* levanta levemente pra alinhar com o Brand 2 */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Mantém layout e proporção no mobile */
+@media (max-width: 768px) {
+  .brands-grid > .brand-item.brand-as-image.brand-10mil > .brand-png {
+    width: min(60vw, 300px) !important;
+    max-width: min(60vw, 300px) !important;
+    transform: none;
+  }
+}
+
+/* =========================================================
+   PATCH — Descer Brand 2 e Brand 5 + anti-corte
+   ========================================================= */
+
+/* Nunca corte conteúdo dos itens da grade */
+.brands-grid,
+.brands-grid > .brand-item { overflow: visible !important; }
+
+/* ↓ Desce o Brand 2 (círculo "Raspou, Achou, Ganhou!") */
+.brands-grid > .brand-item:nth-of-type(2) {
+  margin-top: 38px;                 /* ajuste fino desktop */
+}
+
+/* ↓ Desce o Brand 5 e garante alinhamento lateral com Brand 4 */
+.brands-grid > .brand-item.brand-as-image.brand-10mil {
+  margin-top: 44px;                 /* levemente mais baixo que o Brand 2 */
+  overflow: visible !important;     /* evita cortes na borda do card */
+  position: relative;
+  z-index: 2;
+}
+
+/* Brand 5 um tiquinho menor que antes (e menor que o Brand 2) */
+.brands-grid > .brand-item.brand-as-image.brand-10mil > .brand-png{
+  width: clamp(170px, 16.5vw, 250px) !important;  /* ↓ ajuste sutil */
+  max-width: clamp(170px, 16.5vw, 250px) !important;
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Mobile — offsets menores para não estourar o empilhamento */
+@media (max-width: 768px){
+  .brands-grid > .brand-item:nth-of-type(2){ margin-top: 20px; }
+  .brands-grid > .brand-item.brand-as-image.brand-10mil{ margin-top: 24px; }
+  .brands-grid > .brand-item.brand-as-image.brand-10mil > .brand-png{
+    width: min(58vw, 260px) !important;
+    max-width: min(58vw, 260px) !important;
+  }
+}
+
+
+/* =========================================================
+   PATCH — Brand 6 (Potes Tupperware)
+   ========================================================= */
+
+/* Posicionamento base: abaixo da Brand 3, alinhada ao lado da Brand 5 */
+.brands-grid > .brand-item.brand-as-image.brand-tupperware {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-column: 2;     /* alinhada com Brand 5 */
+  grid-row: 3;        /* nova fileira */
+  overflow: visible !important;
+  position: relative;
+  z-index: 2;
+  margin-top: 50px;   /* espaçamento natural entre fileiras */
+}
+
+/* Tamanho proporcional — um pouco menor que Brand 3 */
+.brands-grid > .brand-item.brand-as-image.brand-tupperware > .brand-png {
+  width: clamp(240px, 23vw, 340px) !important;
+  max-width: clamp(240px, 23vw, 340px) !important;
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Responsividade — mantém proporção e espaçamento em mobile */
+@media (max-width: 768px) {
+  .brands-grid > .brand-item.brand-as-image.brand-tupperware {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    margin-top: 30px;
+  }
+  .brands-grid > .brand-item.brand-as-image.brand-tupperware > .brand-png {
+    width: min(70vw, 360px) !important;
+    max-width: min(70vw, 360px) !important;
+  }
+}
+
+/* =========================================================
+   PATCH — Brand 6 (Tupperware) posicionamento correto
+   ========================================================= */
+
+/* Coluna 3, LINHA 2 (lado do Brand 5 e abaixo do Brand 3) */
+.brands-grid > .brand-item.brand-as-image.brand-tupperware{
+  grid-column: 3 !important;
+  grid-row: 2 !important;
+  margin-top: 44px;            /* igual ao Brand 5 para alinhar a linha */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible !important; /* evita corte das bordas da imagem */
+  position: relative;
+  z-index: 2;
+}
+
+/* Tamanho proporcional ao conjunto */
+.brands-grid > .brand-item.brand-as-image.brand-tupperware > .brand-png{
+  width: clamp(230px, 22vw, 330px) !important;
+  max-width: clamp(230px, 22vw, 330px) !important;
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Mobile: empilha e centraliza */
+@media (max-width: 768px){
+  .brands-grid > .brand-item.brand-as-image.brand-tupperware{
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+    margin-top: 30px;
+  }
+  .brands-grid > .brand-item.brand-as-image.brand-tupperware > .brand-png{
+    width: min(68vw, 340px) !important;
+    max-width: min(68vw, 340px) !important;
+  }
+}
+
+
+/* =========================================================
+   PATCH — Brand 7 (Canecas Rede Litoral)
+   ========================================================= */
+
+/* Posicionamento: mesma coluna do Brand 6, próxima fileira */
+.brands-grid > .brand-item.brand-as-image.brand-caneca{
+  grid-column: 3 !important;  /* coluna da direita (mesma do Brand 6) */
+  grid-row: 3 !important;     /* fileira abaixo do Brand 6 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 46px;            /* respiro entre fileiras */
+  overflow: visible !important;/* nada cortado */
+  position: relative;
+  z-index: 2;
+}
+
+/* Tamanho harmonizado com o Brand 6 (ligeiro destaque) */
+.brands-grid > .brand-item.brand-as-image.brand-caneca > .brand-png{
+  width: clamp(250px, 23vw, 340px) !important;
+  max-width: clamp(250px, 23vw, 340px) !important;
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Mobile — empilha e centraliza */
+@media (max-width: 768px){
+  .brands-grid > .brand-item.brand-as-image.brand-caneca{
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+    margin-top: 30px;
+  }
+  .brands-grid > .brand-item.brand-as-image.brand-caneca > .brand-png{
+    width: min(72vw, 360px) !important;
+    max-width: min(72vw, 360px) !important;
+  }
+}
+
+/* =========================================================
+   PATCH — Brand 7 (Canecas Rede Litoral) — ajuste de proximidade
+   ========================================================= */
+
+/* Mantém posição, mas reduz o espaçamento vertical */
+.brands-grid > .brand-item.brand-as-image.brand-caneca {
+  grid-column: 3 !important;  /* mesma coluna do Brand 6 */
+  grid-row: 3 !important;     /* linha logo abaixo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 26px !important; /* ↓ diminui o espaçamento entre Brand 6 e Brand 7 */
+  overflow: visible !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* Tamanho igualado ao Brand 6 */
+.brands-grid > .brand-item.brand-as-image.brand-caneca > .brand-png {
+  width: clamp(250px, 23vw, 340px) !important;
+  max-width: clamp(250px, 23vw, 340px) !important;
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Mobile — mantém a proporção e alinhamento central */
+@media (max-width: 768px) {
+  .brands-grid > .brand-item.brand-as-image.brand-caneca {
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+    margin-top: 18px !important;
+  }
+
+  .brands-grid > .brand-item.brand-as-image.brand-caneca > .brand-png {
+    width: min(70vw, 340px) !important;
+    max-width: min(70vw, 340px) !important;
+  }
+}
+
+
+/* =========================================================
+   PATCH — Brand 6 (Tupperware) e Brand 7 (Canecas) — ajuste vertical
+   ========================================================= */
+
+/* --- Brand 6: sobe um pouco --- */
+.brands-grid > .brand-item.brand-as-image.brand-tupperware {
+  grid-column: 3 !important;
+  grid-row: 2 !important;
+  margin-top: 18px !important; /* ↓ antes era ~44px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* --- Brand 7: sobe e mantém proximidade --- */
+.brands-grid > .brand-item.brand-as-image.brand-caneca {
+  grid-column: 3 !important;
+  grid-row: 3 !important;
+  margin-top: 10px !important; /* ↓ antes era 26px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* Mantém tamanhos equilibrados */
+.brands-grid > .brand-item.brand-as-image.brand-tupperware > .brand-png,
+.brands-grid > .brand-item.brand-as-image.brand-caneca > .brand-png {
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Mobile — respeita empilhamento */
+@media (max-width: 768px) {
+  .brands-grid > .brand-item.brand-as-image.brand-tupperware {
+    margin-top: 24px !important;
+  }
+  .brands-grid > .brand-item.brand-as-image.brand-caneca {
+    margin-top: 18px !important;
+  }
+}
+
+
+/* =========================================================
+   PATCH — Ajuste fino de espaçamento entre Brand 3, 6 e 7
+   ========================================================= */
+
+/* --- Brand 3 (Panela Ichef) mantém posição fixa --- */
+.brands-grid > .brand-item.brand-as-image.brand-ichef {
+  margin-bottom: 0 !important; /* remove qualquer gap extra */
+  overflow: visible !important;
+}
+
+/* --- Brand 6 (Tupperware) sobe bem mais --- */
+.brands-grid > .brand-item.brand-as-image.brand-tupperware {
+  grid-column: 3 !important;
+  grid-row: 2 !important;
+  margin-top: -10px !important; /* ↓ subiu ainda mais (antes 18px) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* --- Brand 7 (Canecas) cola levemente no Tupperware --- */
+.brands-grid > .brand-item.brand-as-image.brand-caneca {
+  grid-column: 3 !important;
+  grid-row: 3 !important;
+  margin-top: -6px !important; /* ↓ encosta levemente no Tupperware */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* --- Garantia visual e responsiva --- */
+.brands-grid > .brand-item.brand-as-image.brand-tupperware > .brand-png,
+.brands-grid > .brand-item.brand-as-image.brand-caneca > .brand-png {
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* --- Mobile: mantém proporção e separação mínima --- */
+@media (max-width: 768px) {
+  .brands-grid > .brand-item.brand-as-image.brand-tupperware {
+    margin-top: 12px !important;
+  }
+  .brands-grid > .brand-item.brand-as-image.brand-caneca {
+    margin-top: 10px !important;
+  }
+}
+
+
+/* =========================================================
+   PATCH — Coluna direita alinhada (Brand 3, 6, 7) + espaçamento curto
+   ========================================================= */
+
+/* Grade: garantimos 3 colunas e centralização dos itens */
+.brands-grid{
+  grid-template-columns: repeat(3, 1fr) !important;
+  justify-items: center !important;
+  align-items: start !important;
+  overflow: visible !important;
+}
+
+/* -------- Coluna 3 (direita) — posições fixas -------- */
+.brands-grid > .brand-item.brand-as-image.brand-ichef{
+  grid-column: 3 !important;  /* Brand 3 (panelas.png) */
+  grid-row: 1 !important;
+  justify-self: center !important;
+  margin-bottom: 0 !important;
+  overflow: visible !important;
+}
+
+.brands-grid > .brand-item.brand-as-image.brand-tupperware{
+  grid-column: 3 !important;  /* Brand 6 (tupperware.png) */
+  grid-row: 2 !important;
+  justify-self: center !important;
+  margin-top: -12px !important;   /* sobe e aproxima do Brand 3 */
+  overflow: visible !important;
+  position: relative; z-index: 2;
+}
+
+.brands-grid > .brand-item.brand-as-image.brand-caneca{
+  grid-column: 3 !important;  /* Brand 7 (caneca.png) */
+  grid-row: 3 !important;
+  justify-self: center !important;
+  margin-top: -14px !important;  /* ↑ sobe mais que antes, cola no Brand 6 */
+  overflow: visible !important;
+  position: relative; z-index: 2;
+}
+
+/* Segurança: nada de cortes nas imagens */
+.brands-grid > .brand-item.brand-as-image.brand-ichef  > .brand-png,
+.brands-grid > .brand-item.brand-as-image.brand-tupperware > .brand-png,
+.brands-grid > .brand-item.brand-as-image.brand-caneca > .brand-png{
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Mobile: empilha normalmente e reduz offsets */
+@media (max-width: 768px){
+  .brands-grid > .brand-item.brand-as-image.brand-tupperware{ margin-top: 8px !important; }
+  .brands-grid > .brand-item.brand-as-image.brand-caneca{ margin-top: 6px !important; }
+}
+
+
+/* =========================================================
+   PATCH — Brand 8 (Prêmios Todos os Dias)
+   ========================================================= */
+
+/* Posição: mesma coluna do Brand 5, nova linha abaixo dele */
+.brands-grid > .brand-item.brand-as-image.brand-premios {
+  grid-column: 2 !important;   /* alinha com o Brand 5 (10 MIL) */
+  grid-row: 3 !important;      /* aparece logo abaixo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px !important; /* pequena folga entre os círculos */
+  overflow: visible !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* Mesmo tamanho e proporção do Brand 5 */
+.brands-grid > .brand-item.brand-as-image.brand-premios > .brand-png {
+  width: clamp(170px, 16.5vw, 250px) !important;   /* idêntico ao Brand 5 */
+  max-width: clamp(170px, 16.5vw, 250px) !important;
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Mobile — empilha e mantém proporção */
+@media (max-width: 768px) {
+  .brands-grid > .brand-item.brand-as-image.brand-premios {
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+    margin-top: 20px !important;
+  }
+
+  .brands-grid > .brand-item.brand-as-image.brand-premios > .brand-png {
+    width: min(60vw, 280px) !important;
+    max-width: min(60vw, 280px) !important;
+  }
+}
+
+/* =========================================================
+   PATCH — Coluna central (Brand 2, Brand 5, Brand 8)
+   Distância mínima refinada — versão final colada 🔥
+   ========================================================= */
+
+/* Brand 2 — Raspou, Achou, Ganhou */
+.brands-grid > .brand-item:nth-of-type(2) {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  margin-bottom: -28px !important; /* ↓ colou com o Brand 5 */
+  overflow: visible !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* Brand 5 — +10 MIL Prêmios */
+.brands-grid > .brand-item.brand-as-image.brand-10mil {
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  margin-top: -20px !important;     /* ↓ quase encostando no Brand 2 */
+  margin-bottom: -22px !important;  /* ↓ aproxima do Brand 8 */
+  overflow: visible !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* Brand 8 — Centenas de Prêmios Todos os Dias */
+.brands-grid > .brand-item.brand-as-image.brand-premios {
+  grid-column: 2 !important;
+  grid-row: 3 !important;
+  margin-top: -14px !important;  /* ↓ colou mais ao Brand 5 */
+  overflow: visible !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* Imagens otimizadas e centradas */
+.brands-grid > .brand-item.brand-as-image.brand-10mil > .brand-png,
+.brands-grid > .brand-item.brand-as-image.brand-premios > .brand-png {
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Mobile — mantém distância mínima sem sobreposição */
+@media (max-width: 768px) {
+  .brands-grid > .brand-item:nth-of-type(2) { margin-bottom: -8px !important; }
+  .brands-grid > .brand-item.brand-as-image.brand-10mil { margin-top: -6px !important; margin-bottom: -6px !important; }
+  .brands-grid > .brand-item.brand-as-image.brand-premios { margin-top: -4px !important; }
+}
+
+/* =========================================================
+   PATCH — Coluna Central Final: mínima distância (Brand 2, 5, 8)
+   ========================================================= */
+
+/* Brand 2 — Raspou, Achou, Ganhou */
+.brands-grid > .brand-item:nth-of-type(2) {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  margin-bottom: -34px !important; /* ↓ encosta bem no Brand 5 */
+  overflow: visible !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* Brand 5 — +10 MIL Prêmios */
+.brands-grid > .brand-item.brand-as-image.brand-10mil {
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  margin-top: -26px !important;     /* ↓ quase tocando o Brand 2 */
+  margin-bottom: -34px !important;  /* ↓ coladinho no Brand 8 */
+  overflow: visible !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* Brand 8 — Centenas de Prêmios Todos os Dias */
+.brands-grid > .brand-item.brand-as-image.brand-premios {
+  grid-column: 2 !important;
+  grid-row: 3 !important;
+  margin-top: -24px !important; /* ↓ colou praticamente no Brand 5 */
+  overflow: visible !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* Ajuste fino das imagens — nada cortado */
+.brands-grid > .brand-item.brand-as-image.brand-10mil > .brand-png,
+.brands-grid > .brand-item.brand-as-image.brand-premios > .brand-png {
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Mobile — mantém compactação sem sobrepor */
+@media (max-width: 768px) {
+  .brands-grid > .brand-item:nth-of-type(2) { margin-bottom: -10px !important; }
+  .brands-grid > .brand-item.brand-as-image.brand-10mil {
+    margin-top: -10px !important;
+    margin-bottom: -12px !important;
+  }
+  .brands-grid > .brand-item.brand-as-image.brand-premios { margin-top: -10px !important; }
+}
+
+/* =========================================================
+   PATCH — Coluna Central (Brand 2, 5, 8)
+   Distância mínima possível (visual colado)
+   ========================================================= */
+
+/* Brand 2 — Raspou, Achou, Ganhou */
+.brands-grid > .brand-item:nth-of-type(2) {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  margin-bottom: -42px !important; /* ↓ reduz ainda mais */
+  overflow: visible !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* Brand 5 — +10 MIL Prêmios */
+.brands-grid > .brand-item.brand-as-image.brand-10mil {
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  margin-top: -34px !important;     /* ↓ aproxima ainda mais do Brand 2 */
+  margin-bottom: -44px !important;  /* ↓ quase encostando no Brand 8 */
+  overflow: visible !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* Brand 8 — Centenas de Prêmios Todos os Dias */
+.brands-grid > .brand-item.brand-as-image.brand-premios {
+  grid-column: 2 !important;
+  grid-row: 3 !important;
+  margin-top: -34px !important;  /* ↓ encosta visualmente no Brand 5 */
+  overflow: visible !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* Garantia de renderização limpa */
+.brands-grid > .brand-item.brand-as-image.brand-10mil > .brand-png,
+.brands-grid > .brand-item.brand-as-image.brand-premios > .brand-png {
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Mobile — mantém proximidade máxima sem sobrepor */
+@media (max-width: 768px) {
+  .brands-grid > .brand-item:nth-of-type(2) { margin-bottom: -14px !important; }
+  .brands-grid > .brand-item.brand-as-image.brand-10mil {
+    margin-top: -14px !important;
+    margin-bottom: -16px !important;
+  }
+  .brands-grid > .brand-item.brand-as-image.brand-premios { margin-top: -14px !important; }
+}
+
+
+/* =========================================================
+   PATCH — COLUNA CENTRAL (Brand 2, 5, 8) — ZERO GAP MODE 💥
+   ========================================================= */
+
+/* --- Base geral: nada de cortes --- */
+.brands-grid, .brands-grid > .brand-item { overflow: visible !important; }
+
+/* --- Brand 2 — Raspou, Achou, Ganhou! --- */
+.brands-grid > .brand-item:nth-of-type(2) {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  margin-bottom: -54px !important; /* 🔥 encosta de verdade no Brand 5 */
+  z-index: 4; /* mantém sobreposição suave */
+  position: relative;
+}
+
+/* --- Brand 5 — +10 MIL Prêmios --- */
+.brands-grid > .brand-item.brand-as-image.brand-10mil {
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  margin-top: -46px !important;     /* 🔥 cola no Brand 2 */
+  margin-bottom: -58px !important;  /* 🔥 cola no Brand 8 */
+  z-index: 3;
+  position: relative;
+}
+
+/* --- Brand 8 — Centenas de Prêmios Todos os Dias --- */
+.brands-grid > .brand-item.brand-as-image.brand-premios {
+  grid-column: 2 !important;
+  grid-row: 3 !important;
+  margin-top: -50px !important;  /* 🔥 praticamente sobreposto ao Brand 5 */
+  z-index: 2;
+  position: relative;
+}
+
+/* --- Garantia visual: nenhuma imagem cortada --- */
+.brands-grid > .brand-item.brand-as-image.brand-10mil > .brand-png,
+.brands-grid > .brand-item.brand-as-image.brand-premios > .brand-png {
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* --- Mobile: segura a sobreposição visual --- */
+@media (max-width: 768px) {
+  .brands-grid > .brand-item:nth-of-type(2) { margin-bottom: -20px !important; }
+  .brands-grid > .brand-item.brand-as-image.brand-10mil {
+    margin-top: -20px !important;
+    margin-bottom: -22px !important;
+  }
+  .brands-grid > .brand-item.brand-as-image.brand-premios {
+    margin-top: -20px !important;
+  }
+}
+
+/* =========================================================
+   COLUNA CENTRAL COLADA DE VERDADE (2 → 5 → 8)
+   Corta row-gap e usa translateY pra aproximar
+   ========================================================= */
+
+/* 1) Zera o espaçamento vertical do grid (era o vilão) */
+.brands-grid{
+  row-gap: 0 !important;
+  grid-row-gap: 0 !important;
+}
+
+/* 2) Normaliza Brand 2 (sem empurrões extras) */
+.brands-grid > .brand-item:nth-of-type(2){
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  margin: 0 !important;
+  position: relative;
+  z-index: 4;
+}
+
+/* 3) Puxa o Brand 5 (+10 MIL) pra cima */
+.brands-grid > .brand-item.brand-as-image.brand-10mil{
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  margin: 0 !important;
+  position: relative;
+  z-index: 3;
+  transform: translateY(-28px) !important;  /* ajuste fino */
+}
+
+/* 4) Puxa o Brand 8 (PRÊMIOS) ainda mais pra cima */
+.brands-grid > .brand-item.brand-as-image.brand-premios{
+  grid-column: 2 !important;
+  grid-row: 3 !important;
+  margin: 0 !important;
+  position: relative;
+  z-index: 2;
+  transform: translateY(-62px) !important;   /* encosta visualmente no +10 MIL */
+}
+
+/* Imagens seguras (sem corte) */
+.brands-grid > .brand-item.brand-as-image.brand-10mil > .brand-png,
+.brands-grid > .brand-item.brand-as-image.brand-premios > .brand-png{
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Mobile: mantém próximo, mas com respiro pra não sobrepor */
+@media (max-width: 768px){
+  .brands-grid{ row-gap: 8px !important; }
+  .brands-grid > .brand-item.brand-as-image.brand-10mil{
+    transform: translateY(-10px) !important;
+  }
+  .brands-grid > .brand-item.brand-as-image.brand-premios{
+    transform: translateY(-18px) !important;
+  }
+}
+
+
+/* =========================================================
+   COLUNA CENTRAL — ainda mais colada (sem encavalamento)
+   ========================================================= */
+
+/* garante que o grid não imponha gap vertical */
+.brands-grid {
+  row-gap: 0 !important;
+  grid-row-gap: 0 !important;
+  overflow: visible !important;
+}
+
+/* Brand 2 (Raspou...) — base neutra */
+.brands-grid > .brand-item:nth-of-type(2) {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  margin: 0 !important;
+  position: relative;
+  z-index: 4;
+}
+
+/* Brand 5 (+10 MIL) — sobe mais */
+.brands-grid > .brand-item.brand-as-image.brand-10mil {
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  margin: 0 !important;
+  position: relative;
+  z-index: 3;
+  transform: translateY(-38px) !important; /* antes: -28px */
+}
+
+/* Brand 8 (PRÊMIOS) — sobe bem mais */
+.brands-grid > .brand-item.brand-as-image.brand-premios {
+  grid-column: 2 !important;
+  grid-row: 3 !important;
+  margin: 0 !important;
+  position: relative;
+  z-index: 2;
+  transform: translateY(-86px) !important; /* antes: -62px */
+}
+
+/* =========================================================
+   COLUNA DIREITA — micro offset p/ evitar encavalamento
+   (somente visual; não mexe em alinhamento de grid)
+   ========================================================= */
+
+.brands-grid > .brand-item.brand-as-image.brand-tupperware {
+  transform: translateY(6px) !important;   /* empurra um tiquinho p/ baixo */
+  position: relative;
+  z-index: 2;
+}
+
+.brands-grid > .brand-item.brand-as-image.brand-caneca {
+  transform: translateY(10px) !important;  /* mais 4px de respiro */
+  position: relative;
+  z-index: 2;
+}
+
+/* Segurança: imagens sem corte */
+.brands-grid > .brand-item.brand-as-image.brand-10mil > .brand-png,
+.brands-grid > .brand-item.brand-as-image.brand-premios > .brand-png {
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Responsivo: segura proximidade sem sobrepor em telas menores */
+@media (max-width: 1100px) {
+  .brands-grid > .brand-item.brand-as-image.brand-10mil {
+    transform: translateY(-30px) !important;
+  }
+  .brands-grid > .brand-item.brand-as-image.brand-premios {
+    transform: translateY(-68px) !important;
+  }
+  .brands-grid > .brand-item.brand-as-image.brand-tupperware {
+    transform: translateY(4px) !important;
+  }
+  .brands-grid > .brand-item.brand-as-image.brand-caneca {
+    transform: translateY(8px) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .brands-grid { row-gap: 8px !important; }
+  .brands-grid > .brand-item.brand-as-image.brand-10mil {
+    transform: translateY(-12px) !important;
+  }
+  .brands-grid > .brand-item.brand-as-image.brand-premios {
+    transform: translateY(-22px) !important;
+  }
+  .brands-grid > .brand-item.brand-as-image.brand-tupperware {
+    transform: translateY(0) !important;
+  }
+  .brands-grid > .brand-item.brand-as-image.brand-caneca {
+    transform: translateY(4px) !important;
+  }
+}
+
+
+/* =========================================================
+   AJUSTE PRECISO — COLUNA CENTRAL + COLUNA DIREITA
+   ========================================================= */
+
+/* Zera qualquer gap do grid */
+.brands-grid {
+  row-gap: 0 !important;
+  grid-row-gap: 0 !important;
+  overflow: visible !important;
+}
+
+/* --- COLUNA CENTRAL (2 → 5 → 8) --- */
+.brands-grid > .brand-item:nth-of-type(2) {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  margin: 0 !important;
+  position: relative;
+  z-index: 5;
+}
+
+/* +10MIL — sobe mais */
+.brands-grid > .brand-item.brand-as-image.brand-10mil {
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  margin: 0 !important;
+  position: relative;
+  z-index: 4;
+  transform: translateY(-48px) !important; /* 🔥 sobe mais que antes */
+}
+
+/* PRÊMIOS — cola quase totalmente no +10MIL */
+.brands-grid > .brand-item.brand-as-image.brand-premios {
+  grid-column: 2 !important;
+  grid-row: 3 !important;
+  margin: 0 !important;
+  position: relative;
+  z-index: 3;
+  transform: translateY(-102px) !important; /* 🔥 encostado mas sem sobreposição */
+}
+
+/* --- COLUNA DIREITA (sem encavalar) --- */
+.brands-grid > .brand-item.brand-as-image.brand-tupperware {
+  transform: translateY(12px) !important; /* leve descida pra respirar */
+  position: relative;
+  z-index: 2;
+}
+
+.brands-grid > .brand-item.brand-as-image.brand-caneca {
+  transform: translateY(20px) !important; /* mais espaço ainda p/ evitar toque */
+  position: relative;
+  z-index: 2;
+}
+
+/* Garantia de imagens limpas */
+.brands-grid > .brand-item.brand-as-image .brand-png {
+  height: auto !important;
+  object-fit: contain;
+  border: none !important;
+  box-shadow: none !important;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* --- MOBILE --- */
+@media (max-width: 1024px) {
+  .brands-grid > .brand-item.brand-as-image.brand-10mil {
+    transform: translateY(-30px) !important;
+  }
+  .brands-grid > .brand-item.brand-as-image.brand-premios {
+    transform: translateY(-60px) !important;
+  }
+  .brands-grid > .brand-item.brand-as-image.brand-tupperware {
+    transform: translateY(8px) !important;
+  }
+  .brands-grid > .brand-item.brand-as-image.brand-caneca {
+    transform: translateY(12px) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .brands-grid { row-gap: 10px !important; }
+  .brands-grid > .brand-item.brand-as-image.brand-10mil {
+    transform: translateY(-14px) !important;
+  }
+  .brands-grid > .brand-item.brand-as-image.brand-premios {
+    transform: translateY(-24px) !important;
+  }
+  .brands-grid > .brand-item.brand-as-image.brand-tupperware {
+    transform: translateY(0) !important;
+  }
+  .brands-grid > .brand-item.brand-as-image.brand-caneca {
+    transform: translateY(6px) !important;
+  }
+}
+
+
+/* =========================================================
+   AJUSTE DE PROPORÇÃO DO HEADER / HERO
+   ========================================================= */
+
+/* 1. Reduz altura e padding do header hero */
+.hero-section,
+.header-hero,
+.block-section-hero {
+  background-size: cover !important;
+  background-position: center top !important;
+  background-repeat: no-repeat !important;
+  padding-top: 40px !important;   /* antes devia estar 80px+ */
+  padding-bottom: 0 !important;
+  min-height: 480px !important;   /* altura ideal do protótipo */
+  display: flex;
+  align-items: flex-end;          /* faz o conteúdo grudar na base */
+  justify-content: center;
+  overflow: visible;
+}
+
+/* 2. Caso o hero.png esteja dentro de uma <img> */
+.hero-section img.hero-bg,
+.header-hero img.hero-bg {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin-top: -40px !important;   /* sobe o fundo em relação à navbar */
+}
+
+/* 3. Corrige o posicionamento do conteúdo (personagem + título) */
+.hero-content,
+.hero-text,
+.block-section-hero .text-overlay {
+  margin-top: -50px !important;   /* sobe tudo um pouco */
+  transform: translateY(-10px);   /* microajuste suave */
+}
+
+/* 4. Navbar intacta */
+header.navbar,
+.navbar {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* 5. Responsividade: evita cortes em telas pequenas */
+@media (max-width: 768px) {
+  .hero-section,
+  .header-hero,
+  .block-section-hero {
+    padding-top: 20px !important;
+    min-height: 420px !important;
+  }
+
+  .hero-content,
+  .hero-text,
+  .block-section-hero .text-overlay {
+    margin-top: -30px !important;
+    transform: translateY(-5px);
+  }
+}
+
+
+/* ==========================================
+   HEADER / HERO – reduzir o vão com a navbar
+   ========================================== */
+
+/* Garante que a navbar fique por cima e sem empurrar nada */
+header.navbar, .navbar {
+  position: relative;
+  z-index: 10;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Container do hero (usei vários seletores-alvo pra cobrir tua estrutura) */
+.hero-section,
+.header-hero,
+.block-section-hero {
+  background-size: cover !important;
+  background-position: center top !important;
+  background-repeat: no-repeat !important;
+
+  /* menos “respiro” no topo */
+  padding-top: clamp(6px, 1.2vw, 14px) !important;
+
+  /* altura um pouco menor pra aproximar a composição */
+  min-height: clamp(420px, 48vw, 540px) !important;
+
+  display: flex;
+  align-items: flex-end;      /* conteúdo desce pro rodapé do hero */
+  justify-content: center;
+  overflow: visible;
+}
+
+/* Se o fundo do hero é uma <img> */
+.hero-section img.hero-bg,
+.header-hero img.hero-bg,
+.block-section-hero img.hero-bg {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  /* puxa a arte de fundo discretamente pra cima */
+  margin-top: calc(-1 * clamp(10px, 2vw, 28px)) !important;
+}
+
+/* Bloco do conteúdo (menina + airfryer + headline) — sobe de leve */
+.hero-content,
+.hero-text,
+.block-section-hero .text-overlay,
+.block-section-hero .hero-inner {
+  margin-top: 0 !important;
+  transform: translateY(calc(-1 * clamp(22px, 4.8vw, 76px))) !important;
+  will-change: transform;
+}
+
+/* Evita que a seção seguinte “quebre” o encaixe */
+.section-after-hero,
+.brands,
+#premios {
+  margin-top: 0 !important;
+}
+
+/* Mobile: mantém próximo, mas com respiro pra não cortar nada */
+@media (max-width: 768px) {
+  .hero-section,
+  .header-hero,
+  .block-section-hero {
+    padding-top: clamp(4px, 1.5vw, 10px) !important;
+    min-height: clamp(380px, 58vw, 460px) !important;
+  }
+  .hero-section img.hero-bg,
+  .header-hero img.hero-bg,
+  .block-section-hero img.hero-bg {
+    margin-top: calc(-1 * clamp(6px, 1.8vw, 16px)) !important;
+  }
+  .hero-content,
+  .hero-text,
+  .block-section-hero .text-overlay,
+  .block-section-hero .hero-inner {
+    transform: translateY(calc(-1 * clamp(14px, 3.6vw, 40px))) !important;
+  }
+}
+
+
+/* === HOTFIX HEADER/HERO — reduzir vão entre navbar e fundo === */
+.hero{
+  /* altura menor → menos “amarelo” acima da arte */
+  min-height: clamp(360px, 44vw, 520px) !important;
+
+  /* puxa o fundo levemente pra cima */
+  background-position: center calc(-1 * clamp(14px, 3vw, 64px)) !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}
+
+/* telas largas: dá mais uma puxadinha */
+@media (min-width: 1200px){
+  .hero{
+    min-height: clamp(340px, 42vw, 500px) !important;
+    background-position: center calc(-1 * clamp(24px, 4vw, 88px)) !important;
+  }
+}
+
+/* tablet: mantém próximo mas seguro */
+@media (max-width: 1024px){
+  .hero{
+    min-height: clamp(360px, 50vw, 520px) !important;
+    background-position: center calc(-1 * clamp(10px, 2.2vw, 28px)) !important;
+  }
+}
+
+/* ===============================
+   HEADER — tamanhos consistentes
+   =============================== */
+
+/* Altura padrão do header (desktop) */
+:root { --header-h: 72px; }
+
+/* Compacta levemente o header em telas menores */
+@media (max-width: 1024px){
+  :root { --header-h: 68px; }
+  .logo-img{ height: 50px; } /* já existe .logo-img no CSS */
+}
+
+@media (max-width: 640px){
+  :root { --header-h: 60px; }
+  .header .container{ gap: .5rem; }
+  .logo-img{ height: 44px; }
+}
+
+/* Garante que o body compense a altura real do header em todas */
+body{ padding-top: var(--header-h) !important; }
+
+/* A estrutura do header e container já está no arquivo */
+
+/* ====== Menu mobile: sem JS (checkbox hack) ====== */
+
+/* Esconde o checkbox de controle */
+#nav-toggle{ position: absolute; left: -9999px; }
+
+/* Mostra o botão hambúrguer no mobile (já existe a classe) */
+@media (max-width: 920px){
+  .menu-toggle{ display:flex; } /* redundante, mas garante */
+}
+
+/* Abre a navegação quando o checkbox está marcado */
+@media (max-width: 920px){
+  .nav:has(#nav-toggle:checked) .nav-list{
+    transform: translateY(0); /* tua lista começa “fechada” com translateY */
+  }
+
+  /* Links mais legíveis e sem quebrar linha demais */
+  .nav .nav-list{
+    gap: 8px;
+  }
+  .nav .nav-list li a{
+    font-size: 1rem;
+    padding: .9rem 0;
+  }
+}
+
+
+/* === NAVBAR MOBILE — força visibilidade correta === */
+@media (max-width: 920px){
+  /* o botão hambúrguer precisa aparecer SEMPRE no mobile */
+  .menu-toggle{ display:flex !important; }
+
+  /* não esconda o <nav>; deixe vivo pro JS controlar a lista */
+  .nav{ display:block !important; }
+
+  /* o dropdown precisa ocupar toda a largura, alinhado sob o header fixo */
+  .nav .nav-list{
+    position: fixed !important;
+    top: calc(var(--header-h) + env(safe-area-inset-top, 0px)) !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100vw !important;
+    background: rgba(255,255,255,.98);
+    -webkit-backdrop-filter: blur(8px) saturate(160%);
+    backdrop-filter: blur(8px) saturate(160%);
+    box-shadow: 0 10px 24px rgba(0,0,0,.14);
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    transform: translateY(-120%);            /* fechado por padrão */
+    transition: transform .28s ease;
+    z-index: 3500;
+  }
+  /* quando o JS adicionar .active, abre */
+  .nav .nav-list.active{ transform: translateY(0) !important; }
+
+  /* links confortáveis pro toque */
+  .nav .nav-list li a{
+    display:block; padding: 1rem 1.25rem; font-weight:700;
+  }
+}
+
+
+/* === HERO MOBILE — mais fundo amarelo e faixa azul mais baixa === */
+@media (max-width: 480px){
+  /* altura da faixa azul consistente */
+  :root { --hero-bar-h: clamp(92px, 18vw, 128px); }
+
+  .hero{
+    /* mais área amarela → a faixa azul fica mais embaixo na página */
+    min-height: 560px !important;
+    background-position: center 20% !important;
+    padding-bottom: var(--hero-bar-h) !important;
+  }
+
+  /* arte menos “colada” na barra azul */
+  .hero > .hero-art{
+    transform: translateX(-50%) translateY(6px) !important; /* era bem maior */
+    max-width: 500px; /* segurança pra não estourar em 390px */
+  }
+
+  /* mantém data/certificado proporcionais quando empilhados */
+  .hero-data, .hero-certificado{
+    width: 66% !important;
+    max-width: 240px !important;
+    margin: 6px auto !important;
+  }
+}
+
+/* breakpoint coringa (até ~768) mantendo a intenção do protótipo */
+@media (min-width: 481px) and (max-width: 768px){
+  :root { --hero-bar-h: clamp(90px, 16vw, 126px); }
+  .hero{
+    min-height: 520px !important;
+    background-position: center 22% !important;
+    padding-bottom: var(--hero-bar-h) !important;
+  }
+  .hero > .hero-art{
+    transform: translateX(-50%) translateY(10px) !important;
+  }
+}
+
+/* =========================================================
+   MOBILE FIX: Navbar (hamburger), Hero centralizado e
+   barra azul com respiro – COLAR NO FINAL DO style.css
+   ========================================================= */
+@media (max-width: 480px) {
+  /* ===== NAVBAR ===== */
+  /* contêiner da navbar ocupa a largura toda e alinha itens */
+  .navbar, header .navbar, .site-header .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-inline: 14px; /* dá um ar nas laterais */
+  }
+
+  /* logo à esquerda com largura segura */
+  .navbar .brand, .navbar .logo, header .logo {
+    max-width: 62%;
+    display: inline-block;
+  }
+
+  /* botão hamburguer visível à direita */
+  .navbar .menu-toggle, .nav-toggle, .hamburger, .navbar .hamburger {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    margin-left: auto;
+    cursor: pointer;
+  }
+
+  /* links principais somem no mobile; aparecem ao abrir */
+  .navbar .nav-links, nav .nav-links, .navbar ul, nav ul {
+    display: none !important;
+  }
+  /* quando a navbar recebe .is-open (toggle via JS), mostra o menu empilhado */
+  .navbar.is-open .nav-links, nav.is-open .nav-links, .menu.is-open {
+    display: flex !important;
+    flex-direction: column;
+    gap: 12px;
+    background: #fff;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 100%;
+    padding: 12px 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.12);
+  }
+
+  /* ===== HERO / HEADER ===== */
+  /* variáveis de espaçamento no mobile */
+  .hero, #hero, .header-hero, .banner-hero {
+    --hero-gap: 18px;      /* respiro entre navbar e o conteúdo do hero */
+    --blue-shift: 26px;    /* quanto a barra azul desce */
+    text-align: center;    /* fallback para centrar tudo */
+  }
+
+  /* dá o respiro “anti-colo-na-navbar” */
+  .hero, #hero, .header-hero, .banner-hero {
+    padding-top: calc(var(--hero-gap) + 4px);
+  }
+
+  /* garante que a figura principal fique perfeitamente centralizada */
+  .hero .hero-art,
+  .hero .art,
+  .hero .woman,
+  .hero figure,
+  .header-hero .hero-art,
+  #hero .hero-art {
+    display: block;
+    margin-inline: auto;
+    transform: translateX(0) !important; /* neutraliza qualquer empurrão à esquerda */
+  }
+
+  /* qualquer elemento do HERO que tenha inline transform com translateX, zera */
+  .hero [style*="translateX"] {
+    transform: translateX(0) !important;
+  }
+
+  /* imagens do hero sempre fluídas */
+  .hero img,
+  #hero img,
+  .header-hero img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* “selos/badges” que ficam acima da cabeça – dá um respiro para não colar na navbar */
+  .hero .badge,
+  .hero .sticker,
+  .hero .top-badges,
+  .header-hero .badge {
+    margin-top: var(--hero-gap);
+  }
+
+  /* ===== BARRA AZUL ===== */
+  .hero .blue-band,
+  .hero .blue,
+  .header-hero .blue-strip,
+  #hero .blue-strip {
+    margin-top: var(--blue-shift) !important; /* desce a barra azul */
+  }
+}
+
+
+
+/* === MOBILE-ONLY HOTFIX (não afeta desktop) ========================== */
+@media (max-width: 768px) {
+  /* 1) Nunca ter scroll lateral no mobile */
+  html, body { overflow-x: hidden !important; }
+  body { width: 100%; }
+
+  /* 2) Header: container compacto e hambúrguer posicionado corretamente */
+  .header .container { padding: 0 14px !important; position: relative; }
+  .menu-toggle{
+    display: inline-flex !important;
+    position: absolute;
+    right: 12px;               /* encosta no canto sem sair da tela */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px; height: 30px;
+    margin: 0 !important;
+  }
+
+  /* 3) O <nav> nunca some nem cria largura extra */
+  .nav{ display:block !important; overflow: visible; }
+  .nav-list{
+    position: fixed !important;
+    top: var(--header-h, 60px) !important;
+    left: 0 !important; right: 0 !important;
+    width: 100vw !important;
+    margin: 0 !important;
+    transform: translateY(-120%);          /* fechado por padrão */
+  }
+  .nav-list.active{ transform: translateY(0) !important; }
+
+  /* 4) Logo nunca estoura a largura; evita empurrar layout pra direita */
+  .logo, .logo-img, .navbar .brand, .navbar .logo{
+    max-width: 62% !important;
+    height: auto;
+  }
+  .logo-img{ max-width: 100%; height: 44px !important; }
+
+  /* 5) Hero/header: centraliza arte e dá respiro dos selos à navbar */
+  .hero, #hero, .header-hero, .banner-hero{
+    text-align: center;
+    padding-top: 10px !important;           /* ↓ fundo do header */
+    min-height: clamp(380px, 58vw, 480px) !important;  /* ↓ altura */
+    background-position: center top !important;
+  }
+  .hero .hero-art, .header-hero .hero-art, .hero figure, .hero img.hero-art{
+    display: block; margin: 0 auto; transform: none !important; max-width: 92%;
+  }
+  .hero .badge, .header-hero .badge, .hero .top-badges{
+    margin-top: 10px !important;            /* afasta da navbar */
+  }
+
+  /* 6) Barra azul não sobe demais */
+  .hero::after{ height: clamp(84px, 15vw, 120px) !important; }
+
+  /* 7) Segurança: qualquer imagem no topo não passa de 100% */
+  header img, .hero img, .header-hero img{ max-width: 100% !important; height: auto !important; }
+}
+
+/* Extra: telas muito estreitas (390px ~ “Mabel”) */
+@media (max-width: 430px){
+  :root{ --header-h: 58px; }
+  .logo-img{ height: 40px !important; }
+  .menu-toggle{ right: 10px; }
+}
+
+/* === Ajuste final MOBILE: altura do header + logo proporcional === */
+@media (max-width: 768px) {
+  /* aumenta levemente a área de fundo do header */
+  .hero,
+  #hero,
+  .header-hero,
+  .banner-hero {
+    min-height: clamp(440px, 65vw, 500px) !important; /* +altura */
+    padding-top: 16px !important;
+    padding-bottom: 10px !important;
+    background-size: cover !important;
+    background-position: center top !important;
+  }
+
+  /* garante que o conteúdo continue centralizado visualmente */
+  .hero img,
+  .header-hero img,
+  .banner-hero img {
+    max-width: 95%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  /* desamassa o logo da navbar e mantém proporção */
+  .logo,
+  .logo img,
+  .logo-img,
+  .navbar .logo img {
+    height: auto !important;
+    max-height: 52px !important;
+    width: auto !important;
+    max-width: 72% !important;
+    object-fit: contain;
+  }
+
+  /* reposiciona levemente o menu hamburguer */
+  .menu-toggle {
+    top: 50%;
+    transform: translateY(-50%);
+    right: 14px;
+  }
+}
+
+/* para telas bem pequenas (iPhone SE / Galaxy S mini) */
+@media (max-width: 430px) {
+  .logo img {
+    max-height: 48px !important;
+    max-width: 78% !important;
+  }
+  .hero,
+  #hero,
+  .header-hero,
+  .banner-hero {
+    min-height: 480px !important;
+  }
+}
+
+/* ====== MOBILE ONLY ====== */
+@media (max-width: 768px) {
+
+  /* botão hamburguer fica clicável por cima de tudo */
+  .menu-toggle {
+    position: absolute;
+    top: 50%;
+    right: 14px;
+    transform: translateY(-50%);
+    z-index: 10010; /* acima do conteúdo do header */
+    cursor: pointer;
+  }
+
+  /* nav container */
+  .nav {
+    position: relative;
+    --nav-h: 64px; /* ajuste fino se seu header for um pouco maior/menor */
+  }
+
+  /* nav-list “fechada” por padrão no mobile */
+  .nav-list {
+    position: fixed;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    display: none;             /* abre via .is-open */
+    flex-direction: column;
+    gap: 14px;
+    padding: 16px 20px;
+    background: #fff;
+    z-index: 10000;
+    max-height: calc(100dvh - var(--nav-h));
+    overflow: auto;
+    box-shadow: 0 8px 24px rgba(0,0,0,.12);
+  }
+
+  /* quando a nav recebe .is-open via JS */
+  .nav.is-open .nav-list {
+    display: flex;
+  }
+
+  /* evita scroll do body quando o menu está aberto */
+  body.nav-open {
+    overflow: hidden;
+  }
+
+  /* links do menu */
+  .nav-list a {
+    display: block;
+    padding: 10px 2px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  /* —— hero: empurra o conjunto de imagens um pouco pra baixo —— */
+  .hero img,
+  #hero img,
+  .header-hero img,
+  .banner-hero img {
+    /* desce o “hero-art” para invadir mais a barra azul */
+    transform: translateY(clamp(12px, 3.8vw, 28px));
+  }
+}
+
+
+/* === MOBILE TUNING (hero invade mais a barra azul) === */
+@media (max-width: 768px) {
+  /* tentei cobrir os seletores mais comuns do seu header sem afetar desktop */
+  .header .hero img,
+  .header .hero-art img,
+  .header .hero-art,
+  .header .hero-stack,
+  .hero img {
+    /* desce o conjunto do hero */
+    transform: translateY(clamp(28px, 8vw, 90px));
+    will-change: transform;
+  }
+}
+
+/* === FINAL OVERRIDES — HERO INVASION MOBILE === */
+
+/* 0) Neutraliza "empurrões" genéricos de imagens no hero */
+@media (max-width: 768px){
+  .hero img { transform: none !important; }               /* zera regra ampla */
+  .header .hero img { transform: none !important; }       /* zera a outra ampla */
+}
+
+/* 1) Variáveis de controle (ajuste fino se quiser) */
+:root{
+  --hero-invade-mobile: clamp(46px, 11vw, 72px);  /* quanto o hero.png invade a barra azul */
+  --hero-blue-height: clamp(100px, 18vw, 140px);  /* altura da faixa azul no mobile */
+}
+
+/* 2) Mobile: aumenta a faixa azul e desce a arte principal */
+@media (max-width: 768px){
+  .hero::after{
+    height: var(--hero-blue-height) !important;
+  }
+  .hero > .hero-art{
+    position: relative !important;
+    left: 50% !important;
+    transform: translateX(-50%) translateY(var(--hero-invade-mobile)) !important;
+    z-index: 1260;
+  }
+}
+
+/* 3) Telas pequenas (ex.: 390px) — invade um pouco mais */
+@media (max-width: 430px){
+  :root{ --hero-invade-mobile: clamp(56px, 13vw, 86px); }
+}
+
+/* =========================
+   MOBILE – AJUSTE FINO HEADER
+   ========================= */
+@media (max-width: 768px) {
+
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Hero base */
+  .hero {
+    position: relative;
+    overflow: visible;
+  }
+
+  /* Faixa azul */
+  .hero::after {
+    height: clamp(135px, 21vw, 175px) !important;
+  }
+
+  /* Hero art (imagem da mulher) — sobe um pouco menos */
+  .hero img[src*="hero"] {
+    position: relative !important;
+    left: 50% !important;
+    transform: translateX(-50%) translateY(clamp(105px, 17vw, 130px)) !important;
+    z-index: 2;
+    pointer-events: none;
+    user-select: none;
+    display: block;
+  }
+
+  /* Badges superiores (campanha válida e certificado) */
+  .hero img[src*="campanha"],
+  .hero img[src*="certificado"] {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: clamp(14px, 2.5vw, 20px) !important;
+  }
+
+  /* Logo na navbar */
+  .header .logo img,
+  .nav .logo img {
+    height: clamp(20px, 3.8vw, 25px);
+    width: auto;
+  }
+
+  /* Menu hamburguer */
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-list {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 20px;
+    background: #fff;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    z-index: 2000;
+  }
+
+  .nav-list.active {
+    display: flex;
+  }
+}
+
+/* Ajuste fino extra para telas pequenas */
+@media (max-width: 400px) {
+  .hero img[src*="hero"] {
+    transform: translateX(-50%) translateY(clamp(115px, 19vw, 140px)) !important;
+  }
+}
+
+/* =========================
+   MOBILE – AJUSTE FINO HEADER (vFinal+)
+   ========================= */
+@media (max-width: 768px) {
+
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .hero {
+    position: relative;
+    overflow: visible;
+  }
+
+  /* Faixa azul */
+  .hero::after {
+    height: clamp(135px, 21vw, 175px) !important;
+  }
+
+  /* Hero art (mulher + produtos) — sobe mais 15px */
+  .hero img[src*="hero"] {
+    position: relative !important;
+    left: 50% !important;
+    transform: translateX(-50%) translateY(clamp(35px, 7vw, 60px)) !important;
+    z-index: 2;
+    pointer-events: none;
+    user-select: none;
+    display: block;
+  }
+
+  /* Badges superiores (campanha válida e certificado) */
+  .hero img[src*="campanha"],
+  .hero img[src*="certificado"] {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: clamp(14px, 2.5vw, 20px) !important;
+  }
+
+  /* Logo da navbar */
+  .header .logo img,
+  .nav .logo img {
+    height: clamp(20px, 3.8vw, 25px);
+    width: auto;
+  }
+
+  /* Menu hamburguer */
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-list {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 20px;
+    background: #fff;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    z-index: 2000;
+  }
+
+  .nav-list.active {
+    display: flex;
+  }
+}
+
+/* Ajuste fino para telas muito pequenas */
+@media (max-width: 400px) {
+  .hero img[src*="hero"] {
+    transform: translateX(-50%) translateY(clamp(40px, 8vw, 65px)) !important;
+  }
+}
+
+/* =========================
+   MOBILE – CENTRALIZAÇÃO + AJUSTES FINOS DO HEADER
+   ========================= */
+@media (max-width: 768px) {
+
+  /* Leve nudge para a ESQUERDA e subir um pouco o hero.png */
+  .hero img[src*="hero"]{
+    position: relative !important;
+    left: 50% !important;
+    /* nudge X ~2px para a esquerda e ~6–8px MAIS para cima (menor translateY) */
+    transform: translateX(calc(-50% - 2px)) translateY(clamp(28px, 6.2vw, 52px)) !important;
+    display: block;
+    margin: 0 auto;
+    z-index: 2;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* Diminui um pouco os elementos de topo (campanha válida / certificado)
+     e dá um respiro da navbar */
+  .hero img[src*="campanha"],
+  .hero img[src*="certificado"]{
+    display:block;
+    margin-inline:auto;
+    /* ~6–8% menor, mantendo responsivo */
+    width: clamp(290px, 86vw, 340px);
+    margin-top: clamp(12px, 2.3vw, 18px) !important;
+  }
+}
+
+/* =========================
+   MOBILE – AJUSTE HERO FINAL
+   ========================= */
+@media (max-width: 768px) {
+
+  /* Hero principal (mulher + produtos) */
+  .hero img[src*="hero"] {
+    position: relative !important;
+    left: 50% !important;
+    /* Mais para cima (~20px) e um leve empurrão pra esquerda (~6px) */
+    transform: translateX(calc(-50% - 6px)) translateY(clamp(22px, 5.5vw, 46px)) !important;
+    width: clamp(310px, 95vw, 390px) !important; /* aumenta ~6% */
+    max-width: none !important;
+    display: block;
+    margin: 0 auto;
+    z-index: 2;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* Imagens de topo (campanha e certificado) um pouco menores */
+  .hero img[src*="campanha"],
+  .hero img[src*="certificado"] {
+    width: clamp(275px, 82vw, 325px);
+    margin-top: clamp(10px, 2vw, 16px) !important;
+    margin-inline: auto;
+    display: block;
+  }
+}
+
+/* =============== PATCH MOBILE (somente <= 768px) =============== */
+@media (max-width: 768px) {
+
+  /* Garante âncora de posicionamento do sheet do menu */
+  .header .container { position: relative; }
+
+  /* Sheet do menu: escondido por padrão no mobile */
+  .nav-list {
+    position: absolute;
+    top: calc(100% + 6px); /* logo abaixo da navbar */
+    left: 0;
+    right: 0;
+    margin: 0 var(--container-side);
+    width: auto;
+    display: none;              /* mobile: escondido até .active */
+    flex-direction: column;
+    gap: 6px;
+    background: var(--header-sheet, #fff);
+    border-radius: 14px;
+    padding: 12px;
+    box-shadow: 0 10px 24px rgba(0,0,0,.18);
+    z-index: 9999;              /* acima do conteúdo */
+  }
+
+  /* Ao abrir, vira coluna visível */
+  .nav-list.active { display: flex; }
+
+  .nav-list li a {
+    display: block;
+    padding: 12px 10px;
+    font-size: 16px;
+    color: var(--blue-700, #1e2ea6);
+  }
+
+  /* --------- Hero: micro-ajustes --------- */
+
+  /* intrusão menor na barra azul (sobe um pouco a arte) */
+  .hero {
+    --hero-art-overlap: clamp(10px, 1.6vw, 22px);
+  }
+
+  /* desce a linha superior um tiquinho pra não “colar” na navbar */
+  .hero__top {
+    gap: clamp(10px, 2vw, 14px);
+  }
+
+  /* leve deslocamento à esquerda e aumento sutil do hero.png */
+  .hero-art {
+    transform: translateX(calc(-50% - 4px));
+    width: clamp(330px, 92vw, 520px); /* + ~2% de tamanho */
+  }
+}
+
+
+/* ==========================================
+   PATCH MOBILE – CORRIGE DROPDOWN HAMBURGUER
+   ========================================== */
+@media (max-width: 768px) {
+
+  /* esconde o menu mobile por padrão */
+  .nav-list {
+    display: none !important;
+    position: absolute;
+    top: calc(100% + 10px); /* logo abaixo da navbar */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    background: #fff;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 0;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+  }
+
+  /* exibe o menu quando ativo */
+  .nav-list.active {
+    display: flex !important;
+  }
+
+  /* links do menu mobile */
+  .nav-list li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-list li a {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    color: #1636ff;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  /* bloqueia o scroll quando o menu estiver aberto */
+  body.nav-open {
+    overflow: hidden;
+  }
+
+  /* garante que o botão hamburguer fique sempre clicável acima */
+  .menu-toggle {
+    position: relative;
+    z-index: 10000;
+  }
+}
+
+
+/* ==========================================
+   MOBILE – ALINHAMENTO LOGO x BOTÃO HAMBÚRGUER
+   (não afeta o desktop)
+   ========================================== */
+@media (max-width: 768px) {
+  /* altura e referência para posicionamento */
+  .header {
+    position: sticky;           /* já deve estar, mas reforçamos */
+    top: 0;
+    height: 56px;               /* altura da barra */
+  }
+
+  /* garante que a área da logo fique centrada verticalmente */
+  .header .logo,
+  .header .brand,
+  .header .brand-logo {
+    display: flex;
+    align-items: center;
+    min-height: 56px;           /* casa com a barra */
+    padding-left: 16px;         /* respiro à esquerda */
+  }
+
+  /* evita “amassar” a logo no mobile */
+  .header .logo img,
+  .header .brand img,
+  .header .brand-logo img {
+    height: 26px;               /* ajuste fino da logo */
+    width: auto;
+  }
+
+  /* botão hamburguer sempre alinhado ao centro vertical da barra,
+     e “encostado” à direita com respiro */
+  .menu-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%); /* centraliza verticalmente */
+    z-index: 10001;              /* acima do dropdown */
+  }
+
+  /* como a .nav-list abre logo abaixo da barra, use a mesma altura */
+  .nav-list {
+    top: calc(56px + 10px);      /* 56 da barra + 10 de respiro */
+  }
+}
+
+
+/* ==========================================
+   MOBILE – ALTURA DA NAVBAR + ALINHAMENTOS
+   (não afeta o desktop)
+   ========================================== */
+@media (max-width: 768px) {
+  :root {
+    /* ajuste aqui se quiser maior/menor (64px costuma bater com o visual anterior) */
+    --header-h: 64px;
+    --header-pad-x: 16px;
+    --logo-h: 28px; /* altura da imagem da logo dentro da barra */
+  }
+
+  .header {
+    height: var(--header-h);
+  }
+
+  /* Logo centralizada verticalmente e sem “amassar” */
+  .header .logo,
+  .header .brand,
+  .header .brand-logo {
+    display: flex;
+    align-items: center;
+    min-height: var(--header-h);
+    padding-left: var(--header-pad-x);
+  }
+  .header .logo img,
+  .header .brand img,
+  .header .brand-logo img {
+    height: var(--logo-h);
+    width: auto;
+  }
+
+  /* Hambúrguer alinhado ao meio da barra */
+  .menu-toggle {
+    position: absolute;
+    right: var(--header-pad-x);
+    top: calc(var(--header-h) / 2);
+    transform: translateY(-50%);
+    z-index: 10001;
+  }
+
+  /* Dropdown começa logo abaixo da barra */
+  .nav-list {
+    top: calc(var(--header-h) + 10px);
+  }
+}
+
+
+/* ==========================================
+   PATCH – CORRIGE TAMANHO E SIMETRIA DO "X"
+   ========================================== */
+.menu-toggle {
+  position: relative;
+  width: 28px;
+  height: 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-toggle span {
+  position: absolute;
+  width: 24px;
+  height: 2.4px;
+  background: #2b41ff; /* cor do traço */
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center center; /* garante rotação simétrica */
+}
+
+/* espaçamento padrão entre as linhas */
+.menu-toggle span:nth-child(1) {
+  top: 7px;
+}
+.menu-toggle span:nth-child(2) {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.menu-toggle span:nth-child(3) {
+  bottom: 7px;
+}
+
+/* estado ativo ("X" aberto) */
+.menu-toggle.open span:nth-child(1) {
+  transform: rotate(45deg);
+  top: 10px;
+}
+
+.menu-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.open span:nth-child(3) {
+  transform: rotate(-45deg);
+  bottom: 10px;
+}
+
+/* ================================
+   MOBILE NAV: alinhamento & ícone
+   ================================ */
+@media (max-width: 768px) {
+  /* Garante uma barra com altura estável e conteúdo centralizado */
+  .header {
+    height: 64px;              /* mantenha o mesmo valor que estava bom pra você */
+  }
+  .header .container,
+  .header .header-inner,
+  .header .nav-bar,
+  .header .nav {               /* escolha o wrapper certo que você usa para o topo */
+    display: flex;
+    align-items: center;       /* ALINHA logo e hamburguer na MESMA ALTURA */
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 16px;           /* ajuste fino lateral, se necessário */
+  }
+
+  /* Logo com altura controlada (sem amassar) */
+  .header .brand img,
+  .header .logo img,
+  .brand img {
+    max-height: 28px;          /* ajuste se o seu logo pedir 26–30px */
+    height: 28px;
+    width: auto;
+    display: block;
+  }
+
+  /* Tira posicionamento absoluto que estava “jogando” o ícone pra cima/baixo */
+  .menu-toggle {
+    position: static !important;    /* entra no fluxo do flex */
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 22px;
+    cursor: pointer;
+    line-height: 0;
+    z-index: 4;                      /* acima do conteúdo do header */
+  }
+
+  /* Ícone hamburguer – simétrico e nítido */
+  .menu-toggle span {
+    position: absolute;
+    width: 22px;                     /* mesmo comprimento nas duas hastes do X */
+    height: 2.2px;                   /* espessura igual */
+    background: #2b41ff;
+    border-radius: 2px;
+    transform-origin: center center; /* evita “um lado maior que o outro” */
+    transition: transform .28s ease, opacity .2s ease, top .28s ease, bottom .28s ease;
+  }
+  .menu-toggle span:nth-child(1) { top: 6px; }
+  .menu-toggle span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+  .menu-toggle span:nth-child(3) { bottom: 6px; }
+
+  /* Estado aberto → “X” perfeitamente centrado e proporcional */
+  .menu-toggle.open span:nth-child(1) {
+    top: 10px;
+    transform: rotate(45deg);
+  }
+  .menu-toggle.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle.open span:nth-child(3) {
+    bottom: 10px;
+    transform: rotate(-45deg);
+  }
+}
+
+/* =========================================
+   MOBILE – Alinhamento logo × menu hambúrguer
+   ========================================= */
+@media (max-width: 768px) {
+  /* Alturas base para a barra e o logo (ajuste fino se quiser) */
+  :root{
+    --nav-h: 64px;     /* altura da barra */
+    --logo-h: 28px;    /* altura visual do logo */
+  }
+
+  /* A barra precisa centralizar tudo na vertical */
+  .header{
+    height: var(--nav-h);
+  }
+  /* Use o wrapper real do seu topo: container / header-inner / nav-row */
+  .header .container,
+  .header .header-inner,
+  .header .nav,
+  .header .nav-row{
+    display:flex;
+    align-items:center;          /* centraliza logo e botão na MESMA linha */
+    justify-content:space-between;
+    height:100%;
+    padding:0 16px;              /* laterais consistentes */
+  }
+
+  /* Logo sem “amassar” e sem padding extra */
+  .header .brand,
+  .brand{ display:flex; align-items:center; }
+  .header .brand img,
+  .brand img{
+    height: var(--logo-h);
+    max-height: var(--logo-h);
+    width:auto;
+    display:block;
+  }
+
+  /* Botão hambúrguer entra no fluxo (nada de absolute) e herda a altura da barra */
+  .menu-toggle{
+    position: static !important;     /* impede deslocamentos */
+    display:inline-flex;
+    align-items:center;               /* centra verticalmente dentro da barra */
+    justify-content:center;
+    width:34px;
+    height: var(--nav-h);             /* faz o botão ter a mesma altura do header */
+    margin-left:auto;
+    cursor:pointer;
+    line-height:0;
+    /* micro-ajuste óptico: sobe 1px se estiver “um tiquinho” abaixo do logo */
+    transform: translateY(-1px);
+  }
+
+  /* Ícone – três barras simétricas e centradas */
+  .menu-toggle span{
+    position:relative;
+    display:block;
+    width:22px;
+    height:2.2px;
+    background:#2b41ff;
+    border-radius:2px;
+    transform-origin:center;
+    transition:transform .28s ease, opacity .2s ease;
+  }
+  .menu-toggle span + span{ margin-top:5px; }  /* espaçamento igual entre as barras */
+
+  /* Estado aberto → “X” perfeito */
+  .menu-toggle.open span:nth-child(1){
+    transform: translateY(7px) rotate(45deg);
+  }
+  .menu-toggle.open span:nth-child(2){
+    opacity:0;
+  }
+  .menu-toggle.open span:nth-child(3){
+    transform: translateY(-7px) rotate(-45deg);
+  }
+}
+
+/* =========================
+   MOBILE – NAV & HAMBURGER
+   ========================= */
+@media (max-width: 768px) {
+
+  /* Altura/padding padrão da barra no mobile (ajuste fino se precisar) */
+  .header {
+    --header-mobile-h: 64px;        /* altura útil da barra */
+    height: var(--header-mobile-h);
+  }
+
+  /* O wrapper do logo + ícone (caso exista) continua com a altura exata */
+  .header .container,
+  .header .nav,
+  .header .brand {
+    height: var(--header-mobile-h);
+  }
+
+  /* ----- Ícone hamburguer: caixa clicável e alinhamento ----- */
+  .menu-toggle {
+    /* centraliza verticalmente em relação à barra */
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    /* área de toque confortável */
+    width: 40px;
+    height: 40px;
+
+    display: grid;
+    place-items: center;
+
+    /* evita qualquer corte do X no topo */
+    overflow: visible;
+    z-index: 1100;
+  }
+
+  /* Desenha as 3 linhas idênticas */
+  .menu-toggle span,
+  .menu-toggle .bar,
+  .menu-toggle .line { /* cobre variações de markup */
+    position: relative;
+    width: 22px;              /* COMPRIMENTO ÚNICO – evita lados diferentes */
+    height: 2.5px;            /* mesma espessura nas 3 linhas */
+    background: #3a5bff;      /* cor do ícone */
+    border-radius: 2px;
+    transition: transform .25s ease, opacity .2s ease, top .25s ease, bottom .25s ease;
+    display: block;
+  }
+
+  /* Se você usa um único <span> com ::before/::after */
+  .menu-toggle span::before,
+  .menu-toggle span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 22px;              /* mesmo comprimento do traço principal */
+    height: 2.5px;
+    background: currentColor;
+    border-radius: 2px;
+    transition: inherit;
+  }
+  .menu-toggle span::before { top: -7px; }
+  .menu-toggle span::after  { bottom: -7px; }
+
+  /* Se a marcação já tiver 3 elementos (.bar/.line), garanta o espaçamento: */
+  .menu-toggle .bar + .bar,
+  .menu-toggle .line + .line {
+    margin-top: 7px;
+  }
+
+  /* ----- Estado ABERTO: vira “X” simétrico, sem cortes ----- */
+  .menu-toggle.open span {
+    background: transparent;             /* barra do meio some */
+  }
+  .menu-toggle.open span::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+  .menu-toggle.open span::after {
+    bottom: 0;
+    transform: rotate(-45deg);
+  }
+
+  /* Caso use 3 elementos em vez de pseudo-elementos, esta alternativa
+     mantém as mesmas proporções do “X”: */
+  .menu-toggle.open .bar:nth-child(1),
+  .menu-toggle.open .line:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+  .menu-toggle.open .bar:nth-child(2),
+  .menu-toggle.open .line:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle.open .bar:nth-child(3),
+  .menu-toggle.open .line:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  /* ----- Dropdown/folha flutuante encostada na navbar ----- */
+  /* Use as classes que o seu dropdown usa quando está ativo.
+     Abaixo cubro dois cenários comuns (.nav-flyout e .nav-list.active). */
+  .nav-flyout,
+  .nav-list.active {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: var(--header-mobile-h) !important;   /* sem folga */
+    margin-top: 0 !important;
+    z-index: 1000;                             /* abaixo do botão (1100) */
+  }
+
+  /* Para evitar qualquer deslocamento visual no topo do “card” do menu */
+  .nav-flyout,
+  .nav-list.active {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+/* === PATCH FINAL – Hambúrguer simétrico + X perfeito (mobile) =================== */
+@media (max-width: 768px) {
+
+  .menu-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1100;
+  }
+
+  /* Traços base */
+  .menu-toggle::before,
+  .menu-toggle::after,
+  .menu-toggle span {
+    content: "";
+    position: absolute;
+    left: 9px;
+    width: 22px;
+    height: 2.5px;
+    background: #2a46ff;
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.25s ease, top 0.25s ease, bottom 0.25s ease;
+  }
+
+  /* estado fechado – espaçamento uniforme */
+  .menu-toggle::before { top: 13px; }   /* linha superior */
+  .menu-toggle span      { top: 19px; } /* linha do meio */
+  .menu-toggle::after  { top: 25px; }   /* linha inferior */
+
+  /* estado aberto – vira o “X” */
+  .menu-toggle.open span {
+    opacity: 0;
+  }
+  .menu-toggle.open::before {
+    top: 19px;
+    transform: rotate(45deg);
+  }
+  .menu-toggle.open::after {
+    top: 19px;
+    transform: rotate(-45deg);
+  }
+}
+
+
+/* === PATCH: Hambúrguer simples (3 linhas) + alinhado ao logo (mobile) === */
+@media (max-width: 768px) {
+
+  /* Botão do menu: centralizado verticalmente na navbar */
+  .header .menu-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 56px;                /* mesma altura da navbar */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 0;
+    z-index: 1100;
+  }
+
+  /* As 3 barras (superior, meio, inferior) — reset total do que havia antes */
+  .header .menu-toggle::before,
+  .header .menu-toggle::after,
+  .header .menu-toggle span {
+    content: "";
+    position: absolute;
+    left: 5px !important;
+    width: 22px !important;
+    height: 2px !important;
+    background: #2a46ff !important;
+    border-radius: 2px;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: transform .22s ease, opacity .2s ease, top .22s ease;
+  }
+
+  /* espaçamento uniforme em relação ao centro da área do botão */
+  .header .menu-toggle span         { top: 50% !important; transform: translateY(-50%) !important; }
+  .header .menu-toggle::before      { top: calc(50% - 7px) !important; }
+  .header .menu-toggle::after       { top: calc(50% + 7px) !important; }
+
+  /* estado aberto: vira “X” preservando proporções */
+  .header .menu-toggle.open span    { opacity: 0 !important; }
+  .header .menu-toggle.open::before { top: 50% !important; transform: translateY(-50%) rotate(45deg) !important; }
+  .header .menu-toggle.open::after  { top: 50% !important; transform: translateY(-50%) rotate(-45deg) !important; }
+}
+
+/* ===========================
+   PATCH — ÍCONE HAMBÚRGUER
+   (3 barras iguais + X simétrico)
+   =========================== */
+
+/* caixa do botão, centralizada e clicável */
+.menu-toggle{
+  width: 44px;                 /* não muda a altura da navbar */
+  height: 44px;
+  display: grid;
+  place-items: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* barra central */
+.menu-toggle .bar{
+  position: relative;
+  width: 22px;                 /* COMPRIMENTO DAS 3 BARRAS */
+  height: 2px;                 /* ESPESSURA IGUAL PARA TODAS */
+  background: #1737ff;         /* azul do layout */
+  border-radius: 2px;
+  transition: opacity .18s ease, transform .24s ease;
+  transform: translateZ(0);    /* evita serrilhado em alguns browsers */
+}
+
+/* barras superior e inferior */
+.menu-toggle .bar::before,
+.menu-toggle .bar::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 22px;                 /* mesmo comprimento da barra central */
+  height: 2px;                 /* mesma espessura */
+  background: #1737ff;
+  border-radius: 2px;
+  transform-origin: center;
+  transition: transform .24s ease;
+}
+
+/* distância vertical entre as barras (total 12px) */
+.menu-toggle .bar::before{ transform: translateY(-6px); }
+.menu-toggle .bar::after { transform: translateY( 6px); }
+
+/* estado “aberto”: X perfeitamente simétrico */
+.menu-toggle.open .bar{ opacity: 0; }                /* some a barra do meio */
+.menu-toggle.open .bar::before{ transform: rotate(45deg); }
+.menu-toggle.open .bar::after { transform: rotate(-45deg); }
+
+/* garante alinhamento vertical com o logo na navbar em telas pequenas */
+@media (max-width: 768px){
+  .header-inner{ align-items: center; }
+  .menu-toggle{ margin-right: 2px; } /* só um ajuste fino */
+}
+
+
+/* ===========================
+   PATCH — ÍCONE HAMBÚRGUER
+   (3 barras iguais + X simétrico)
+   =========================== */
+
+/* caixa do botão, centralizada e clicável */
+.menu-toggle{
+  width: 44px;                 /* não muda a altura da navbar */
+  height: 44px;
+  display: grid;
+  place-items: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* barra central */
+.menu-toggle .bar{
+  position: relative;
+  width: 22px;                 /* COMPRIMENTO DAS 3 BARRAS */
+  height: 2px;                 /* ESPESSURA IGUAL PARA TODAS */
+  background: #1737ff;         /* azul do layout */
+  border-radius: 2px;
+  transition: opacity .18s ease, transform .24s ease;
+  transform: translateZ(0);    /* evita serrilhado em alguns browsers */
+}
+
+/* barras superior e inferior */
+.menu-toggle .bar::before,
+.menu-toggle .bar::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 22px;                 /* mesmo comprimento da barra central */
+  height: 2px;                 /* mesma espessura */
+  background: #1737ff;
+  border-radius: 2px;
+  transform-origin: center;
+  transition: transform .24s ease;
+}
+
+/* distância vertical entre as barras (total 12px) */
+.menu-toggle .bar::before{ transform: translateY(-6px); }
+.menu-toggle .bar::after { transform: translateY( 6px); }
+
+/* estado “aberto”: X perfeitamente simétrico */
+.menu-toggle.open .bar{ opacity: 0; }                /* some a barra do meio */
+.menu-toggle.open .bar::before{ transform: rotate(45deg); }
+.menu-toggle.open .bar::after { transform: rotate(-45deg); }
+
+/* garante alinhamento vertical com o logo na navbar em telas pequenas */
+@media (max-width: 768px){
+  .header-inner{ align-items: center; }
+  .menu-toggle{ margin-right: 2px; } /* só um ajuste fino */
+}
+
+/* ========== HAMBURGUER FIX ==========
+   Normaliza o botão, evita barras duplicadas e
+   garante alinhamento com o logo na navbar (mobile)
+   ---------------------------------------------- */
+
+/* tamanho/posição do botão */
+.header .menu-toggle{
+  position: absolute;
+  right: 16px;                /* encosta na mesma régua do logo */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* zera qualquer estilização antiga de spans internos */
+.header .menu-toggle span{
+  all: unset;
+  display: block;
+}
+
+/* usa APENAS o primeiro span como “core” do ícone */
+.header .menu-toggle span:not(:first-child){
+  display: none !important;
+}
+
+/* desenha as 3 barras com 1 span + pseudo-elements */
+.header .menu-toggle span:first-child,
+.header .menu-toggle span:first-child::before,
+.header .menu-toggle span:first-child::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 24px;                /* largura das barras */
+  height: 2.5px;              /* espessura das barras */
+  background: #3157ff;        /* cor das barras */
+  border-radius: 2px;
+  transition: transform .25s ease, opacity .2s ease, background .2s ease;
+}
+
+/* barra do meio */
+.header .menu-toggle span:first-child{
+  transform: translateY(0);
+}
+
+/* barra superior e inferior */
+.header .menu-toggle span:first-child::before{
+  transform: translateY(-8px);
+}
+.header .menu-toggle span:first-child::after{
+  transform: translateY(8px);
+}
+
+/* estado ABERTO (vira “X”) */
+.header .menu-toggle.open span:first-child{
+  background: transparent;                 /* some a barra do meio */
+}
+.header .menu-toggle.open span:first-child::before{
+  transform: translateY(0) rotate(45deg);
+}
+.header .menu-toggle.open span:first-child::after{
+  transform: translateY(0) rotate(-45deg);
+}
+
+/* garante a mesma altura da navbar de antes (se necessário ajustar) */
+@media (max-width: 768px){
+  .header{
+    height: 56px;                          /* ajuste fino da tua barra */
+  }
+  .header .logo img{
+    max-height: 24px;                       /* evita “amassar” o logo */
+  }
+}
+
+/* ============ HAMBURGUER: RESET + REBUILD (mobile) ============ */
+/* alinhamento do botão na navbar mobile (mesma régua do logo) */
+@media (max-width: 768px){
+  .header .menu-toggle{
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #3157ff;                 /* cor das barras */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* ⚠️ esconde QUALQUER filho que o HTML tenha (spans, i, svg..) 
+     para evitar barras duplicadas vindas de estilos antigos */
+  .header .menu-toggle > *{
+    visibility: hidden !important;
+    display: none !important;
+  }
+
+  /* desenha o hambúrguer com APENAS 2 pseudo-elements */
+  .header .menu-toggle::before,
+  .header .menu-toggle::after{
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    margin: 0 auto;
+    width: 24px;                    /* largura das barras */
+    height: 2.5px;                  /* espessura das barras */
+    background: currentColor;       /* barra do meio */
+    border-radius: 2px;
+    transition: transform .22s ease, box-shadow .18s ease, opacity .18s ease;
+  }
+
+  /* barra do meio + as outras duas via box-shadow (3 linhas no total) */
+  .header .menu-toggle::before{
+    top: 50%;
+    transform: translateY(-50%);
+    /* as “outras” barras: uma 6px acima e outra 6px abaixo */
+    box-shadow: 0 -6px 0 0 currentColor, 0 6px 0 0 currentColor;
+  }
+
+  /* elemento de apoio para formar o “X” na animação */
+  .header .menu-toggle::after{
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;                     /* fica invisível no estado fechado */
+  }
+
+  /* ========== estado ABERTO (vira X) ========== */
+  .header .menu-toggle.open::before{
+    /* tira as barras de cima/baixo e rotaciona para a primeira perna do X */
+    box-shadow: none;
+    transform: translateY(-50%) rotate(45deg);
+  }
+  .header .menu-toggle.open::after{
+    opacity: 1;
+    transform: translateY(-50%) rotate(-45deg); /* segunda perna do X */
+  }
+}
+
+/* ============================================================
+   MOBILE – HAMBÚRGUER LIMPO (3 linhas) + REMOVER LINHA CINZA
+   ============================================================ */
+@media (max-width: 768px){
+
+  /* zera qualquer conteúdo antigo do botão (evita linha extra) */
+  .header .menu-toggle > span,
+  .header .menu-toggle > i,
+  .header .menu-toggle > svg {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* botão alinhado na mesma altura do logo */
+  .header .menu-toggle{
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #3157ff;                /* cor das barras */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* desenha APENAS 3 linhas:
+     - barra do meio em ::before
+     - barras de cima/baixo via box-shadow */
+  .header .menu-toggle::before,
+  .header .menu-toggle::after{
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    margin: 0 auto;
+    width: 24px;
+    height: 2.5px;
+    border-radius: 2px;
+    transition: transform .22s ease, opacity .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+
+  /* estado FECHADO */
+  .header .menu-toggle::before{
+    background: currentColor;               /* barra do meio */
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 -6px 0 0 currentColor,    /* barra de cima */
+                0  6px 0 0 currentColor;    /* barra de baixo */
+  }
+  /* ::after fica completamente invisível (não soma linha) */
+  .header .menu-toggle::after{
+    background: transparent;
+    top: 50%;
+    transform: translateY(-50%) scaleX(0);  /* some de vez */
+    opacity: 0;
+    box-shadow: none;
+  }
+
+  /* estado ABERTO (vira X perfeito e simétrico) */
+  .header .menu-toggle.open::before{
+    box-shadow: none;                        /* remove cima/baixo */
+    transform: translateY(-50%) rotate(45deg);
+  }
+  .header .menu-toggle.open::after{
+    background: currentColor;               /* aparece só no X */
+    opacity: 1;
+    transform: translateY(-50%) rotate(-45deg);
+  }
+
+  /* ===== remove a “barrinha cinza” entre navbar e header ===== */
+  .header{
+    box-shadow: none !important;
+    border-bottom: 0 !important;
+  }
+  .header::after{                           /* se houver algum pseudo com sombra/linha */
+    display: none !important;
+  }
+  /* garante que a próxima seção/hero não crie gap por margem */
+  .header + .hero,
+  .header + section,
+  .header + .hero-wrapper{
+    margin-top: 0 !important;
+    border-top: 0 !important;
+  }
+}
+
+/* ===============================
+   HAMBÚRGUER — FORÇA 3 LINHAS
+   =============================== */
+@media (max-width: 768px) {
+
+  /* 1) Não deixa pseudo-elemento virar “4ª barra” */
+  .header .menu-toggle::before,
+  .header .menu-toggle::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  /* 2) Só os 3 primeiros filhos contam (span, i, b… o que for) */
+  .header .menu-toggle > :not(:nth-child(-n+3)) {
+    display: none !important;
+  }
+
+  /* 3) Botão alinhado com o logo */
+  .header .menu-toggle{
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 22px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* 4) Normaliza as barras (usando os 3 primeiros filhos) */
+  .header .menu-toggle > :nth-child(-n+3) {
+    position: absolute;
+    left: 0; right: 0;
+    margin: 0 auto;
+    width: 24px;
+    height: 2.5px;
+    border-radius: 2px;
+    background: #3157ff;                /* cor das barras */
+    transition: transform .22s ease, opacity .18s ease, width .18s ease;
+  }
+
+  /* top / middle / bottom */
+  .header .menu-toggle > :nth-child(1) { top: 2px; }
+  .header .menu-toggle > :nth-child(2) { top: 50%; transform: translateY(-50%); }
+  .header .menu-toggle > :nth-child(3) { bottom: 2px; }
+
+  /* 5) Estado ABERTO (X) */
+  .header .menu-toggle.open > :nth-child(1) {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+  .header .menu-toggle.open > :nth-child(2) {
+    opacity: 0;
+    width: 0;
+  }
+  .header .menu-toggle.open > :nth-child(3) {
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg);
+  }
+}
+
+/* ===============================
+   HAMBÚRGUER À PROVA DE TUDO
+   (3 linhas via background; "X" com ::before/::after)
+   =============================== */
+@media (max-width: 768px) {
+  .header .menu-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 22px;
+    padding: 0;
+    border: 0;
+    background:
+      /* top */
+      linear-gradient(#3157ff, #3157ff) left 2px top 3px / 24px 2px no-repeat,
+      /* middle */
+      linear-gradient(#3157ff, #3157ff) left 2px center / 24px 2px no-repeat,
+      /* bottom */
+      linear-gradient(#3157ff, #3157ff) left 2px bottom 3px / 24px 2px no-repeat;
+    -webkit-tap-highlight-color: transparent;
+    z-index: 1100; /* acima do hero */
+  }
+
+  /* Garante que qualquer filho/pseudo antigo não interfira */
+  .header .menu-toggle > * { display: none !important; }
+  .header .menu-toggle::before,
+  .header .menu-toggle::after { content: none; }
+
+  /* Estado ABERTO: vira "X" */
+  .header .menu-toggle.open {
+    background: none; /* some com as 3 barras pintadas */
+  }
+  .header .menu-toggle.open::before,
+  .header .menu-toggle.open::after {
+    content: "";
+    position: absolute;
+    left: 3px;
+    right: 3px;
+    height: 2px;
+    background: #3157ff;
+    top: 50%;
+    transform-origin: center;
+  }
+  .header .menu-toggle.open::before {
+    transform: translateY(-50%) rotate(45deg);
+  }
+  .header .menu-toggle.open::after {
+    transform: translateY(-50%) rotate(-45deg);
+  }
+}
+
+/* =========================
+   MOBILE – hamburger fix/align + X
+   ========================= */
+@media (max-width: 768px) {
+  /* altura “oficial” da barra no mobile */
+  .header,
+  .header .nav,
+  .header .nav-bar,
+  .header .nav-container { height: 56px; }
+
+  /* botão alinhado com a logo (direita) */
+  .menu-toggle{
+    position: absolute;
+    top: 0;
+    right: 16px;               /* ajuste fino se precisar */
+    width: 44px;
+    height: 56px;              /* mesma altura da navbar */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;             /* acima do conteúdo */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* — 3 LINHAS EXATAS — 
+     Usamos 1 elemento + 2 pseudo-elementos.
+     Isso remove “linhas extras” que alguns resets criavam. */
+  .menu-toggle .bar{
+    position: relative;
+    width: 22px;               /* comprimento das linhas */
+    height: 2px;
+    background: #3148FF;       /* azul do tema */
+    border-radius: 2px;
+    transition: background .2s ease;
+  }
+  .menu-toggle .bar::before,
+  .menu-toggle .bar::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 22px;
+    height: 2px;
+    background: #3148FF;
+    border-radius: 2px;
+    transition: transform .25s ease, opacity .2s ease;
+  }
+  .menu-toggle .bar::before{ transform: translateY(-6px); }
+  .menu-toggle .bar::after { transform: translateY( 6px); }
+
+  /* ESTADO ABERTO: vira “X” */
+  .menu-toggle.open .bar{
+    background: transparent;           /* esconde a linha do meio */
+  }
+  .menu-toggle.open .bar::before{
+    transform: rotate(45deg);          /* braço 1 do X */
+  }
+  .menu-toggle.open .bar::after{
+    transform: rotate(-45deg);         /* braço 2 do X */
+  }
+
+  /* menu flutuante encostado na barra (sem folga) – ajuste de segurança */
+  .nav-list{
+    top: 56px;                         /* começa logo abaixo da navbar */
+  }
+}
+
+/* ===========================
+   MOBILE NAV — altura, alinhamento, hamburger e "X"
+   =========================== */
+@media (max-width: 768px) {
+  :root { --nav-h: 64px; }  /* ↑ aumente aqui se quiser mais alto */
+
+  /* Garante a mesma altura em todos os wrappers da barra */
+  .header,
+  .header .nav,
+  .header .nav-bar,
+  .header .nav-container {
+    height: var(--nav-h) !important;
+    min-height: var(--nav-h) !important;
+  }
+
+  /* A barra precisa ser referência pro posicionamento absoluto */
+  .header .nav-bar { position: relative !important; }
+
+  /* Alinhamento vertical do botão com a logo (centro da navbar) */
+  .menu-toggle{
+    position: absolute !important;
+    top: 50% !important;
+    right: 16px !important;          /* ajuste fino horizontal */
+    transform: translateY(-50%) !important;
+    width: 44px;                      /* área clicável confortável */
+    height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1002;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* HAMBURGER: força exatamente 3 linhas (1 real + 2 pseudos) */
+  .menu-toggle .bar{
+    position: relative;
+    width: 22px !important;
+    height: 2px !important;
+    background: #2E46FF !important;
+    border-radius: 2px;
+    transition: background .2s ease;
+  }
+  .menu-toggle .bar::before,
+  .menu-toggle .bar::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 22px !important;
+    height: 2px !important;
+    background: #2E46FF !important;
+    border-radius: 2px;
+    transition: transform .25s ease, opacity .2s ease;
+  }
+  .menu-toggle .bar::before{ top: -6px; }
+  .menu-toggle .bar::after { top:  6px; }
+
+  /* ESTADO ABERTO → vira "X" visível */
+  .menu-toggle.open .bar{
+    background: transparent !important;           /* some a linha do meio */
+  }
+  .menu-toggle.open .bar::before{
+    top: 0; transform: rotate(45deg) !important;  /* braço 1 do X */
+  }
+  .menu-toggle.open .bar::after{
+    top: 0; transform: rotate(-45deg) !important; /* braço 2 do X */
+  }
+
+  /* Menu flutuante encostado na barra (sem folga cinza) */
+  .nav-list{
+    top: var(--nav-h) !important;
+  }
+}
+
+/* ===========================
+   FIX FINAL — ÍCONE HAMBURGUER + "X"
+   =========================== */
+@media (max-width: 768px) {
+  .menu-toggle {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1002;
+  }
+
+  /* Cria as 3 barras */
+  .menu-toggle .bar,
+  .menu-toggle .bar::before,
+  .menu-toggle .bar::after {
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background-color: #2E46FF;
+    border-radius: 1px;
+    transition: all 0.3s ease;
+  }
+
+  .menu-toggle .bar::before {
+    transform: translateY(-6px);
+  }
+
+  .menu-toggle .bar::after {
+    transform: translateY(6px);
+  }
+
+  /* Animação ao abrir — vira X */
+  .menu-toggle.open .bar {
+    background-color: transparent;
+  }
+
+  .menu-toggle.open .bar::before {
+    transform: rotate(45deg);
+  }
+
+  .menu-toggle.open .bar::after {
+    transform: rotate(-45deg);
+  }
+
+  /* Ajuste de altura da navbar */
+  .header,
+  .header .nav,
+  .header .nav-bar {
+    height: 64px !important;
+    min-height: 64px !important;
+  }
+
+  /* Remove qualquer sombra ou borda residual */
+  .header {
+    border-bottom: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Garante que o menu flutuante encoste na barra */
+  .nav-list {
+    top: 64px !important;
+  }
+}
+
+/* ========= FIX HAMBURGUER + X + ALINHAMENTO (MOBILE) ========= */
+@media (max-width: 768px) {
+
+  /* Altura consistente da navbar */
+  .header,
+  .header .nav,
+  .header .nav-bar {
+    height: 64px !important;
+    min-height: 64px !important;
+    line-height: 64px !important;
+  }
+
+  /* Alinha ícone com a logo (centro vertical da navbar) */
+  .menu-toggle {
+    position: absolute;
+    top: 0;
+    right: 16px;
+    height: 64px !important;
+    width: 44px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    z-index: 1003;
+  }
+
+  /* GARANTE que só exista 1 “bar” visível mesmo se houver barras antigas duplicadas */
+  .menu-toggle .bar ~ .bar { display: none !important; }
+
+  /* 3 linhas (a central é o .bar; as de cima/baixo são ::before/::after) */
+  .menu-toggle .bar,
+  .menu-toggle .bar::before,
+  .menu-toggle .bar::after {
+    content: "" !important;
+    position: absolute !important;
+    left: 0;
+    width: 24px !important;
+    height: 2px !important;
+    background: #2E46FF !important;
+    border-radius: 1px;
+    transition: transform .25s ease, top .25s ease, background-color .2s ease;
+  }
+
+  .menu-toggle .bar { transform: none !important; }
+  .menu-toggle .bar::before { top: -6px !important; }
+  .menu-toggle .bar::after  { top:  6px !important; }
+
+  /* Estado ABERTO: vira “X” (a barra central some; as outras cruzam) */
+  .menu-toggle.open .bar {
+    background: transparent !important;
+  }
+  .menu-toggle.open .bar::before {
+    top: 0 !important;
+    transform: rotate(45deg) !important;
+  }
+  .menu-toggle.open .bar::after {
+    top: 0 !important;
+    transform: rotate(-45deg) !important;
+  }
+
+  /* Painel flutuante encostado na navbar */
+  .nav-list { top: 64px !important; }
+}
+
+/* ========= FIX HAMBURGUER + X + ALINHAMENTO (MOBILE) ========= */
+@media (max-width: 768px) {
+
+  /* Altura consistente da navbar */
+  .header,
+  .header .nav,
+  .header .nav-bar {
+    height: 64px !important;
+    min-height: 64px !important;
+    line-height: 64px !important;
+  }
+
+  /* Alinha ícone com a logo (centro vertical da navbar) */
+  .menu-toggle {
+    position: absolute;
+    top: 0;
+    right: 16px;
+    height: 64px !important;
+    width: 44px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    z-index: 1003;
+  }
+
+  /* GARANTE que só exista 1 “bar” visível mesmo se houver barras antigas duplicadas */
+  .menu-toggle .bar ~ .bar { display: none !important; }
+
+  /* 3 linhas (a central é o .bar; as de cima/baixo são ::before/::after) */
+  .menu-toggle .bar,
+  .menu-toggle .bar::before,
+  .menu-toggle .bar::after {
+    content: "" !important;
+    position: absolute !important;
+    left: 0;
+    width: 24px !important;
+    height: 2px !important;
+    background: #2E46FF !important;
+    border-radius: 1px;
+    transition: transform .25s ease, top .25s ease, background-color .2s ease;
+  }
+
+  .menu-toggle .bar { transform: none !important; }
+  .menu-toggle .bar::before { top: -6px !important; }
+  .menu-toggle .bar::after  { top:  6px !important; }
+
+  /* Estado ABERTO: vira “X” (a barra central some; as outras cruzam) */
+  .menu-toggle.open .bar {
+    background: transparent !important;
+  }
+  .menu-toggle.open .bar::before {
+    top: 0 !important;
+    transform: rotate(45deg) !important;
+  }
+  .menu-toggle.open .bar::after {
+    top: 0 !important;
+    transform: rotate(-45deg) !important;
+  }
+
+  /* Painel flutuante encostado na navbar */
+  .nav-list { top: 64px !important; }
+}
+
+
+/* ====== Ajuste fino: reduzir espaçamento entre as 3 linhas do hambúrguer ====== */
+@media (max-width: 768px) {
+  /* garante altura/alinhamento como antes */
+  .header, .header .nav, .header .nav-bar {
+    height: 64px !important;
+    min-height: 64px !important;
+    line-height: 64px !important;
+  }
+  .menu-toggle {
+    position: absolute;
+    top: 0;
+    right: 16px;
+    width: 44px;
+    height: 64px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent;
+    border: 0;
+    z-index: 1003;
+  }
+
+  /* mantém só UMA barra base ativa */
+  .menu-toggle .bar ~ .bar { display: none !important; }
+
+  .menu-toggle .bar,
+  .menu-toggle .bar::before,
+  .menu-toggle .bar::after {
+    content: "" !important;
+    position: absolute !important;
+    left: 0;
+    width: 22px !important;      /* um pouco menor para ficar mais elegante */
+    height: 2px !important;
+    background: #2E46FF !important;
+    border-radius: 1px;
+    transform-origin: center;
+    transition: transform .2s ease, top .2s ease, background-color .2s ease;
+  }
+
+  /* >>> Espaçamento mais curto entre as linhas (antes ±6px) */
+  .menu-toggle .bar::before { top: -4px !important; }
+  .menu-toggle .bar::after  { top:  4px !important; }
+
+  /* estado aberto (X visível) */
+  .menu-toggle.open .bar { background: transparent !important; }
+  .menu-toggle.open .bar::before { top: 0 !important; transform: rotate(45deg) !important; }
+  .menu-toggle.open .bar::after  { top: 0 !important; transform: rotate(-45deg) !important; }
+}
+
+
+/* ====== Ajuste fino: reduzir espaçamento entre as 3 linhas do hambúrguer ====== */
+@media (max-width: 768px) {
+  /* garante altura/alinhamento como antes */
+  .header, .header .nav, .header .nav-bar {
+    height: 64px !important;
+    min-height: 64px !important;
+    line-height: 64px !important;
+  }
+  .menu-toggle {
+    position: absolute;
+    top: 0;
+    right: 16px;
+    width: 44px;
+    height: 64px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent;
+    border: 0;
+    z-index: 1003;
+  }
+
+  /* mantém só UMA barra base ativa */
+  .menu-toggle .bar ~ .bar { display: none !important; }
+
+  .menu-toggle .bar,
+  .menu-toggle .bar::before,
+  .menu-toggle .bar::after {
+    content: "" !important;
+    position: absolute !important;
+    left: 0;
+    width: 22px !important;      /* um pouco menor para ficar mais elegante */
+    height: 2px !important;
+    background: #2E46FF !important;
+    border-radius: 1px;
+    transform-origin: center;
+    transition: transform .2s ease, top .2s ease, background-color .2s ease;
+  }
+
+  /* >>> Espaçamento mais curto entre as linhas (antes ±6px) */
+  .menu-toggle .bar::before { top: -4px !important; }
+  .menu-toggle .bar::after  { top:  4px !important; }
+
+  /* estado aberto (X visível) */
+  .menu-toggle.open .bar { background: transparent !important; }
+  .menu-toggle.open .bar::before { top: 0 !important; transform: rotate(45deg) !important; }
+  .menu-toggle.open .bar::after  { top: 0 !important; transform: rotate(-45deg) !important; }
+}
+
+
+/* ===== FIX FINAL DO ÍCONE HAMBURGUER ===== */
+@media (max-width: 768px) {
+  .menu-toggle {
+    position: absolute;
+    top: 0;
+    right: 16px;
+    height: 64px;
+    width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    z-index: 1003;
+  }
+
+  /* Desativa barras duplicadas */
+  .menu-toggle .bar ~ .bar { display: none !important; }
+
+  /* Define as 3 linhas compactas e centralizadas */
+  .menu-toggle .bar,
+  .menu-toggle .bar::before,
+  .menu-toggle .bar::after {
+    content: "" !important;
+    position: absolute !important;
+    left: 0;
+    width: 22px !important;
+    height: 2px !important;
+    background: #2E46FF !important;
+    border-radius: 1px;
+    transition: transform .25s ease, top .25s ease;
+  }
+
+  /* Espaçamento ajustado (3px entre linhas) */
+  .menu-toggle .bar::before { top: -3px !important; }
+  .menu-toggle .bar::after  { top:  3px !important; }
+
+  /* Estado aberto — vira X perfeitamente visível */
+  .menu-toggle.open .bar { background: transparent !important; }
+  .menu-toggle.open .bar::before {
+    top: 0 !important;
+    transform: rotate(45deg) !important;
+  }
+  .menu-toggle.open .bar::after {
+    top: 0 !important;
+    transform: rotate(-45deg) !important;
+  }
+
+  /* Navbar alta e alinhada à logo */
+  .header,
+  .header .nav,
+  .header .nav-bar {
+    height: 64px !important;
+    min-height: 64px !important;
+    line-height: 64px !important;
+  }
+
+  /* Remove borda inferior residual */
+  .header { border-bottom: none !important; box-shadow: none !important; }
+}
+
+
+/* ===== FIX FINAL DO ÍCONE HAMBURGUER ===== */
+@media (max-width: 768px) {
+  .menu-toggle {
+    position: absolute;
+    top: 0;
+    right: 16px;
+    height: 64px;
+    width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    z-index: 1003;
+  }
+
+  /* Desativa barras duplicadas */
+  .menu-toggle .bar ~ .bar { display: none !important; }
+
+  /* Define as 3 linhas compactas e centralizadas */
+  .menu-toggle .bar,
+  .menu-toggle .bar::before,
+  .menu-toggle .bar::after {
+    content: "" !important;
+    position: absolute !important;
+    left: 0;
+    width: 22px !important;
+    height: 2px !important;
+    background: #2E46FF !important;
+    border-radius: 1px;
+    transition: transform .25s ease, top .25s ease;
+  }
+
+  /* Espaçamento ajustado (3px entre linhas) */
+  .menu-toggle .bar::before { top: -3px !important; }
+  .menu-toggle .bar::after  { top:  3px !important; }
+
+  /* Estado aberto — vira X perfeitamente visível */
+  .menu-toggle.open .bar { background: transparent !important; }
+  .menu-toggle.open .bar::before {
+    top: 0 !important;
+    transform: rotate(45deg) !important;
+  }
+  .menu-toggle.open .bar::after {
+    top: 0 !important;
+    transform: rotate(-45deg) !important;
+  }
+
+  /* Navbar alta e alinhada à logo */
+  .header,
+  .header .nav,
+  .header .nav-bar {
+    height: 64px !important;
+    min-height: 64px !important;
+    line-height: 64px !important;
+  }
+
+  /* Remove borda inferior residual */
+  .header { border-bottom: none !important; box-shadow: none !important; }
+}
+
+
+
+/* =========================
+   MOBILE — HAMBÚRGUER FIX
+   ========================= */
+@media (max-width: 768px) {
+
+  /* garante alinhamento vertical do conteúdo da barra */
+  .header,
+  .header .header-inner,
+  .header .nav {
+    display: flex;
+    align-items: center;
+  }
+
+  /* botão do hambúrguer */
+  .menu-toggle{
+    position: relative;
+    width: 28px;            /* largura do ícone */
+    height: 22px;           /* altura total (define o espaçamento entre linhas) */
+    display: inline-block;
+    line-height: 0;         /* evita “pulos” verticais */
+    z-index: 1001;          /* fica acima do overlay do menu */
+  }
+
+  /* barra central (apenas 1 span) */
+  .menu-toggle span{
+    position: absolute;
+    left: 0; right: 0;
+    top: 50%;
+    height: 2px;
+    background: #2A55FF;
+    transform: translateY(-50%);
+    border-radius: 2px;
+    transition: transform .25s ease, opacity .2s ease;
+  }
+
+  /* evita “quarta linha” se houver spans extras no HTML */
+  .menu-toggle span ~ span { display: none !important; }
+
+  /* barras superior e inferior (pseudoelementos) */
+  .menu-toggle::before,
+  .menu-toggle::after{
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 2px;
+    background: #2A55FF;
+    border-radius: 2px;
+    transition: transform .25s ease, top .25s ease, bottom .25s ease, opacity .2s ease;
+  }
+
+  /* espaçamento entre linhas (sem exagero) */
+  .menu-toggle::before{ top: 0; }       /* linha de cima */
+  .menu-toggle::after { bottom: 0; }    /* linha de baixo */
+
+  /* estado ABERTO (vira X) */
+  .menu-toggle.open span{ opacity: 0; } /* some a barra do meio */
+  .menu-toggle.open::before{
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+  .menu-toggle.open::after{
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg);
+  }
+}
+
+/* =============================
+   MOBILE – HAMBURGUER + ALINHO
+   ============================= */
+@media (max-width: 768px) {
+
+  /* garante alinhamento vertical na barra */
+  .header { display:flex; align-items:center; }
+
+  /* botão: 3 linhas via background (independe do HTML interno) */
+  .menu-toggle{
+    position:absolute;
+    right:16px;               /* ajuste fino horizontal */
+    top:50%;
+    transform:translateY(-50%);
+    width:28px;
+    height:20px;              /* controla o espaçamento entre as linhas */
+    background:
+      linear-gradient(#2A55FF 0 0) 0 0/100% 2px no-repeat,
+      linear-gradient(#2A55FF 0 0) 0 9px/100% 2px no-repeat,
+      linear-gradient(#2A55FF 0 0) 0 18px/100% 2px no-repeat;
+    border:0;
+    outline:0;
+    z-index:1001;
+  }
+
+  /* se existirem spans ou i dentro, não deixam “quarta linha” aparecer */
+  .menu-toggle > * { display:none !important; }
+
+  /* barras do X (aparecem somente quando .open) */
+  .menu-toggle::before,
+  .menu-toggle::after{
+    content:"";
+    position:absolute;
+    left:0; right:0;
+    top:50%;
+    height:2px;
+    background:#2A55FF;
+    border-radius:2px;
+    transform:translateY(-50%);
+    opacity:0;
+    transition:transform .25s ease, opacity .2s ease;
+  }
+
+  /* estado ABERTO: some as 3 linhas e mostra o X */
+  .menu-toggle.open{
+    background:none; /* remove as 3 linhas */
+  }
+  .menu-toggle.open::before{
+    opacity:1;
+    transform:translateY(-50%) rotate(45deg);
+  }
+  .menu-toggle.open::after{
+    opacity:1;
+    transform:translateY(-50%) rotate(-45deg);
+  }
+}
+
+
+/* ===== PATCH: Hamburger – 3 linhas, espaçamento fixo, X visível (mobile) ===== */
+@media (max-width: 768px) {
+  /* evita linhas “fantasmas” vindas de outras regras antigas */
+  .menu-toggle::before,
+  .menu-toggle::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  /* container do botão alinhado verticalmente com a navbar */
+  .menu-toggle{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;                 /* área de toque */
+    height: var(--nav-h, 56px);  /* usa a altura atual da navbar */
+    margin-right: 12px;
+  }
+
+  /* dimensões e aparência das 3 barras */
+  .menu-toggle .bar,
+  .menu-toggle .bar::before,
+  .menu-toggle .bar::after{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 2px;
+    background: #2E46FF;
+    border-radius: 2px;
+    transition: transform .22s ease, background .22s ease, top .22s ease;
+    content: "";
+    display: block;
+  }
+
+  /* barra do meio bem no centro */
+  .menu-toggle .bar{ top: 50%; margin-top: -1px; }
+
+  /* espaçamento entre as linhas (gap de 5px) */
+  .menu-toggle .bar::before{ top: calc(50% - 1px - 5px); }
+  .menu-toggle .bar::after { top: calc(50% - 1px + 5px); }
+
+  /* estado ABERTO: vira “X” perfeito */
+  .menu-toggle.open .bar{
+    background: transparent; /* some a barra do meio */
+  }
+  .menu-toggle.open .bar::before{
+    top: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+  .menu-toggle.open .bar::after{
+    top: 50%;
+    transform: translateX(-50%) rotate(-45deg);
+  }
+
+  /* garante que o menu flutuante encoste na navbar, sem folga cinza */
+  .nav-list{ top: var(--nav-h, 56px) !important; }
+}
+
+/* ===== PATCH: Hamburger – 3 linhas, espaçamento fixo, X visível (mobile) ===== */
+@media (max-width: 768px) {
+  /* evita linhas “fantasmas” vindas de outras regras antigas */
+  .menu-toggle::before,
+  .menu-toggle::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  /* container do botão alinhado verticalmente com a navbar */
+  .menu-toggle{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;                 /* área de toque */
+    height: var(--nav-h, 56px);  /* usa a altura atual da navbar */
+    margin-right: 12px;
+  }
+
+  /* dimensões e aparência das 3 barras */
+  .menu-toggle .bar,
+  .menu-toggle .bar::before,
+  .menu-toggle .bar::after{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 2px;
+    background: #2E46FF;
+    border-radius: 2px;
+    transition: transform .22s ease, background .22s ease, top .22s ease;
+    content: "";
+    display: block;
+  }
+
+  /* barra do meio bem no centro */
+  .menu-toggle .bar{ top: 50%; margin-top: -1px; }
+
+  /* espaçamento entre as linhas (gap de 5px) */
+  .menu-toggle .bar::before{ top: calc(50% - 1px - 5px); }
+  .menu-toggle .bar::after { top: calc(50% - 1px + 5px); }
+
+  /* estado ABERTO: vira “X” perfeito */
+  .menu-toggle.open .bar{
+    background: transparent; /* some a barra do meio */
+  }
+  .menu-toggle.open .bar::before{
+    top: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+  .menu-toggle.open .bar::after{
+    top: 50%;
+    transform: translateX(-50%) rotate(-45deg);
+  }
+
+  /* garante que o menu flutuante encoste na navbar, sem folga cinza */
+  .nav-list{ top: var(--nav-h, 56px) !important; }
+}
+
+/* === PATCH FINAL: ÍCONE HAMBURGUER 3 LINHAS + X CORRETO === */
+@media (max-width: 768px) {
+
+  /* zera qualquer coisa antiga */
+  .menu-toggle,
+  .menu-toggle::before,
+  .menu-toggle::after,
+  .menu-toggle span,
+  .menu-toggle span::before,
+  .menu-toggle span::after {
+    all: unset;
+    box-sizing: border-box;
+  }
+
+  /* botão base — alinhado com o logo */
+  .menu-toggle {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 24px;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  /* container interno */
+  .menu-toggle .bar {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #2A55FF;
+    border-radius: 2px;
+    transform: translateY(-50%);
+    transition: transform .25s ease, opacity .25s ease;
+  }
+
+  /* cria as três linhas */
+  .menu-toggle .bar::before,
+  .menu-toggle .bar::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #2A55FF;
+    border-radius: 2px;
+    transition: transform .25s ease, top .25s ease, bottom .25s ease;
+  }
+
+  .menu-toggle .bar::before { top: -8px; }
+  .menu-toggle .bar::after  { bottom: -8px; }
+
+  /* === estado ABERTO: vira X === */
+  .menu-toggle.open .bar {
+    background: transparent;
+  }
+
+  .menu-toggle.open .bar::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+
+  .menu-toggle.open .bar::after {
+    bottom: 0;
+    transform: rotate(-45deg);
+  }
+
+  /* remove qualquer espaçamento entre navbar e menu flutuante */
+  .nav-list {
+    top: 56px !important;
+  }
+}
+
+/* === PATCH FINAL: ÍCONE HAMBURGUER 3 LINHAS + X CORRETO === */
+@media (max-width: 768px) {
+
+  /* zera qualquer coisa antiga */
+  .menu-toggle,
+  .menu-toggle::before,
+  .menu-toggle::after,
+  .menu-toggle span,
+  .menu-toggle span::before,
+  .menu-toggle span::after {
+    all: unset;
+    box-sizing: border-box;
+  }
+
+  /* botão base — alinhado com o logo */
+  .menu-toggle {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 24px;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  /* container interno */
+  .menu-toggle .bar {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #2A55FF;
+    border-radius: 2px;
+    transform: translateY(-50%);
+    transition: transform .25s ease, opacity .25s ease;
+  }
+
+  /* cria as três linhas */
+  .menu-toggle .bar::before,
+  .menu-toggle .bar::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #2A55FF;
+    border-radius: 2px;
+    transition: transform .25s ease, top .25s ease, bottom .25s ease;
+  }
+
+  .menu-toggle .bar::before { top: -8px; }
+  .menu-toggle .bar::after  { bottom: -8px; }
+
+  /* === estado ABERTO: vira X === */
+  .menu-toggle.open .bar {
+    background: transparent;
+  }
+
+  .menu-toggle.open .bar::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+
+  .menu-toggle.open .bar::after {
+    bottom: 0;
+    transform: rotate(-45deg);
+  }
+
+  /* remove qualquer espaçamento entre navbar e menu flutuante */
+  .nav-list {
+    top: 56px !important;
+  }
+}
+
+
+/* ===============================
+   MENU HAMBURGUER COM IMAGEM FIXA
+   =============================== */
+@media (max-width: 768px) {
+  .menu-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 34px;
+    height: 34px;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+
+  .menu-toggle .hamburger-img {
+    width: 28px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* quando o menu estiver aberto, substitui o ícone por um “X” */
+  .menu-toggle.open .hamburger-img {
+    content: url("images/icon-close.png"); /* crie um ícone X simples */
+  }
+
+  /* garante que a navbar mantenha altura e alinhamento com o logo */
+  .header {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+  }
+
+  .header .logo img {
+    max-height: 28px;
+    height: auto;
+    width: auto;
+  }
+}
+
+
+
+/* ==== Mobile: ícone do menu por SVG (sem depender de imagens externas) ==== */
+@media (max-width: 768px) {
+  /* Garante que qualquer “barrinha” antiga não interfira */
+  .menu-toggle::before,
+  .menu-toggle::after,
+  .menu-toggle .bar { display: none !important; }
+
+  .menu-toggle{
+    position: absolute;
+    right: 16px;
+    top: 12px;               /* ajuste fino para alinhar com o logo */
+    width: 36px; height: 36px;
+    display: grid; place-items: center;
+    background: transparent; border: 0; padding: 0;
+    line-height: 0; cursor: pointer;
+  }
+  .menu-toggle svg{ display:block; width:26px; height:26px; }
+
+  /* Mostra hambúrguer por padrão, X ao abrir */
+  .menu-toggle .icon-close{ display: none; }
+  .menu-toggle.open .icon-burger{ display: none; }
+  .menu-toggle.open .icon-close{ display: block; }
+
+  /* Navbar mais alta mantém alinhamento com o logo */
+  .header, .navbar, .nav { min-height: 56px; }
+}
+
+/* ==== MOBILE: Hamburguer “limpa tudo” e usa SVG próprio ==== */
+@media (max-width: 768px) {
+
+  /* Mata QUALQUER desenho antigo (pseudo-elementos, spans, barras, BG, etc.) */
+  #k-menu-toggle,
+  #k-menu-toggle * {
+    background: none !important;
+    box-shadow: none !important;
+  }
+  #k-menu-toggle::before,
+  #k-menu-toggle::after,
+  #k-menu-toggle span,
+  #k-menu-toggle i,
+  #k-menu-toggle .bar,
+  .hamburger, .hamburger::before, .hamburger::after,
+  .navbar .menu-toggle::before, .navbar .menu-toggle::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  /* Botão e alinhamento com o logo */
+  #k-menu-toggle{
+    position: absolute;
+    right: 16px;
+    top: 12px;              /* ajuste fino p/ alinhar com a logo */
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    padding: 0;
+    line-height: 0;
+    cursor: pointer;
+    z-index: 1001;
+  }
+  #k-menu-toggle .k-icon{ width:26px; height:26px; display:block; }
+  #k-menu-toggle .k-close{ display:none; }
+  #k-menu-toggle.open .k-burger{ display:none; }
+  #k-menu-toggle.open .k-close{ display:block; }
+
+  /* Altura confortável da navbar (não mexe no desktop) */
+  .header, .navbar, .nav { min-height: 56px; }
+}
+
+
+
+/* ===============================================
+   PATCH FINAL — MOSTRAR ÍCONE SVG DO MENU
+   =============================================== */
+@media (max-width: 768px) {
+
+  /* neutraliza QUALQUER estilização antiga */
+  .menu-toggle,
+  .menu-toggle::before,
+  .menu-toggle::after,
+  .menu-toggle span,
+  .menu-toggle span::before,
+  .menu-toggle span::after {
+    all: unset !important;
+    display: block !important;
+    background: none !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  /* botão base */
+  #k-menu-toggle {
+    position: absolute !important;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000; /* garante que fica visível */
+  }
+
+  /* ícones SVG */
+  #k-menu-toggle svg {
+    width: 26px;
+    height: 26px;
+    display: block;
+  }
+
+  /* alternância entre hambúrguer e X */
+  #k-menu-toggle .k-close { display: none; }
+  #k-menu-toggle.open .k-burger { display: none; }
+  #k-menu-toggle.open .k-close { display: block; }
+
+  /* Garante que navbar não cobre o botão */
+  .header {
+    position: relative;
+    z-index: 1500;
+  }
+}
+
+
+
+/* ===========================
+   MOBILE: HAMBURGER RESET + NOVO
+   =========================== */
+@media (max-width: 768px) {
+
+  /* Garante contexto p/ posicionar o botão */
+  .header,
+  .navbar,
+  .nav,
+  .nav .container,
+  .header .container { position: relative; }
+
+  /* Mata QUALQUER hambúrguer antigo */
+  .menu-toggle,
+  .menu-toggle::before,
+  .menu-toggle::after,
+  .menu-toggle span,
+  .menu-toggle span::before,
+  .menu-toggle span::after {
+    display: none !important;
+    content: none !important;
+    box-shadow: none !important;
+    background: none !important;
+    border: 0 !important;
+  }
+
+  /* Botão novo visível e clicável */
+  #k-menu-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: 0;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000; /* acima do header e de quaisquer overlays */
+    cursor: pointer;
+  }
+
+  /* Ícones */
+  #k-menu-toggle svg { display: block; width: 26px; height: 26px; }
+  #k-menu-toggle .k-close { display: none; }
+  #k-menu-toggle.open .k-burger { display: none; }
+  #k-menu-toggle.open .k-close { display: block; }
+
+  /* Evita que algo da nav cobre o botão quando fechada */
+  .nav-list:not(.active) {
+    display: none !important;
+    pointer-events: none;
+  }
+
+  /* (opcional) Ajuste fino da altura da barra p/ alinhar à logo */
+  .header { min-height: 56px; }
+}
+
+/* Remove qualquer “barrinha” entre navbar e header no mobile */
+@media (max-width: 768px) {
+  .header { border: 0 !important; box-shadow: none !important; }
+}
+
+/* Desktop: esconde o botão mobile e força a nav “normal” */
+@media (min-width: 769px) {
+  #k-menu-toggle { display: none !important; }
+  .nav-list {
+    display: flex !important;      /* sua nav horizontal normal */
+    position: static !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+  body.menu-open { overflow: auto !important; }
+}
